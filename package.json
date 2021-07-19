@@ -1,0 +1,55 @@
+{
+	"name": "ipvc-dapp",
+	"version": "1.0.0",
+	"main": "index.js",
+	"repository": "https://github.com/codebuster22/ipvc-dapp.git",
+	"author": "Angel Lakra <angel.lakra@chainlabs.in>",
+	"license": "MIT",
+	"dependencies": {
+		"@styled-system/prop-types": "^5.1.5",
+		"@types/styled-components": "^5.1.11",
+		"@types/styled-system": "^5.1.12",
+		"lodash": "^4.17.21",
+		"next": "^11.0.1",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"styled-components": "^5.3.0",
+		"styled-system": "^5.1.5"
+	},
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"format": "prettier --write \"**/*.(ts|js|jsx|tsx|json)\"",
+		"prepare": "husky install"
+	},
+	"lint-staged": {
+		"*.{ts,css,html,js,tsx,jsx}": [
+			"yarn format"
+		]
+	},
+	"devDependencies": {
+		"@babel/plugin-proposal-optional-chaining": "^7.14.5",
+		"@types/react": "^17.0.14",
+		"@typescript-eslint/eslint-plugin": "^4.28.3",
+		"babel-plugin-styled-components": "^1.13.2",
+		"eslint": "^7.2.0",
+		"eslint-config-airbnb": "18.2.1",
+		"eslint-config-next": "^11.0.1",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-import-resolver-alias": "^1.1.2",
+		"eslint-plugin-import": "^2.22.1",
+		"eslint-plugin-jsx-a11y": "^6.4.1",
+		"eslint-plugin-prettier": "^3.4.0",
+		"eslint-plugin-react": "^7.21.5",
+		"eslint-plugin-react-hooks": "^1.7.0",
+		"husky": "4",
+		"lint-staged": "^11.0.1",
+		"prettier": "^2.3.2",
+		"stylelint": "^13.13.1",
+		"stylelint-config-recommended": "^5.0.0",
+		"stylelint-processor-styled-components": "^1.10.0",
+		"typescript": "^4.3.5"
+	}
+}
