@@ -4,7 +4,6 @@ module.exports = {
 	extends: [
 		'airbnb',
 		'plugin:prettier/recommended',
-		'prettier/react',
 		'plugin:import/errors',
 		'plugin:import/warnings',
 		'plugin:@typescript-eslint/recommended',
@@ -12,7 +11,7 @@ module.exports = {
 		'prettier/@typescript-eslint',
 		'plugin:import/typescript',
 	],
-	plugins: ['@typescript-eslint', 'prettier', 'react', 'import', 'jsx-a11y'],
+	plugins: ['@typescript-eslint', 'prettier', 'import', 'jsx-a11y'],
 	parser: '@typescript-eslint/parser',
 	settings: {
 		'import/resolver': {

@@ -33,17 +33,17 @@ import { allStyledSystemProps } from '@/styleguide/filterStyledSystemProps';
 
 export interface BoxProps
 	extends ColorProps,
-	FontSizeProps,
-	FontWeightProps,
-	LayoutProps,
-	SpaceProps,
-	FlexboxProps,
-	GridProps,
-	TypographyProps,
-	ShadowProps,
-	BorderProps,
-	PositionProps,
-	BackgroundImageProps {
+		FontSizeProps,
+		FontWeightProps,
+		LayoutProps,
+		SpaceProps,
+		FlexboxProps,
+		GridProps,
+		TypographyProps,
+		ShadowProps,
+		BorderProps,
+		PositionProps,
+		BackgroundImageProps {
 	boxShadow?: any;
 	borderRadius?: any;
 	textTransform?: ResponsiveValue<'none' | 'capitalize' | 'uppercase' | 'lowercase'>;
@@ -57,28 +57,11 @@ export interface BoxProps
 	scrollBehavior?: 'auto' | 'smooth';
 	scrollMarginTop?: string;
 	objectFit?: 'cover' | 'fill' | 'contain' | 'none' | 'scale-down';
-	outline?:
-	| 'dashed'
-	| 'dotted'
-	| 'double'
-	| 'groove'
-	| 'hidden'
-	| 'inset'
-	| 'none'
-	| 'outset'
-	| 'ridge'
-	| 'solid';
+	outline?: 'dashed' | 'dotted' | 'double' | 'groove' | 'hidden' | 'inset' | 'none' | 'outset' | 'ridge' | 'solid';
 	backgroundRepeat?: 'no-repeat' | 'repeat' | 'repeat-x' | 'repeat-y' | 'round' | 'space';
 	backgroundPosition?: 'bottom' | 'center' | 'left' | 'right' | 'top';
 	backgroundSize?: 'auto' | 'contain' | 'cover';
-	whiteSpace?:
-	| '-moz-pre-wrap'
-	| 'break-spaces'
-	| 'normal'
-	| 'nowrap'
-	| 'pre'
-	| 'pre-line'
-	| 'pre-wrap';
+	whiteSpace?: '-moz-pre-wrap' | 'break-spaces' | 'normal' | 'nowrap' | 'pre' | 'pre-line' | 'pre-wrap';
 	WebkitBoxOrient?: 'block-axis' | 'horizontal' | 'inherit' | 'inline-axis' | 'vertical';
 	WebkitLineClamp?: 'none' | number;
 	transform?: ResponsiveValue<string>;
@@ -126,40 +109,35 @@ const customProps = {
 const customPropsStyleFn = system(customProps as any);
 
 const allBoxProps = { ...allStyledSystemProps, ...customProps };
-const filterStyledSytemProps = (prop, defaultValidatorFn) =>
-	(!allBoxProps[prop] && defaultValidatorFn(prop));
+const filterStyledSytemProps = (prop, defaultValidatorFn) => !allBoxProps[prop] && defaultValidatorFn(prop);
 
-const Box = styled.div.withConfig({ shouldForwardProp: filterStyledSytemProps }) <BoxProps>`
+const Box = styled.div.withConfig({ shouldForwardProp: filterStyledSytemProps })<BoxProps>`
 	${(props) =>
 		props.row &&
 		css`
 			display: flex;
 			flex-direction: row;
-		`
-	};
+		`};
 	${(props) =>
 		props.column &&
 		css`
 			display: flex;
 			flex-direction: column;
-		`
-	};
+		`};
 	${(props) =>
 		props.center &&
 		css`
 			display: flex;
 			justify-content: center;
 			align-items: center;
-		`
-	};
+		`};
 	${(props) =>
 		props.between &&
 		css`
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-		`
-	};
+		`};
 	${color};
 	${flexbox};
 	${grid}
