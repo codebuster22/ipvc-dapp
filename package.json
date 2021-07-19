@@ -24,9 +24,9 @@
 		"format": "prettier --write \"**/*.(ts|js|jsx|tsx|json)\""
 	},
 	"devDependencies": {
-		"@babel/plugin-proposal-optional-chaining": "^7.14.5",
 		"@types/react": "^17.0.14",
-		"@typescript-eslint/eslint-plugin": "^4.28.3",
+		"@babel/plugin-proposal-optional-chaining": "^7.14.5",
+		"@typescript-eslint/eslint-plugin": "^4.0.1",
 		"babel-plugin-styled-components": "^1.13.2",
 		"eslint": "^7.2.0",
 		"eslint-config-airbnb": "18.2.1",
