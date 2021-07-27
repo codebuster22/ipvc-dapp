@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as pdfjsLib from 'pdfjs-dist';
 import * as pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry';
-import { PDFDocumentProxy } from 'pdfjs-dist/types/display/api';
+import { PDFDocumentProxy, TextItem } from 'pdfjs-dist/types/display/api';
 import Tesseract from 'tesseract.js';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker.workerSrc;
@@ -40,13 +40,13 @@ export const getPageText = (pageNum: number, PDFDocumentInstance: PDFDocumentPro
 		PDFDocumentInstance.getPage(pageNum).then(function (pdfPage) {
 			// The main trick to obtain the text of the PDF page, use the getTextContent method
 			pdfPage.getTextContent().then(function (textContent) {
-				const textItems = textContent.items;
+				const textItems: TextItem[] = textContent.items;
 				let finalString = '';
 
 				// Concatenate the string of the item to the final string
 				for (let i = 0; i < textItems.length; i++) {
-					const item = textItems[i];
-					finalString += item.str + ' ';
+					const item: TextItem = textItems[i];
+					finalString += item?.str + ' ';
 				}
 
 				// Solve promise with the text retrieven from the page
