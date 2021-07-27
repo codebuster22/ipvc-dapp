@@ -5,6 +5,9 @@ import { debounce } from 'lodash';
 import { ThemeProvider } from 'styled-components';
 import theme from '../src/styleguide/theme';
 import '../styles/globalStyles.css';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 // This default export is required in a new `pages/_app.js` file.
 const MyApp = ({ Component, pageProps }) => {
@@ -25,18 +28,20 @@ const MyApp = ({ Component, pageProps }) => {
 			}, 150);
 
 			window.addEventListener('resize', handleResize);
+			return () => {
+				if (process.browser) {
+					window.removeEventListener('resize', handleResize);
+				}
+			};
 		}
-		return () => {
-			if (process.browser) {
-				window.removeEventListener('resize', handleResize);
-			}
-		};
 	});
 
 	return (
-		<ThemeProvider theme={theme}>
-			<Component {...pageProps} />
-		</ThemeProvider>
+		<QueryClientProvider client={queryClient}>
+			<ThemeProvider theme={theme}>
+				<Component {...pageProps} />
+			</ThemeProvider>
+		</QueryClientProvider>
 	);
 };
 
