@@ -46,7 +46,6 @@ export const getPageText = (pageNum: number, PDFDocumentInstance: PDFDocumentPro
 				// Concatenate the string of the item to the final string
 				for (let i = 0; i < textItems.length; i++) {
 					const item = textItems[i];
-
 					finalString += item.str + ' ';
 				}
 
