@@ -2,11 +2,12 @@ const path = require('path');
 
 module.exports = {
 	extends: [
-		'plugin:prettier/recommended',
 		'prettier',
+		'plugin:prettier/recommended',
+		'plugin:@typescript-eslint/recommended',
 		'plugin:import/errors',
 		'plugin:import/warnings',
-		'plugin:@typescript-eslint/recommended',
+		'plugin:import/typescript',
 	],
 	rules: {
 		'no-shadow': 0,
@@ -18,6 +19,7 @@ module.exports = {
 		'object-curly-newline': 0,
 		'@typescript-eslint/no-var-requires': 0,
 		'@typescript-eslint/no-explicit-any': 0,
+		'ban-ts-comment': 0,
 	},
 	plugins: ['@typescript-eslint', 'prettier', 'import', 'jsx-a11y'],
 	parser: '@typescript-eslint/parser',
@@ -28,9 +30,15 @@ module.exports = {
 					['@/containers/*', path.resolve(__dirname, './src/containers')],
 					['@/components/*', path.resolve(__dirname, './src/components')],
 					['@/styleguide/*', path.resolve(__dirname, './src/styleguide')],
+					['@/utils/*', path.resolve(__dirname, './src/utils/*')],
+					['@/api/*', path.resolve(__dirname, './src/api/*')],
 					['@/pages/*', path.resolve(__dirname, './pages')],
 				],
 				extensions: ['.ts', '.js', '.tsx', '.jsx', '.json'],
+			},
+			node: {
+				paths: ['src'],
+				extensions: ['.js', '.jsx', '.ts', '.tsx'],
 			},
 		},
 	},
