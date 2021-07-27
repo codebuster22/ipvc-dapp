@@ -40,12 +40,12 @@ export const getPageText = (pageNum: number, PDFDocumentInstance: PDFDocumentPro
 		PDFDocumentInstance.getPage(pageNum).then(function (pdfPage) {
 			// The main trick to obtain the text of the PDF page, use the getTextContent method
 			pdfPage.getTextContent().then(function (textContent) {
-				const textItems: TextItem[] = textContent.items;
+				const textItems = textContent.items;
 				let finalString = '';
 
 				// Concatenate the string of the item to the final string
 				for (let i = 0; i < textItems.length; i++) {
-					const item: TextItem = textItems[i];
+					const item = textItems[i];
 					finalString += item?.str + ' ';
 				}
 
