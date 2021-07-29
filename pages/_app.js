@@ -1,16 +1,18 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-undef */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { debounce } from 'lodash';
 import { ThemeProvider } from 'styled-components';
 import theme from '../src/styleguide/theme';
 import '../styles/globalStyles.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import getEthers from '../src/utils/getEthers';
 
 const queryClient = new QueryClient();
 
 // This default export is required in a new `pages/_app.js` file.
 const MyApp = ({ Component, pageProps }) => {
+
 	useEffect(() => {
 		// Set a custom CSS Property for Height
 		// See https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
@@ -35,6 +37,37 @@ const MyApp = ({ Component, pageProps }) => {
 			};
 		}
 	});
+
+	// this should be on the topmost element
+	// starting from here
+	const [ethers, setEthers] = useState();
+	const [provider, setProvider] = useState();
+	const [signer, setSigner] = useState();
+
+	const setup = async () => {
+		const result = await getEthers();
+		setEthers(result.ethers);
+		setProvider(result.provider);
+	};
+
+	useEffect(() => {
+		setup();
+		ethereum.on('accountsChanged', async (accounts) => {
+			if (provider) {
+				setSigner(provider.getSigner());
+			}
+		});
+		ethereum.on('chainChanged', (chainId) => {
+			window.location.reload();
+		});
+	}, [provider, ethers]);
+
+	useEffect(() => {
+		if (provider) {
+			setSigner(provider.getSigner());
+		}
+	}, [provider, ethers]);
+	// till here
 
 	return (
 		<QueryClientProvider client={queryClient}>
