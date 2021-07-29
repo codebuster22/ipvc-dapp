@@ -10,6 +10,7 @@
 		"@types/styled-components": "^5.1.11",
 		"@types/styled-system": "^5.1.12",
 		"axios": "^0.21.1",
+		"ethers": "^5.4.2",
 		"hash.js": "^1.1.7",
 		"lodash": "^4.17.21",
 		"next": "^11.0.1",
