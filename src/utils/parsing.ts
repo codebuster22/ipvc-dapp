@@ -7,59 +7,77 @@ import Tesseract from 'tesseract.js';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker.workerSrc;
 
-export const parsePDF = (file: File): void => {
+//To parse a PDF documnet, we need to first convert the PDF file into an image.
+//This is done by first converting the PDF into a canvas element
+//Then the canvas element is converted into a Data URL
+//The Data URL is then converted to a Blob/File and it's path is determined
+//The path is then passed to Tesseract to be parsed
+export const parsePDF = (file: File, setProgress: (number) => void): void => {
 	const fileReader: FileReader = new FileReader();
 	fileReader.onload = async (e: ProgressEvent<FileReader>) => {
-		const pdf = e.target.result;
+		const pdfFile = e.target.result;
 		// @ts-ignore
-		const pdfDoc = pdfjsLib.getDocument(pdf);
-		pdfDoc.promise.then(async (pdf) => {
-			console.log(pdf.numPages);
-			const pdfDocument = pdf;
-			const pagesPromises = [];
+		const pdfDoc = pdfjsLib.getDocument(pdfFile); //Convert the PDF file to a PDFDocument object.
+		const pdf = await pdfDoc.promise; //Get the PDFDocument object's promise.
+		const page = await pdf.getPage(1); //Get the first page of the PDF document.
 
-			for (let i = 0; i < pdf.numPages; i++) {
-				// Required to prevent that i is always the total of pages
-				pagesPromises.push(getPageText(i + 1, pdfDocument));
-			}
+		//Check to ensure that we are running in the browser to access document
+		if (process.browser) {
+			//Initialize the canvas element
+			const canvas = document.createElement('canvas');
+			const ctx = canvas.getContext('2d');
+			const viewport = page.getViewport({ scale: 1.5 });
+			canvas.height = viewport.height;
+			canvas.width = viewport.width;
 
-			Promise.all(pagesPromises).then(function (pagesText) {
-				for (let i = 0; i < pagesText.length; i++) {
-					console.log(pagesText[i]);
+			//Render the page into the canvas element and wait for the render to finish
+			page.render({ canvasContext: ctx, viewport }).promise.then(async () => {
+				//when render is finished, convert the canvas element to a Data URL
+				const dataURI = canvas.toDataURL('image/png', 1);
+
+				// Convert the DataURL to a Blob
+				const enc = dataURI.split(',')[1];
+				console.log({ dataURI, enc });
+				const binary = atob(enc);
+				const mime = 'image/png';
+				let n = binary.length;
+				const u8arr = new Uint8Array(n);
+				while (n--) {
+					u8arr[n] = binary.charCodeAt(n);
 				}
+				const blob = new Blob([u8arr], { type: mime });
+
+				//Create a Blob path URL
+				const imagePath = URL.createObjectURL(blob);
+
+				//Pass the Blob path URL to Tesseract
+				const result = await Tesseract.recognize(imagePath, 'eng', {
+					logger: (m) => {
+						//To track progress of the parsing process
+						if (m.status == 'recognizing text') {
+							const progress = Math.trunc(m.progress * 100);
+							setProgress(progress);
+						}
+					},
+				});
+
+				console.log(result);
 			});
-		});
+		}
 	};
 	fileReader.readAsArrayBuffer(file);
 };
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const getPageText = (pageNum: number, PDFDocumentInstance: PDFDocumentProxy) => {
-	// Return a Promise that is solved once the text of the page is retrieven
-	return new Promise(function (resolve) {
-		PDFDocumentInstance.getPage(pageNum).then(function (pdfPage) {
-			// The main trick to obtain the text of the PDF page, use the getTextContent method
-			pdfPage.getTextContent().then(function (textContent) {
-				const textItems = textContent.items;
-				let finalString = '';
-
-				// Concatenate the string of the item to the final string
-				for (let i = 0; i < textItems.length; i++) {
-					const item = textItems[i];
-					finalString += item.str + ' ';
-				}
-
-				// Solve promise with the text retrieven from the page
-				resolve(finalString);
-			});
-		});
-	});
-};
-
-export const parseImage = async (file: File): Promise<string> => {
+export const parseImage = async (file: File, setProgress: (number) => void): Promise<string> => {
 	const imagePath = URL.createObjectURL(file);
+	console.log({ imagePath });
 	const result = await Tesseract.recognize(imagePath, 'eng', {
-		logger: (m) => console.log(m),
+		logger: (m) => {
+			if (m.status == 'recognizing text') {
+				const progress = Math.trunc(m.progress * 100);
+				setProgress(progress);
+			}
+		},
 	});
 	return result.data.text;
 };

@@ -12,6 +12,7 @@ const Home = (): JSX.Element => {
 	const [otp, setOtp] = useState<string>('');
 	const [txnId, setTxnId] = useState<string>('');
 	const [isVerified, setIsVerified] = useState<boolean>(false);
+	const [progress, setProgress] = useState<number>(0);
 	const GET_OTP_MUTATION = useMutation('otp', getOtp, {
 		onSuccess(res) {
 			setTxnId(res?.txnId);
@@ -33,9 +34,9 @@ const Home = (): JSX.Element => {
 		const file = e.target.files[0];
 		console.log({ inputRef, file });
 		if (file['type'] === 'application/pdf') {
-			parsePDF(file);
+			parsePDF(file, setProgress);
 		} else if (file['type'].split('/')[0] === 'image') {
-			const text = await parseImage(file);
+			const text = await parseImage(file, setProgress);
 			console.log({ text });
 		}
 	};
@@ -82,6 +83,9 @@ const Home = (): JSX.Element => {
 			/>
 			<Box>
 				<input type="file" ref={inputRef} onChange={handleUpload}></input>
+			</Box>
+			<Box display={progress ? 'block' : 'none'} fontSize="20px">
+				{progress}
 			</Box>
 		</React.Fragment>
 	);

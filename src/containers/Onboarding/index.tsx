@@ -17,6 +17,7 @@ const OnboardingComp = (): JSX.Element => {
 			<Box as="button" onClick={handleLogout}>
 				Logout
 			</Box>
+			<Box color="green-100"></Box>
 		</Box>
 	);
 };
