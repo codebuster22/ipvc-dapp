@@ -6,7 +6,7 @@ import {ethers} from 'ethers';
 //     provider: {},
 //     ethers: {}
 // }
-const getEthers = (): Object => 
+const getEthers = (window): Object => 
     new Promise((resolve, reject)=> {
         window.addEventListener('load', async () => {
             if(window.ethereum){

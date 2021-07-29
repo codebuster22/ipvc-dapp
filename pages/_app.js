@@ -45,7 +45,7 @@ const MyApp = ({ Component, pageProps }) => {
 	const [signer, setSigner] = useState();
 
 	const setup = async () => {
-		const result = await getEthers();
+		const result = await getEthers(window);
 		setEthers(result.ethers);
 		setProvider(result.provider);
 	};
