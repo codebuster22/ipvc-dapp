@@ -29,26 +29,37 @@ const space: DefaultTheme['space'] = [
 	'12rem',
 ];
 
-space.mxxs = space[1];
-space.mxs = space[2];
-space.ms = space[3];
-space.mm = space[4];
-space.ml = space[5];
-space.mxl = space[6];
-space.mxxl = space[7];
-space.mxxxl = space[8];
+space.mxxs = space[1]; //4px
+space.mxs = space[2]; //8px
+space.ms = space[3]; //12px
+space.mm = space[4]; //16px
+space.ml = space[5]; //20px
+space.mxl = space[6]; //24px
+space.mxxl = space[7]; //28px
+space.mxxxl = space[8]; //32px
 
-space.wxxs = space[9];
-space.wxs = space[10];
-space.ws = space[11];
-space.wm = space[12];
-space.wl = space[13];
-space.wxl = space[14];
-space.wxxl = space[15];
+space.wxxs = space[9]; //40px
+space.wxs = space[10]; //48px
+space.ws = space[11]; //56px
+space.wm = space[12]; //64px
+space.wl = space[13]; //80px
+space.wxl = space[14]; //100px
+space.wxxl = space[15]; //120px
+
+const colors: DefaultTheme['colors'] = {
+	'pink-100': '#D83F87',
+	'purple-10': '#2A1B3D',
+	'purple-100': '#44318D',
+	'purple-50': '#BA93E1',
+	'gray-100': '#A4B3B6',
+	'orange-50': '#F65F59',
+	'green-100': '#96E6B3',
+};
 
 const theme: DefaultTheme = {
 	space,
 	breakpoints,
+	colors,
 };
 
 export default theme;
