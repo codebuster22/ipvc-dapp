@@ -34,7 +34,7 @@ const Home = (): JSX.Element => {
 		const file = e.target.files[0];
 		console.log({ inputRef, file });
 		if (file['type'] === 'application/pdf') {
-			parsePDF(file, setProgress);
+			// parsePDF(file, setProgress);
 		} else if (file['type'].split('/')[0] === 'image') {
 			const text = await parseImage(file, setProgress);
 			console.log({ text });

@@ -1,9 +1,9 @@
 interface IfProps {
 	condition: boolean;
-	then: JSX.Element;
-	else?: JSX.Element;
+	then: any;
+	else?: any;
 }
-const If = (props: IfProps): JSX.Element => {
+const If = (props: IfProps): any => {
 	const condition = props.condition || false;
 	const positive = props.then || null;
 	const negative = props.else || null;

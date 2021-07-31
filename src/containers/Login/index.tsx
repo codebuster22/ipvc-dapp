@@ -128,7 +128,7 @@ const LoginComp = (): JSX.Element => {
 								transition: background 200ms ease-out;
 							`}
 						>
-							<Box borderRight="1px solid black" width="6rem" height="100%" bg="green-100" center>
+							<Box borderRight="1px solid black" width="6rem" height="100%" bg="green-100" center p="ms">
 								+91
 							</Box>
 							<Box
@@ -143,7 +143,7 @@ const LoginComp = (): JSX.Element => {
 								fontSize="inherit"
 								fontWeight="inherit"
 								outline="none"
-								flex={1}
+								width="90%"
 								bg="transparent"
 								disabled={step === 1}
 							/>

@@ -12,7 +12,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker.workerSrc;
 //Then the canvas element is converted into a Data URL
 //The Data URL is then converted to a Blob/File and it's path is determined
 //The path is then passed to Tesseract to be parsed
-export const parsePDF = (file: File, setProgress: (number) => void): void => {
+export const parsePDF = (file: File, setProgress: (number) => void, setText: (string) => void): void => {
 	const fileReader: FileReader = new FileReader();
 	fileReader.onload = async (e: ProgressEvent<FileReader>) => {
 		const pdfFile = e.target.result;
@@ -61,7 +61,7 @@ export const parsePDF = (file: File, setProgress: (number) => void): void => {
 					},
 				});
 
-				console.log(result);
+				setText(result?.data?.text);
 			});
 		}
 	};
