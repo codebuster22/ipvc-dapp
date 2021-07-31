@@ -1,18 +1,19 @@
+/* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import nookies from 'nookies';
-import { debounce } from 'lodash';
+import { gsap } from 'gsap';
 
 import Box from '@/components/Box';
 import Text from '@/components/Text';
 import Dropzone from '@/components/Dropzone';
+import If from '@/components/If';
 import theme from '@/styleguide/theme';
 import { parseImage, parsePDF } from '@/utils/parsing';
 
 import PDFIcon from '../../svgs/pdf.svg';
 import ImageIcon from '../../svgs/image-icon.svg';
-import If from '@/components/If';
-import { gsap } from 'gsap';
+import CloseIcon from '../../svgs/close.svg';
 
 const OnboardingComp = (): JSX.Element => {
 	const router = useRouter();
@@ -115,14 +116,24 @@ const OnboardingComp = (): JSX.Element => {
 								boxShadow="0 0 5px 0 rgba( 0, 0, 0, 0.37 )"
 								column
 								alignItems="center"
-								height="14rem"
+								py="ml"
 								borderRadius="10px"
 								bg="rgba(0,0,0,0.05)"
 								px="ml"
 								border="1px solid"
 								borderColor="gray-100"
+								position="relative"
 							>
-								<Box row pt="mxs">
+								<Box
+									position="absolute"
+									right="ms"
+									onClick={() => setFile(null)}
+									cursor="pointer"
+									display={step > 0 ? 'none' : 'initial'}
+								>
+									<CloseIcon height="20px" />
+								</Box>
+								<Box row pt="mxs" alignSelf="flex-start" mb="mxs">
 									<If
 										condition={file?.type === 'application/pdf'}
 										then={<PDFIcon height="8rem" color="maroon" />}
@@ -239,6 +250,8 @@ const OnboardingComp = (): JSX.Element => {
 					mx="50%"
 					transform="translateX(-50%)"
 					onClick={handleLogout}
+					mb="wl"
+					cursor="pointer"
 				>
 					Logout
 				</Box>

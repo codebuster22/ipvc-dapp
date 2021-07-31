@@ -55,6 +55,7 @@ const Dropzone = ({ setFile, ...props }: DropzoneProps): JSX.Element => {
 		// @ts-expect-error Style Props spreading causing overload of props
 		<Box
 			{...props}
+			cursor="pointer"
 			onClick={() => openFileSystem()}
 			onDragEnter={onDragEnter}
 			onDragOver={onDragOver}

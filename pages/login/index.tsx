@@ -17,10 +17,10 @@ export default LoginPage;
 
 LoginPage.getInitialProps = async (ctx): Promise<any> => {
 	if (ctx?.req?.cookies['access_token']) {
-		ctx.res.writeHead(301, {
+		ctx?.res?.writeHead(301, {
 			Location: '/onboarding',
 		});
-		ctx.res.end();
+		ctx?.res?.end();
 	} else {
 		return {};
 	}
