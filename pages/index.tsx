@@ -20,4 +20,5 @@ Home.getInitialProps = (ctx) => {
 		});
 		ctx?.res?.end();
 	}
+	return {};
 };

@@ -22,6 +22,7 @@ LoginPage.getInitialProps = async (ctx): Promise<any> => {
 		});
 		ctx?.res?.end();
 	} else {
-		return {};
+		return { access_token: '' };
 	}
+	return {};
 };
