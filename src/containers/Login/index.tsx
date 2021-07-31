@@ -47,7 +47,7 @@ const LoginComp = (): JSX.Element => {
 
 	const handleOTPSend = async (e) => {
 		e.preventDefault();
-		if (mobileNumber.length < 10) {
+		if (mobileNumber.length !== 10) {
 			toast.error('Invalid Mobile Number');
 		} else {
 			GET_OTP_MUTATION.mutate(mobileNumber);
