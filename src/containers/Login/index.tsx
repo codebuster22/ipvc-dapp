@@ -47,7 +47,7 @@ const LoginComp = (): JSX.Element => {
 
 	const handleOTPSend = async (e) => {
 		e.preventDefault();
-		if (mobileNumber.length < 10) {
+		if (mobileNumber.length !== 10) {
 			toast.error('Invalid Mobile Number');
 		} else {
 			GET_OTP_MUTATION.mutate(mobileNumber);
@@ -95,8 +95,8 @@ const LoginComp = (): JSX.Element => {
 						OTP Verification
 					</Box>
 					<Box fontSize="18px">
-						This step shows that it is
-						<br /> really you trying to sign-in.
+						This step will authenticate you
+						<br /> with the CoWIN API.
 					</Box>
 				</Box>
 				<Box
@@ -128,7 +128,7 @@ const LoginComp = (): JSX.Element => {
 								transition: background 200ms ease-out;
 							`}
 						>
-							<Box borderRight="1px solid black" width="6rem" height="100%" bg="green-100" center>
+							<Box borderRight="1px solid black" width="6rem" height="100%" bg="green-100" center p="ms">
 								+91
 							</Box>
 							<Box
@@ -143,7 +143,7 @@ const LoginComp = (): JSX.Element => {
 								fontSize="inherit"
 								fontWeight="inherit"
 								outline="none"
-								flex={1}
+								width="90%"
 								bg="transparent"
 								disabled={step === 1}
 							/>
