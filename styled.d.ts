@@ -29,7 +29,17 @@ interface IBreakpoints {
 
 declare module 'styled-components' {
 	export interface DefaultTheme {
+		colors: {
+			'pink-100': string;
+			'purple-10': string;
+			'purple-100': string;
+			'purple-50': string;
+			'gray-100': string;
+			'orange-50': string;
+			'green-100': string;
+		};
 		space: string[] & Partial<ISpace>;
 		breakpoints: string[] & Partial<IBreakpoints>;
+		colors: string[] & Partial<IColors>;
 	}
 }
