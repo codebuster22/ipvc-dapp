@@ -95,8 +95,8 @@ const LoginComp = (): JSX.Element => {
 						OTP Verification
 					</Box>
 					<Box fontSize="18px">
-						This step shows that it is
-						<br /> really you trying to sign-in.
+						This step will authenticate you
+						<br /> with the CoWIN API.
 					</Box>
 				</Box>
 				<Box

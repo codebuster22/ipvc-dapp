@@ -62,10 +62,6 @@ const OnboardingComp = (): JSX.Element => {
 
 	return (
 		<Box height="100vh" center bg="purple-10">
-			{/* <h1>Onboarding</h1>
-			<Box as="button" onClick={handleLogout}>
-				Logout
-			</Box> */}
 			<Box
 				height={{ mobS: '100%', tabS: 'auto' }}
 				color="black"
@@ -82,6 +78,9 @@ const OnboardingComp = (): JSX.Element => {
 					</Text>
 					<Text as="h4" fontWeight="medium">
 						This step verifies your vaccine certificate with the CoWIN database.
+					</Text>
+					<Text as="h5" fontWeight="regular" mt="mxs">
+						No credentials will leave your device.
 					</Text>
 				</Box>
 				<Box
