@@ -10,7 +10,7 @@ import useEthers from '../src/ethereum/useEthers';
 import useContract from '../src/ethereum/useContract';
 import useSigner from '../src/ethereum/useSigner';
 import chains from '../src/ethereum/utils/chains';
-import contracts from '../src/ethereum/utils/contracts';
+import contracts from '../src/ethereum/utils/contracts.js';
 import useListeners from '../src/ethereum/useListeners';
 
 const queryClient = new QueryClient();
