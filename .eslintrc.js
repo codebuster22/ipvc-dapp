@@ -20,6 +20,12 @@ module.exports = {
 		'@typescript-eslint/no-var-requires': 0,
 		'@typescript-eslint/no-explicit-any': 0,
 		'ban-ts-comment': 0,
+		'prettier/prettier': [
+			'error',
+			{
+				endOfLine: 'auto',
+			},
+		],
 	},
 	plugins: ['@typescript-eslint', 'prettier', 'import', 'jsx-a11y'],
 	parser: '@typescript-eslint/parser',
