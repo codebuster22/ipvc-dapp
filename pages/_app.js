@@ -6,13 +6,17 @@ import { ThemeProvider } from 'styled-components';
 import theme from '../src/styleguide/theme';
 import '../styles/globalStyles.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import getEthers from '../src/utils/getEthers';
+import useEthers from '../src/ethereum/useEthers';
+import useContract from '../src/ethereum/useContract';
+import useSigner from '../src/ethereum/useSigner';
+import chains from '../src/ethereum/utils/chains';
+import contracts from '../src/ethereum/utils/contracts';
+import useListeners from '../src/ethereum/useListeners';
 
 const queryClient = new QueryClient();
 
 // This default export is required in a new `pages/_app.js` file.
 const MyApp = ({ Component, pageProps }) => {
-
 	useEffect(() => {
 		// Set a custom CSS Property for Height
 		// See https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
@@ -40,34 +44,30 @@ const MyApp = ({ Component, pageProps }) => {
 
 	// this should be on the topmost element
 	// starting from here
-	const [ethers, setEthers] = useState();
-	const [provider, setProvider] = useState();
-	const [signer, setSigner] = useState();
+	const [provider, setProvider, ethers] = useEthers();
+	const [signer, setSigner] = useSigner(provider);
+	const [address, setAddress] = useState();
+	const [chainName, setChainName] = useState();
+	const warriorCore = useContract(contracts.warrior, provider);
+	const geneGenerator = useContract(contracts.geneGenerator, provider);
 
-	const setup = async () => {
-		const result = await getEthers(window);
-		setEthers(result.ethers);
-		setProvider(result.provider);
-	};
-
-	useEffect(() => {
-		setup();
-		ethereum.on('accountsChanged', async (accounts) => {
-			if (provider) {
-				setSigner(provider.getSigner());
-			}
-		});
-		ethereum.on('chainChanged', (chainId) => {
-			window.location.reload();
-		});
-	}, [provider, ethers]);
+	useListeners(provider, setProvider, setSigner);
 
 	useEffect(() => {
-		if (provider) {
-			setSigner(provider.getSigner());
+		if (signer?.provider) {
+			const getAddress = async () => {
+				setAddress(await signer.getAddress());
+				setChainName(chains[signer.provider.provider.chainId.toString()]);
+			};
+			getAddress();
 		}
-	}, [provider, ethers]);
-	// till here
+	}, [signer]);
+
+	const getCurrentGen = async () => {
+		console.log((await warriorCore.currentGeneration()).toString());
+		console.log((await warriorCore.currentGenerationMaxPopulation()).toString());
+		console.log((await warriorCore.maxPopulation()).toString());
+	};
 
 	return (
 		<QueryClientProvider client={queryClient}>
