@@ -79,7 +79,7 @@ const MyApp = ({ Component, pageProps }) => {
 		if (warriorCore) {
 			getCurrentGen();
 		}
-	}, [provider, warriorCore]);
+	}, [warriorCore]);
 
 	return (
 		<QueryClientProvider client={queryClient}>
