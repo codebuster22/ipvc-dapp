@@ -65,12 +65,21 @@ const MyApp = ({ Component, pageProps }) => {
 	}, [signer]);
 
 	const getCurrentGen = async () => {
-		console.log((await warriorCore?.currentGeneration())?.toString());
-		console.log((await warriorCore?.currentGenerationMaxPopulation())?.toString());
-		console.log((await warriorCore?.maxPopulation())?.toString());
+		const currentGen = (await warriorCore?.currentGeneration())?.toString();
+		const currentGenMax = (await warriorCore?.currentGenerationMaxPopulation())?.toString();
+		const maxPopulation = (await warriorCore?.maxPopulation())?.toString();
+		const header = `Few details on warriors:-\n`;
+		const line1 = `Current Generation: ${currentGen}\n`;
+		const line2 = `Current Generation Maximum Population: ${currentGenMax}\n`;
+		const line3 = `Max Population: ${maxPopulation}`;
+		alert(`${header}${line1}${line2}${line3}`);
 	};
 
-	getCurrentGen();
+	useEffect(() => {
+		if (warriorCore) {
+			getCurrentGen();
+		}
+	}, [provider, warriorCore]);
 
 	return (
 		<QueryClientProvider client={queryClient}>
