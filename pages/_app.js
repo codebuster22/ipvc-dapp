@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
@@ -10,7 +11,7 @@ import useEthers from '../src/ethereum/useEthers';
 import useContract from '../src/ethereum/useContract';
 import useSigner from '../src/ethereum/useSigner';
 import chains from '../src/ethereum/utils/chains';
-import contracts from '../src/ethereum/utils/contracts.js';
+import contracts from '../src/ethereum/utils/contracts';
 import useListeners from '../src/ethereum/useListeners';
 
 const queryClient = new QueryClient();
@@ -64,10 +65,12 @@ const MyApp = ({ Component, pageProps }) => {
 	}, [signer]);
 
 	const getCurrentGen = async () => {
-		console.log((await warriorCore.currentGeneration()).toString());
-		console.log((await warriorCore.currentGenerationMaxPopulation()).toString());
-		console.log((await warriorCore.maxPopulation()).toString());
+		console.log((await warriorCore?.currentGeneration())?.toString());
+		console.log((await warriorCore?.currentGenerationMaxPopulation())?.toString());
+		console.log((await warriorCore?.maxPopulation())?.toString());
 	};
+
+	getCurrentGen();
 
 	return (
 		<QueryClientProvider client={queryClient}>

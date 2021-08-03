@@ -1,6 +1,6 @@
 const contracts = {
-    warrior: "WarriorCore",
-    geneGenerator: "WarriorGeneGenerator"
-}
+	warrior: 'WarriorCore',
+	geneGenerator: 'WarriorGeneGenerator',
+};
 
 export default contracts;

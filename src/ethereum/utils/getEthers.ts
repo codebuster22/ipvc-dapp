@@ -1,12 +1,15 @@
 // use this file to connect with metamask or with some JSON RPC
 import { ethers } from 'ethers';
 
-// returns an object:-
-// {
-//     provider: {},
-//     ethers: {}
-// }
-const getEthers = () =>
+// To expose ethereum to the window object
+declare let window: any;
+
+export interface IEthers {
+	provider: ethers.providers.Provider | ethers.providers.JsonRpcProvider;
+	ethers: any;
+}
+
+const getEthers = (): Promise<IEthers> =>
 	new Promise((resolve, reject) => {
 		window.addEventListener('load', async () => {
 			if (window.ethereum) {
@@ -18,7 +21,7 @@ const getEthers = () =>
 					console.error(error);
 					reject(error);
 				}
-			}else if (window.web3) {
+			} else if (window.web3) {
 				const provider = new ethers.providers.Web3Provider(window.web3);
 				try {
 					await window.web3.enable();
