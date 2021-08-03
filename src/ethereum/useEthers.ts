@@ -18,7 +18,11 @@ const useEthers = (): UseEthersResult => {
 		const connectToEthereum = async () => {
 			const { provider, ethers } = await getEthers();
 			if (provider) {
-				await requestAccount();
+				try {
+					await requestAccount();
+				} catch (e) {
+					console.log(e);
+				}
 			}
 			setProvider(provider as ProviderProps);
 			setEthers(ethers);
