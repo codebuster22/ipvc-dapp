@@ -11,13 +11,13 @@ const useListeners = (
 	setSigner: (arg0: SignerProps) => void
 ): void => {
 	useEffect(() => {
-		if (provider) {
+		if (provider?.provider) {
 			window?.ethereum?.on('accountsChanged', async (accounts) => {
 				if (provider) {
 					setSigner(provider?.getSigner());
 				}
 			});
-			window.ethereum.on('chainChanged', async (chainId) => {
+			window?.ethereum?.on('chainChanged', async (chainId) => {
 				const PROVIDER = new ethers.providers.Web3Provider(window.ethereum);
 				setProvider(PROVIDER);
 			});
