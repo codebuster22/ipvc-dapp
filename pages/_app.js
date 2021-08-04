@@ -79,7 +79,7 @@ const MyApp = ({ Component, pageProps }) => {
 		const maxPopulation = (await warriorCore?.maxPopulation())?.toString();
 		const header = `Few details on warriors:-\n`;
 		const line1 = `Current Generation: ${currentGen}\n`;
-		const line2 = `Current Generation Population: ${currentPopulation}\n`
+		const line2 = `Current Generation Population: ${currentPopulation}\n`;
 		const line3 = `Current Generation Maximum Population: ${currentGenMax}\n`;
 		const line4 = `Max Population: ${maxPopulation}`;
 		alert(`${header}${line1}${line2}${line3}${line4}`);
