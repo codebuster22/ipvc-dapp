@@ -13,6 +13,7 @@ import useSigner from '../src/ethereum/useSigner';
 import chains from '../src/ethereum/utils/chains';
 import contracts from '../src/ethereum/utils/contracts';
 import useListeners from '../src/ethereum/useListeners';
+import generateWarrior from '../src/ethereum/generateWarrior';
 
 const queryClient = new QueryClient();
 
@@ -50,7 +51,6 @@ const MyApp = ({ Component, pageProps }) => {
 	const [address, setAddress] = useState();
 	const [chainName, setChainName] = useState();
 	const warriorCore = useContract(contracts.warrior, provider);
-	const geneGenerator = useContract(contracts.geneGenerator, provider);
 
 	useListeners(provider, setProvider, setSigner);
 
@@ -64,22 +64,26 @@ const MyApp = ({ Component, pageProps }) => {
 		}
 	}, [signer]);
 
+	useEffect(() => {
+		if (warriorCore?.address && address) {
+			const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
+			getCurrentGen();
+			generateWarrior(warriorCore, signer, metadata);
+		}
+	}, [address, warriorCore]);
+
 	const getCurrentGen = async () => {
 		const currentGen = (await warriorCore?.currentGeneration())?.toString();
 		const currentGenMax = (await warriorCore?.currentGenerationMaxPopulation())?.toString();
+		const currentPopulation = (await warriorCore?.currentGenerationPopulation())?.toString();
 		const maxPopulation = (await warriorCore?.maxPopulation())?.toString();
 		const header = `Few details on warriors:-\n`;
 		const line1 = `Current Generation: ${currentGen}\n`;
-		const line2 = `Current Generation Maximum Population: ${currentGenMax}\n`;
-		const line3 = `Max Population: ${maxPopulation}`;
-		alert(`${header}${line1}${line2}${line3}`);
+		const line2 = `Current Generation Population: ${currentPopulation}\n`
+		const line3 = `Current Generation Maximum Population: ${currentGenMax}\n`;
+		const line4 = `Max Population: ${maxPopulation}`;
+		alert(`${header}${line1}${line2}${line3}${line4}`);
 	};
-
-	useEffect(() => {
-		if (warriorCore) {
-			getCurrentGen();
-		}
-	}, [warriorCore]);
 
 	return (
 		<QueryClientProvider client={queryClient}>
