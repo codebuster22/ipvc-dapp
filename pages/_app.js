@@ -1,11 +1,21 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-undef */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { debounce } from 'lodash';
 import { ThemeProvider } from 'styled-components';
-import theme from '../src/styleguide/theme';
+import theme from '@/styleguide/theme';
 import '../styles/globalStyles.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import useEthers from '@/ethereum/useEthers';
+import useContract from '@/ethereum/useContract';
+import useSigner from '@/ethereum/useSigner';
+import chains from '@/ethereum/utils/chains';
+import contracts from '@/ethereum/utils/contracts';
+import useListeners from '@/ethereum/useListeners';
+import generateWarrior from '@/ethereum/utils/generateWarrior';
+import { EthersProvider } from '@/ethereum/EthersContext';
 
 const queryClient = new QueryClient();
 
@@ -36,12 +46,55 @@ const MyApp = ({ Component, pageProps }) => {
 		}
 	});
 
+	// this should be on the topmost element
+	// starting from here
+	const [provider, setProvider, ethers] = useEthers();
+	const [signer, setSigner] = useSigner(provider);
+	const [address, setAddress] = useState();
+	const [chainName, setChainName] = useState();
+	const warriorCore = useContract(contracts.warrior, provider);
+
+	useListeners(provider, setProvider, setSigner);
+
+	useEffect(() => {
+		if (signer?.provider) {
+			const getAddress = async () => {
+				setAddress(await signer.getAddress());
+				setChainName(chains[signer.provider.provider.chainId.toString()]);
+			};
+			getAddress();
+		}
+	}, [signer]);
+
+	useEffect(() => {
+		if (warriorCore?.address && address) {
+			const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
+			getCurrentGen();
+			generateWarrior(warriorCore, signer, metadata);
+		}
+	}, [address, warriorCore]);
+
+	const getCurrentGen = async () => {
+		const currentGen = (await warriorCore?.currentGeneration())?.toString();
+		const currentGenMax = (await warriorCore?.currentGenerationMaxPopulation())?.toString();
+		const currentPopulation = (await warriorCore?.currentGenerationPopulation())?.toString();
+		const maxPopulation = (await warriorCore?.maxPopulation())?.toString();
+		const header = `Few details on warriors:-\n`;
+		const line1 = `Current Generation: ${currentGen}\n`;
+		const line2 = `Current Generation Population: ${currentPopulation}\n`;
+		const line3 = `Current Generation Maximum Population: ${currentGenMax}\n`;
+		const line4 = `Max Population: ${maxPopulation}`;
+		alert(`${header}${line1}${line2}${line3}${line4}`);
+	};
+
 	return (
-		<QueryClientProvider client={queryClient}>
-			<ThemeProvider theme={theme}>
-				<Component {...pageProps} />
-			</ThemeProvider>
-		</QueryClientProvider>
+		<EthersProvider provider={provider} signer={signer} warriorCore={warriorCore}>
+			<QueryClientProvider client={queryClient}>
+				<ThemeProvider theme={theme}>
+					<Component {...pageProps} />
+				</ThemeProvider>
+			</QueryClientProvider>
+		</EthersProvider>
 	);
 };
 
