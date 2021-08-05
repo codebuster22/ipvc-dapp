@@ -1,3 +1,3 @@
 # IPVC dApp
 
-The frontend for warriors.chainlabs.in
+The frontend for https://warriors.chainlabs.in
