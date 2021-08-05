@@ -18,6 +18,7 @@ module.exports = {
 		'no-use-before-define': 0,
 		'object-curly-newline': 0,
 		'@typescript-eslint/no-var-requires': 0,
+		'@typescript-eslint/explicit-module-boundary-types': 0,
 		'@typescript-eslint/no-explicit-any': 0,
 		'ban-ts-comment': 0,
 		'prettier/prettier': [
@@ -38,6 +39,8 @@ module.exports = {
 					['@/styleguide/*', path.resolve(__dirname, './src/styleguide')],
 					['@/utils/*', path.resolve(__dirname, './src/utils/*')],
 					['@/api/*', path.resolve(__dirname, './src/api/*')],
+					['@/ethereum/*', path.resolve(__dirname, './src/ethereum/*')],
+					['@/svgs/*', path.resolve(__dirname, './src/svgs/*')],
 					['@/pages/*', path.resolve(__dirname, './pages')],
 				],
 				extensions: ['.ts', '.js', '.tsx', '.jsx', '.json'],
