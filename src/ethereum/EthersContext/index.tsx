@@ -1,10 +1,14 @@
 import React from 'react';
 import { ProviderProps, SignerProps } from '../types';
 
-const EthersContext = React.createContext({});
+const EthersContext = React.createContext({
+	provider: {},
+	signer: {},
+	warriorCore: {},
+});
 
-interface EthersProviderProps {
-	children: React.ReactNode;
+export interface EthersProviderProps {
+	children?: React.ReactNode;
 	provider: ProviderProps;
 	signer: SignerProps;
 	warriorCore: any;

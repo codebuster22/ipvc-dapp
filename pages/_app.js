@@ -68,9 +68,7 @@ const MyApp = ({ Component, pageProps }) => {
 
 	useEffect(() => {
 		if (warriorCore?.address && address) {
-			const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
 			getCurrentGen();
-			generateWarrior(warriorCore, signer, metadata);
 		}
 	}, [address, warriorCore]);
 
