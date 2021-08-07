@@ -372,9 +372,112 @@ const isMetadataUsed = await warriorCore.isMetadataUsed();
 ```
 
 ## Events
+to query the data from events, use `queryEvents()`.
 
-### AssetRegistered
+```js
+const data = await queryEvents(contract, eventName [, queryArgs]);
+```
 
-### AssetForLayerRegistered
+### Input
+1. contract - Object - This is the contract which emits the event.
+2. eventName - string - Name of the event which needs to be queried
+3. queryArgs - array - array of arguments which needs to be filtered
 
-### WarriorGenerated
+### Output
+1. data - array - array of event argumnets which were emitted filtered by queryArgs
+
+### Examples
+
+#### WarriorGenerated
+
+Have two query arguments:-
+1. creator - address - address which minted this warrior
+2. warriorId - number/string - id of warrior generated
+```js
+// with no query arguments
+const data = await queryEvents(warriorCore, "WarriorGenerated");
+// [
+//     ["0x67BE2C36e75B7439ffc2DCb99dBdF4fbB2455930", BigNumber {1}],
+//     ["0xd18Cd50a6bDa288d331e3956BAC496AAbCa4960d", BigNumber {2}],
+//     ["0x67BE2C36e75B7439ffc2DCb99dBdF4fbB2455930", BigNumber {3}]
+// ]
+
+// filter with creator address
+const queryArgs = ["0x67BE2C36e75B7439ffc2DCb99dBdF4fbB2455930"];
+const data = await queryEvents(warriorCore, "WarriorGenerated", queryArgs);
+// [
+//     ["0x67BE2C36e75B7439ffc2DCb99dBdF4fbB2455930", BigNumber {1}],
+//     ["0x67BE2C36e75B7439ffc2DCb99dBdF4fbB2455930", BigNumber {3}]
+// ]
+
+// filter with warrior id
+const queryArgs = [null, 1];
+const data = await queryEvents(warriorCore, "WarriorGenerated", queryArgs);
+// [
+//     ["0x67BE2C36e75B7439ffc2DCb99dBdF4fbB2455930", BigNumber {1}],
+// ]
+```
+
+#### AssetRegistered
+Have two query arguments:-
+1. assetId - number/string - id of asset
+2. assetCid - bytes32 - ipfs hash of asset converted to bytes32
+```js
+// with no query arguments
+const data = await queryEvents(warriorCore, "AssetRegistered");
+// [
+//     [BigNumber {1}, "0x7c7a99f603f231d53a4f39d1521f98d2e8bb279cf29bebfd0687dc98458e7f89"],
+//     [BigNumber {2}, "0x9a5a99f603f231d93a4f39d1521f98d2e8bb279cf29bebfd0687dc98458e7f89"],
+//     [BigNumber {3}, "0x7168799f603f231d53a4f39d1521f98d2e8bb499cf29bebfd0687dc98458e7f9"],
+//     .
+//     .
+//     .
+// ]
+
+// filter with asset id
+const queryArgs = [1];
+const data = await queryEvents(warriorCore, "AssetRegistered", queryArgs);
+// [
+//     [BigNumber {1}, "0x7c7a99f603f231d53a4f39d1521f98d2e8bb279cf29bebfd0687dc98458e7f89"]
+// ]
+
+// filter with ipfs hash
+const queryArgs = [null, getBytes32FromHash("QmWmyoMoctfbAaiEs2G46gpeUmhqFRDW6KWo64y5r581Vz")];
+const data = await queryEvents(warriorCore, "AssetRegistered", queryArgs);
+// [
+//     [BigNumber {2}, "0x7c7a99f603f231d53a4f39d1521f98d2e8bb279cf29bebfd0687dc98458e7f89"]
+// ]
+```
+
+#### AssetForLayerRegistered
+Have two query arguments:-
+1. layerId - id of layer whose assets have been created
+2. generation - generation number/id
+```js
+// with no query arguments
+const data = await queryEvents(warriorCore, "AssetForLayerRegistered");
+// [
+//     [BigNumber {1}, BigNumber {0}],
+//     [BigNumber {2}, BigNumber {0}],
+//     [BigNumber {3}, BigNumber {0}],
+//     [BigNumber {1}, BigNumber {1}],
+//     [BigNumber {2}, BigNumber {1}],
+//     [BigNumber {3}, BigNumber {2}]
+// ]
+
+// filter with layerid
+const queryArgs = [1];
+const data = await queryEvents(warriorCore, "AssetForLayerRegistered", queryArgs);
+// [
+//     [BigNumber {1}, BigNumber {0}]
+// ]
+
+// filter with ipfs hash
+const queryArgs = [null, 0];
+const data = await queryEvents(warriorCore, "AssetForLayerRegistered", queryArgs);
+// [
+//     [BigNumber {1}, BigNumber {0}],
+//     [BigNumber {2}, BigNumber {0}],
+//     [BigNumber {3}, BigNumber {0}]
+// ]
+```
