@@ -16,6 +16,7 @@ import contracts from '@/ethereum/utils/contracts';
 import useListeners from '@/ethereum/useListeners';
 import generateWarrior from '@/ethereum/utils/generateWarrior';
 import { EthersProvider } from '@/ethereum/EthersContext';
+import queryEvents from '../src/ethereum/utils/queryEvents';
 
 const queryClient = new QueryClient();
 
@@ -73,6 +74,32 @@ const MyApp = ({ Component, pageProps }) => {
 			generateWarrior(warriorCore, signer, metadata);
 		}
 	}, [address, warriorCore]);
+
+	// get all the warriors which were minted
+	const getAllWarriors = async () => {
+		const data = await queryEvents(warriorCore, 'WarriorGenerated');
+		console.log('All Warriors', data);
+	};
+
+	// get the warriors that this person created
+	const getUserHolding = async (address) => {
+		const data = await queryEvents(warriorCore, 'WarriorGenerated', [address]);
+		console.log('User warriors', data);
+	};
+
+	// Not yet live on rinkeby
+	// const getAllAssets = async () => {
+	// 	const data = await queryEvents(warriorCore, "AssetRegistered");
+	// 	console.log("All Assets", data);
+	// }
+
+	useEffect(() => {
+		if (warriorCore?.address && address) {
+			getUserHolding(address);
+			getAllWarriors();
+			// getAllAssets();
+		}
+	}, [warriorCore, address]);
 
 	const getCurrentGen = async () => {
 		const currentGen = (await warriorCore?.currentGeneration())?.toString();
