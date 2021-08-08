@@ -437,14 +437,14 @@ const data = await queryEvents(warriorCore, "AssetsRegistered");
 
 // filter with asset id
 const queryArgs = [1];
-const data = await queryEvents(warriorCore, "AssetRegistered", queryArgs);
+const data = await queryEvents(warriorCore, "AssetsRegistered", queryArgs);
 // [
 //     [BigNumber {1}, BigNumber {6}, "0x7c7a99f603f231d53a4f39d1521f98d2e8bb279cf29bebfd0687dc98458e7f89"]
 // ]
 
 // filter with total layers
 const queryArgs = [null, 10];
-const data = await queryEvents(warriorCore, "AssetRegistered", queryArgs);
+const data = await queryEvents(warriorCore, "AssetsRegistered", queryArgs);
 // [
 //     [BigNumber {3}, BigNumber {10}, "0x7168799f603f231d53a4f39d1521f98d2e8bb499cf29bebfd0687dc98458e7f9"],
 //     [BigNumber {4}, BigNumber {10}, "0x7168799f603f231d53a4f39d1521f98d2e8bb499cf29bebfd0687dc98458e7f9"]
@@ -452,41 +452,8 @@ const data = await queryEvents(warriorCore, "AssetRegistered", queryArgs);
 
 // filter with ipfs hash
 const queryArgs = [null, null ,getBytes32FromHash("QmWmyoMoctfbAaiEs2G46gpeUmhqFRDW6KWo64y5r581Vz")];
-const data = await queryEvents(warriorCore, "AssetRegistered", queryArgs);
+const data = await queryEvents(warriorCore, "AssetsRegistered", queryArgs);
 // [
 //     [BigNumber {2}, BigNumber {8}, "0x7c7a99f603f231d53a4f39d1521f98d2e8bb279cf29bebfd0687dc98458e7f89"]
-// ]
-```
-
-#### AssetForLayerRegistered
-Have two query arguments:-
-1. layerId - id of layer whose assets have been created
-2. generation - generation number/id
-```js
-// with no query arguments
-const data = await queryEvents(warriorCore, "AssetForLayerRegistered");
-// [
-//     [BigNumber {1}, BigNumber {0}],
-//     [BigNumber {2}, BigNumber {0}],
-//     [BigNumber {3}, BigNumber {0}],
-//     [BigNumber {1}, BigNumber {1}],
-//     [BigNumber {2}, BigNumber {1}],
-//     [BigNumber {3}, BigNumber {2}]
-// ]
-
-// filter with layerid
-const queryArgs = [1];
-const data = await queryEvents(warriorCore, "AssetForLayerRegistered", queryArgs);
-// [
-//     [BigNumber {1}, BigNumber {0}]
-// ]
-
-// filter with ipfs hash
-const queryArgs = [null, 0];
-const data = await queryEvents(warriorCore, "AssetForLayerRegistered", queryArgs);
-// [
-//     [BigNumber {1}, BigNumber {0}],
-//     [BigNumber {2}, BigNumber {0}],
-//     [BigNumber {3}, BigNumber {0}]
 // ]
 ```
