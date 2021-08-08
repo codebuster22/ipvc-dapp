@@ -89,7 +89,7 @@ const MyApp = ({ Component, pageProps }) => {
 
 	// Not yet live on rinkeby
 	// const getAllAssets = async () => {
-	// 	const data = await queryEvents(warriorCore, "AssetRegistered");
+	// 	const data = await queryEvents(warriorCore, "AssetsRegistered");
 	// 	console.log("All Assets", data);
 	// }
 
