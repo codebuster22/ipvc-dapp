@@ -418,17 +418,18 @@ const data = await queryEvents(warriorCore, "WarriorGenerated", queryArgs);
 // ]
 ```
 
-#### AssetRegistered
-Have two query arguments:-
-1. assetId - number/string - id of asset
-2. assetCid - bytes32 - ipfs hash of asset converted to bytes32
+#### AssetsRegistered
+Have three query arguments:-
+1. generation - number/string - generation number
+2. totalLayers - number/string - total number of layer
 ```js
 // with no query arguments
-const data = await queryEvents(warriorCore, "AssetRegistered");
+const data = await queryEvents(warriorCore, "AssetsRegistered");
 // [
-//     [BigNumber {1}, "0x7c7a99f603f231d53a4f39d1521f98d2e8bb279cf29bebfd0687dc98458e7f89"],
-//     [BigNumber {2}, "0x9a5a99f603f231d93a4f39d1521f98d2e8bb279cf29bebfd0687dc98458e7f89"],
-//     [BigNumber {3}, "0x7168799f603f231d53a4f39d1521f98d2e8bb499cf29bebfd0687dc98458e7f9"],
+//     [BigNumber {1}, BigNumber {6}, "0x7c7a99f603f231d53a4f39d1521f98d2e8bb279cf29bebfd0687dc98458e7f89"],
+//     [BigNumber {2}, BigNumber {8}, "0x9a5a99f603f231d93a4f39d1521f98d2e8bb279cf29bebfd0687dc98458e7f89"],
+//     [BigNumber {3}, BigNumber {10}, "0x7168799f603f231d53a4f39d1521f98d2e8bb499cf29bebfd0687dc98458e7f9"],
+//     [BigNumber {4}, BigNumber {10}, "0x7168799f603f231d53a4f39d1521f98d2e8bb499cf29bebfd0687dc98458e7f9"],
 //     .
 //     .
 //     .
@@ -438,14 +439,22 @@ const data = await queryEvents(warriorCore, "AssetRegistered");
 const queryArgs = [1];
 const data = await queryEvents(warriorCore, "AssetRegistered", queryArgs);
 // [
-//     [BigNumber {1}, "0x7c7a99f603f231d53a4f39d1521f98d2e8bb279cf29bebfd0687dc98458e7f89"]
+//     [BigNumber {1}, BigNumber {6}, "0x7c7a99f603f231d53a4f39d1521f98d2e8bb279cf29bebfd0687dc98458e7f89"]
+// ]
+
+// filter with total layers
+const queryArgs = [null, 10];
+const data = await queryEvents(warriorCore, "AssetRegistered", queryArgs);
+// [
+//     [BigNumber {3}, BigNumber {10}, "0x7168799f603f231d53a4f39d1521f98d2e8bb499cf29bebfd0687dc98458e7f9"],
+//     [BigNumber {4}, BigNumber {10}, "0x7168799f603f231d53a4f39d1521f98d2e8bb499cf29bebfd0687dc98458e7f9"]
 // ]
 
 // filter with ipfs hash
-const queryArgs = [null, getBytes32FromHash("QmWmyoMoctfbAaiEs2G46gpeUmhqFRDW6KWo64y5r581Vz")];
+const queryArgs = [null, null ,getBytes32FromHash("QmWmyoMoctfbAaiEs2G46gpeUmhqFRDW6KWo64y5r581Vz")];
 const data = await queryEvents(warriorCore, "AssetRegistered", queryArgs);
 // [
-//     [BigNumber {2}, "0x7c7a99f603f231d53a4f39d1521f98d2e8bb279cf29bebfd0687dc98458e7f89"]
+//     [BigNumber {2}, BigNumber {8}, "0x7c7a99f603f231d53a4f39d1521f98d2e8bb279cf29bebfd0687dc98458e7f89"]
 // ]
 ```
 
