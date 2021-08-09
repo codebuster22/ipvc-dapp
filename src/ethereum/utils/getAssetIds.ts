@@ -20,14 +20,12 @@ const getAssetIds = async (warriorCore, warriorId): Promise<IAssets> => {
 	const gene = await warriorCore?.getWarrior(warriorId);
 	if (!!gene) {
 		const attributes = gene?.toString()?.substring(4);
-		console.log({ attributes });
 		const attributeArray = attributes?.match(/.{1,12}/g);
-		let assetIds: IAssets;
+		const assetIds: IAssets = { ...variations };
 		attributeArray.map((attribute, idx) => {
 			const layer = `layer_${6 - idx}`;
-			assetIds[layer] = Number(attribute) % variations[layer];
+			assetIds[layer] = Number(attribute) % variations?.[layer];
 		});
-		console.log({ assetIds });
 		return assetIds;
 	}
 };
