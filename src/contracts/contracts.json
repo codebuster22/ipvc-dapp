@@ -5,7 +5,7 @@
       "chainId": "4",
       "contracts": {
         "WarriorCore": {
-          "address": "0x1AfF11a7a0e106F46Fd6Ce711BBda8d08B6cD6F3",
+          "address": "0x7bF4F936119F19DBD0CC455e48EFCB3B2926411C",
           "abi": [
             {
               "inputs": [
@@ -82,7 +82,7 @@
               "anonymous": false,
               "inputs": [
                 {
-                  "indexed": false,
+                  "indexed": true,
                   "internalType": "uint256",
                   "name": "generation",
                   "type": "uint256"
@@ -94,7 +94,7 @@
                   "type": "uint256"
                 },
                 {
-                  "indexed": false,
+                  "indexed": true,
                   "internalType": "bytes32",
                   "name": "assetCid",
                   "type": "bytes32"
@@ -940,7 +940,7 @@
           ]
         },
         "WarriorGeneGenerator": {
-          "address": "0x68621ad5cfE621c9550b57520B09C5ba953d31ce",
+          "address": "0xe6a8d18B5Dbc709Fa17a20FCeDfC8edFE8D35019",
           "abi": [
             {
               "inputs": [
