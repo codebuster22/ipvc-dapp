@@ -3,16 +3,16 @@ import { IRegistry } from '@/containers/Warrior/types';
 import getAssetIds, { IAssets } from '@/ethereum/utils/getAssetIds';
 import { IPFS_URL } from '@/utils/constants';
 import React, { useContext, useState, useEffect } from 'react';
+import styled from 'styled-components';
 import Box from './Box';
 import { StatesContext } from './StatesContext';
 
 interface Props {
-	height?: string;
 	warriorId: string;
 	registry: IRegistry;
 }
 
-const Warrior = ({ height, warriorId, registry }: Props) => {
+const Warrior = ({ warriorId, registry }: Props) => {
 	const state = useContext(StatesContext);
 	const [assets, setAssets] = useState<IAssets>();
 	const [urls, setUrls] = useState([]);
@@ -37,19 +37,27 @@ const Warrior = ({ height, warriorId, registry }: Props) => {
 	}, [assets]);
 
 	return (
-		<Box border="1px solid black" fontSize="1rem" position="absolute" top="10rem">
-			<Box as="img" src={urls?.[0]} position="absolute" height={height} />
-			<Box as="img" src={urls?.[1]} position="absolute" height={height} />
-			<Box as="img" src={urls?.[2]} position="absolute" height={height} />
-			<Box as="img" src={urls?.[3]} position="absolute" height={height} />
-			<Box as="img" src={urls?.[4]} position="absolute" height={height} />
-			<Box as="img" src={urls?.[5]} position="absolute" height={height} />
+		<Box fontSize="1rem">
+			<Asset as="img" src={urls?.[0]} position="absolute" />
+			<Asset as="img" src={urls?.[1]} position="absolute" />
+			<Asset as="img" src={urls?.[2]} position="absolute" />
+			<Asset as="img" src={urls?.[3]} position="absolute" />
+			<Asset as="img" src={urls?.[4]} position="absolute" />
+			<Asset as="img" src={urls?.[5]} position="absolute" />
 		</Box>
 	);
 };
 
 export default Warrior;
 
-Warrior.defaultProps = {
-	height: '30rem',
-};
+const Asset = styled(Box)(
+	({ theme }: { theme: any }) => `
+
+	height: 50rem;
+
+	@media only screen and (min-width: ${theme.breakpoints.mobS}) and (max-width: ${theme.breakpoints.tabS}) {
+		height: 25rem;
+	}
+
+`
+);
