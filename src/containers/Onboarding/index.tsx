@@ -24,7 +24,7 @@ const OnboardingComp = (): JSX.Element => {
 	const [progress, setProgress] = useState<number>(0);
 	const [step, setStep] = useState<number>(0);
 	const [text, setText] = useState<string>('');
-	const [success, setSuccess] = useState<Boolean>(false);
+	const [success, setSuccess] = useState<boolean>(false);
 
 	const { signer, warriorCore } = useContext(StatesContext);
 
@@ -89,7 +89,7 @@ const OnboardingComp = (): JSX.Element => {
 				pb="0"
 				backgroundImage={`linear-gradient(-145deg, ${theme.colors['green-100']} 1%, ${theme.colors['purple-50']} 100%);`}
 			>
-				<Box pt={step>3?"mxl":"wm"} px="mxxl" pb="wxxl">
+				<Box pt={step > 3 ? 'mxl' : 'wm'} px="mxxl" pb="wxxl">
 					<Text as="h1" fontWeight="bold">
 						Verify Certificate
 					</Text>
@@ -254,25 +254,26 @@ const OnboardingComp = (): JSX.Element => {
 					>
 						{step > 0 ? (step > 3 ? 'Succesful' : 'Processing') : 'Verify Certificate'}
 					</Box>
-					<If 
-					condition={step>3}
-					then={
-						<Box
-						as="button"
-						className="get-btn"
-						height="5rem"
-						width="100%"
-						bg={success ? 'green' : 'orange-50'}
-						fontFamily="inherit"
-						mb="ml"
-						color="white"
-						border="none"
-						borderRadius="7px"
-						onClick={success ? handleBlockWarrior : handleWarriorGenerate}
-					>
-						{success ? 'Warrior fetched Successfully' : 'Get Warrior'}
-					</Box>	
-					}
+					<If
+						condition={step > 3}
+						then={
+							<Box
+								as="button"
+								className="get-btn"
+								height="5rem"
+								width="100%"
+								bg={success ? 'green-100' : 'orange-50'}
+								fontFamily="inherit"
+								mb="ml"
+								color="white"
+								border="none"
+								borderRadius="7px"
+								onClick={success ? handleBlockWarrior : handleWarriorGenerate}
+								cursor="pointer"
+							>
+								{success ? 'Warrior fetched Successfully' : 'Get Warrior'}
+							</Box>
+						}
 					/>
 				</Box>
 				<Box

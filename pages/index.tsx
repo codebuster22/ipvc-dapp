@@ -18,7 +18,7 @@ Home.getInitialProps = (ctx) => {
 		ctx?.res?.writeHead(301, {
 			Location: '/login',
 		});
-		ctx?.res?.end(); 
+		ctx?.res?.end();
 	}
 	return {};
 };
