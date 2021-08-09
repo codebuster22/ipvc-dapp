@@ -25,7 +25,6 @@ const OnboardingComp = (): JSX.Element => {
 	const [step, setStep] = useState<number>(0);
 	const [text, setText] = useState<string>('');
 	const [success, setSuccess] = useState<boolean>(false);
-	const [loading, setLoading] = useState<boolean>(false);
 
 	const { signer, warriorCore } = useContext(StatesContext);
 
@@ -49,10 +48,8 @@ const OnboardingComp = (): JSX.Element => {
 
 	const handleWarriorGenerate = async (e) => {
 		e.preventDefault();
-		setLoading(true);
 		const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
 		await generateWarrior(warriorCore, signer, metadata);
-		setLoading(false);
 		setSuccess(true);
 	};
 
@@ -265,7 +262,7 @@ const OnboardingComp = (): JSX.Element => {
 								className="get-btn"
 								height="5rem"
 								width="100%"
-								bg={loading ? 'gray-100' : success ? 'green' : 'orange-50'}
+								bg={success ? 'green-100' : 'orange-50'}
 								fontFamily="inherit"
 								mb="ml"
 								color="white"
@@ -273,14 +270,8 @@ const OnboardingComp = (): JSX.Element => {
 								borderRadius="7px"
 								onClick={success ? handleBlockWarrior : handleWarriorGenerate}
 								cursor="pointer"
-								disabled={loading == true || success == true}
-								css={`
-									:disabled {
-										cursor: not-allowed;
-									}
-								`}
 							>
-								{loading ? 'Fetching' : success ? 'Warrior fetched Successfully' : 'Get Warrior'}
+								{success ? 'Warrior fetched Successfully' : 'Get Warrior'}
 							</Box>
 						}
 					/>
