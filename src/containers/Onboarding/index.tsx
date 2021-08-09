@@ -113,7 +113,6 @@ const OnboardingComp = (): JSX.Element => {
 					px="mxxl"
 					pt="wxxs"
 					mx="mxs"
-					// mb="mxl"
 				>
 					<Text as="h3" fontWeight="medium" mb="mm">
 						Upload Certificate
