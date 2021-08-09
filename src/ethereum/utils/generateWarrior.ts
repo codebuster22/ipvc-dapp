@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { AWS_LAMBDA_WARRIOR_SIGNATURE_URL } from '@/utils/constants';
 
 const { default: axios } = require('axios');

@@ -1,0 +1,39 @@
+{
+	"layer_1": [
+		{ "name": "body.png", "cid": "QmUJf9uZE9SgMEjV4XekgKBqNpacMqMGg9ZCeGs22jjT2L" },
+		{ "name": "body_2.png", "cid": "QmWrHNhhrNFW2qZ8ta52qa2jjBJ5mHUTQ1mUzM96s7ACjm" },
+		{ "name": "body_3.png", "cid": "QmRjQqLmzxwycAmKhEYfPivpyy4esukBzgy9MctSCcqSk5" }
+	],
+	"layer_2": [
+		{ "name": "outfit.png", "cid": "QmYaanHKEwGA5X6cauRXva3aeHwycwb4mVr2yGpE3fDcqp" },
+		{ "name": "outfit_2.png", "cid": "QmQxqpwNbGKxT5SHMfp4XBM2KXnbASy3rjgJ9g8mcYFyyV" }
+	],
+	"layer_3": [
+		{ "name": "helmet.png", "cid": "QmaFERzQhJ3hVeF463HkV1LSA6MhoZ7C4rhrsNdaCXaNk3" },
+		{ "name": "helmet_2.png", "cid": "QmeQoAvfZ5SP9g95xGJ6dTArb3H71HW22iH5G9zkVn26hT" }
+	],
+	"layer_4": [
+		{ "name": "expression.png", "cid": "QmXMpEfPM77EVXMPaeFyLkCufvQkF8arPmotkbtjw34xjw" },
+		{ "name": "expression_2.png", "cid": "Qmb9SQ5SCXbbkJXD1mGDgj5hgSdnQxyuMgLZgQcAN3bCms" },
+		{ "name": "expression_3.png", "cid": "QmW7gphJdwHkFFfNE7fC8fPc5swue9SZBJvzzViW75YKKH" },
+		{ "name": "expression_4.png", "cid": "QmZ2To5DnSx3pFz2H9iRWaKBteXXtmfQ9qb4BhrnCb5k53" },
+		{ "name": "expression_5.png", "cid": "QmRHxrMgu9QftK6qZBV22UC6fYcskEVytTS3iQND39hju3" },
+		{ "name": "expression_6.png", "cid": "QmTZRoedXsYx47JL4tyDYMSpm4Aqb53Cg2Ni5TXXXw8cVF" },
+		{ "name": "expression_7.png", "cid": "QmXuPDMptkbo8j9twiKPtEMBZG14KePHg3KVd6pmoi9CWT" },
+		{ "name": "expression_8.png", "cid": "QmQeC4pVQRoYb3Xj9zkWKdBju8NHNzM9gYdcXSAqUjFsLM" },
+		{ "name": "expression_9.png", "cid": "QmPhsjYBdAuKxhf2NGyV6AtdTuhBrfRLmskvJV6RUhr7fP" },
+		{ "name": "expression_10.png", "cid": "QmU2AqutDoVhDyPax1mQhUUNT1xi9jiJeJPDLgc3L1Xzs6" }
+	],
+	"layer_5": [
+		{ "name": "sheild.png", "cid": "QmegdvcQHFbGdTjjHnzQXyyd835mhwmJCsWNd9WSMjVxUR" },
+		{ "name": "sheild_2.png", "cid": "QmNbhUHztY22x41zddRatcLFYDdrEEeyw3JdQk5zYZgQa4" },
+		{ "name": "sheild_3.png", "cid": "QmaDnfdfniMx5ZDmTiJuqoYiaSrrB7PiUCfpMrq6j1Yw7t" },
+		{ "name": "sheild_4.png", "cid": "QmY6w7AFqkMp89z2KebBK8C1DWX1noX9Gu2RdfJkiHfwvG" },
+		{ "name": "sheild_5.png", "cid": "Qmcs5hMoPafdtN9dyT2vRCooKtSXW8jC74WPgp6ctNRtNC" }
+	],
+	"layer_6": [
+		{ "name": "sword.png", "cid": "QmV1MMhbZ39X1wA6QvvTL5LNXXe2unEVCu8pf6wiBoq4SM" },
+		{ "name": "sword_2.png", "cid": "QmXToQy6SqwhTHm1QkSrrdWjHSgEpFvrmCNE7T81UdiPNV" },
+		{ "name": "sword_3.png", "cid": "QmdAuNfqwEd6b2DzRcoH4Tj2yMuKAf3nwf2bLBP7AycCHi" }
+	]
+}

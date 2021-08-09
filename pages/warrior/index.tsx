@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import Warrior from '@/components/Warrior';
+import WarriorComp from '@/containers/Warrior';
 
 const WarriorPage = () => {
 	return (
@@ -8,7 +8,7 @@ const WarriorPage = () => {
 			<Head>
 				<title>Warrior</title>
 			</Head>
-			<Warrior height="60rem" />
+			<WarriorComp />
 		</React.Fragment>
 	);
 };

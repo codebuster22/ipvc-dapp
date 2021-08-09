@@ -14,9 +14,9 @@ import { parseImage, parsePDF } from '@/utils/parsing';
 import PDFIcon from '../../svgs/pdf.svg';
 import ImageIcon from '../../svgs/image-icon.svg';
 import CloseIcon from '../../svgs/close.svg';
-import { ethers, providers, Signer } from 'ethers';
+import { ethers } from 'ethers';
 import generateWarrior from '@/ethereum/utils/generateWarrior';
-import { StatesContext, StatesProviderProps } from '@/components/StatesContext';
+import { StatesContext } from '@/components/StatesContext';
 
 const OnboardingComp = (): JSX.Element => {
 	const router = useRouter();
