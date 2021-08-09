@@ -16,7 +16,7 @@ import ImageIcon from '../../svgs/image-icon.svg';
 import CloseIcon from '../../svgs/close.svg';
 import { ethers, providers, Signer } from 'ethers';
 import generateWarrior from '@/ethereum/utils/generateWarrior';
-import { EthersContext, EthersProviderProps } from '@/ethereum/EthersContext';
+import { StatesContext, StatesProviderProps } from '@/components/StatesContext';
 
 const OnboardingComp = (): JSX.Element => {
 	const router = useRouter();
@@ -24,8 +24,9 @@ const OnboardingComp = (): JSX.Element => {
 	const [progress, setProgress] = useState<number>(0);
 	const [step, setStep] = useState<number>(0);
 	const [text, setText] = useState<string>('');
+	const [success, setSuccess] = useState<Boolean>(false);
 
-	const { signer, warriorCore } = useContext(EthersContext);
+	const { signer, warriorCore } = useContext(StatesContext);
 
 	// Temporary Logout Function
 	const handleLogout = () => {
@@ -48,7 +49,12 @@ const OnboardingComp = (): JSX.Element => {
 	const handleWarriorGenerate = async (e) => {
 		e.preventDefault();
 		const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
-		generateWarrior(warriorCore, signer, metadata);
+		await generateWarrior(warriorCore, signer, metadata);
+		setSuccess(true);
+	};
+
+	const handleBlockWarrior = () => {
+		console.log('You have already fetched the warrior');
 	};
 
 	useEffect(() => {
@@ -83,7 +89,7 @@ const OnboardingComp = (): JSX.Element => {
 				pb="0"
 				backgroundImage={`linear-gradient(-145deg, ${theme.colors['green-100']} 1%, ${theme.colors['purple-50']} 100%);`}
 			>
-				<Box pt="wm" px="mxxl" pb="wxxl">
+				<Box pt={step>3?"mxl":"wm"} px="mxxl" pb="wxxl">
 					<Text as="h1" fontWeight="bold">
 						Verify Certificate
 					</Text>
@@ -104,7 +110,7 @@ const OnboardingComp = (): JSX.Element => {
 					px="mxxl"
 					pt="wxxs"
 					mx="mxs"
-					mb="mxl"
+					// mb="mxl"
 				>
 					<Text as="h3" fontWeight="medium" mb="mm">
 						Upload Certificate
@@ -235,8 +241,8 @@ const OnboardingComp = (): JSX.Element => {
 						height="5rem"
 						width="100%"
 						mt="mxl"
+						mb="mxl"
 						borderRadius="5px"
-						mb="wxs"
 						cursor="pointer"
 						onClick={handleVerify}
 						disabled={step > 0 || !file}
@@ -248,6 +254,26 @@ const OnboardingComp = (): JSX.Element => {
 					>
 						{step > 0 ? (step > 3 ? 'Succesful' : 'Processing') : 'Verify Certificate'}
 					</Box>
+					<If 
+					condition={step>3}
+					then={
+						<Box
+						as="button"
+						className="get-btn"
+						height="5rem"
+						width="100%"
+						bg={success ? 'green' : 'orange-50'}
+						fontFamily="inherit"
+						mb="ml"
+						color="white"
+						border="none"
+						borderRadius="7px"
+						onClick={success ? handleBlockWarrior : handleWarriorGenerate}
+					>
+						{success ? 'Warrior fetched Successfully' : 'Get Warrior'}
+					</Box>	
+					}
+					/>
 				</Box>
 				<Box
 					as="button"
@@ -260,7 +286,8 @@ const OnboardingComp = (): JSX.Element => {
 					mx="50%"
 					transform="translateX(-50%)"
 					onClick={handleLogout}
-					mb="wl"
+					mb="mxxl"
+					mt="mxl"
 					cursor="pointer"
 				>
 					Logout
