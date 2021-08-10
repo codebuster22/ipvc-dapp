@@ -17,6 +17,12 @@ import CloseIcon from '../../svgs/close.svg';
 import { ethers } from 'ethers';
 import generateWarrior from '@/ethereum/utils/generateWarrior';
 import { StatesContext } from '@/components/StatesContext';
+import Warrior from '@/components/Warrior';
+import WarriorComp from '../Warrior';
+import { IRegistry } from '../Warrior/types';
+import { getAssetRegistry } from '@/api/queries';
+import { useQuery } from 'react-query';
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
 
 const OnboardingComp = (): JSX.Element => {
 	const router = useRouter();
@@ -26,6 +32,25 @@ const OnboardingComp = (): JSX.Element => {
 	const [text, setText] = useState<string>('');
 	const [success, setSuccess] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
+	const [registry, setRegistry] = useState<IRegistry>();
+	const [warriorId, setWarriorId] = useState<string>();
+	const [warrior, setWarrior] = useState<boolean>(false);
+	const id = 50;
+	useQuery('registry-fetch', getAssetRegistry, {
+		enabled: true,
+		onSuccess: (result) => {
+			let key;
+			for (const k in result) {
+				key = k;
+				break;
+			}
+			const res = JSON.parse(key);
+			setRegistry(res);
+		},
+		onError: (error: any) => {
+			console.log({ error });
+		},
+	});
 
 	const { signer, warriorCore } = useContext(StatesContext);
 
@@ -46,20 +71,25 @@ const OnboardingComp = (): JSX.Element => {
 			setText(text);
 		}
 	};
-
 	const handleWarriorGenerate = async (e) => {
 		e.preventDefault();
 		setLoading(true);
 		const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
-		await generateWarrior(warriorCore, signer, metadata);
+		let id = await generateWarrior(warriorCore, signer, metadata);
+		setWarriorId(id.toString());
 		setLoading(false);
 		setSuccess(true);
+		setWarriorId(id.toString());
+		setWarrior(true);
 	};
 
 	const handleBlockWarrior = () => {
 		console.log('You have already fetched the warrior');
 	};
 
+	const handleCloseWarrior = () => {
+		setWarrior(false);
+	};
 	useEffect(() => {
 		if (text?.length > 0) {
 			setStep(2);
@@ -302,6 +332,30 @@ const OnboardingComp = (): JSX.Element => {
 					Logout
 				</Box>
 			</Box>
+			<If
+				condition={warrior == true}
+				then={
+					<Box center position="absolute" height="100vh" bg="transparent">
+						<Box height="80vh" width="40vw" borderRadius="20px" bg="pink" opacity="1">
+							<Box
+								display="flex"
+								justifyContent="space-between"
+								px="mm"
+								py="ms"
+								borderBottom="1px solid black"
+								borderTopRightRadius="20px"
+								borderTopLeftRadius="20px"
+							>
+								<SaveAltIcon fontSize="large" cursor="pointer" />
+								<CloseIcon height="30px" cursor="pointer" onClick={handleCloseWarrior} />
+							</Box>
+							<Box mx="wxxl">
+								<Warrior warriorId={warriorId} registry={registry} />
+							</Box>
+						</Box>
+					</Box>
+				}
+			/>
 		</Box>
 	);
 };
