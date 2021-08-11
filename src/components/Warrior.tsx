@@ -37,7 +37,7 @@ const Warrior = ({ warriorId, registry }: Props) => {
 	}, [assets]);
 
 	return (
-		<Box fontSize={{deskM:"1rem",tabS:"0.5rem"}}>
+		<Box fontSize="1rem">
 			<Asset as="img" src={urls?.[0]} position="absolute" />
 			<Asset as="img" src={urls?.[1]} position="absolute" />
 			<Asset as="img" src={urls?.[2]} position="absolute" />
