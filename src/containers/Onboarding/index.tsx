@@ -336,7 +336,7 @@ const OnboardingComp = (): JSX.Element => {
 				condition={warrior == true}
 				then={
 					<Box center position="absolute" height="100vh" bg="transparent">
-						<Box height="80vh" width="40vw" borderRadius="20px" bg="pink" opacity="1">
+						<Box height={{mobS:"40vh", deskM:"80vh", tabS:"80vh",mobL:"60vh",tabL:"50vh"}} width={{mobS:"80vw", deskM:"40vw"}} borderRadius="20px" bg="pink" opacity="1">
 							<Box
 								display="flex"
 								justifyContent="space-between"
@@ -349,7 +349,10 @@ const OnboardingComp = (): JSX.Element => {
 								<SaveAltIcon fontSize="large" cursor="pointer" />
 								<CloseIcon height="30px" cursor="pointer" onClick={handleCloseWarrior} />
 							</Box>
-							<Box mx="wxxl">
+							<Box
+							mx={{mobS:"wm", deskM:"wxxl", tabS:"wxl"}}
+							px={{tabS:"wl",tabL:"wxl",mobL:"wxxl"}}							
+							>
 								<Warrior warriorId={warriorId} registry={registry} />
 							</Box>
 						</Box>
