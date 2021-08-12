@@ -59,9 +59,12 @@ const OnboardingComp = (): JSX.Element => {
 			const address = await signer?.getAddress();
 			const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(text.concat(address)));
 			try {
-				await generateWarrior(warriorCore, signer, metadata);
+				const id = await generateWarrior(warriorCore, signer, metadata);
+				setWarriorId(id.toString());
 				setLoading(false);
 				setSuccess(true);
+				setWarriorId(id.toString());
+				setWarrior(true);
 			} catch (err) {
 				const error = await getError(err.code);
 				toast.error(error);
