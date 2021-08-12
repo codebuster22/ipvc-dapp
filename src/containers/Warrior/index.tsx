@@ -7,8 +7,8 @@ import { useQuery } from 'react-query';
 import { IRegistry } from './types';
 
 const WarriorComp = () => {
-	const [warriorId, setWarriorId] = useState<string>('50');
-	const [warrior, setWarrior] = useState<string>('50');
+	const [warriorId, setWarriorId] = useState<string>('0');
+	const [warrior, setWarrior] = useState<string>('0');
 	const [registry, setRegistry] = useState<IRegistry>();
 	useQuery('registry-fetch', getAssetRegistry, {
 		enabled: true,
