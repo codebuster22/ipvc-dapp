@@ -14,6 +14,6 @@ export const getBeneficiaries = async (): Promise<any> => {
 };
 
 export const getAssetRegistry = async (): Promise<any> => {
-	const res = await axios.get(`${IPFS_URL}QmadFsEm8GfbG9urFYYTaFVF4ubU8YCawHy1pBB75Ai4y5`);
+	const res = await axios.get(`${IPFS_URL}QmckjVxAfP8qyhrsF7FyRHMbE7MbUNFRYcKzQEUpcHxR1L`);
 	return res.data;
 };

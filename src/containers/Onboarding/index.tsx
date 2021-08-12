@@ -117,13 +117,15 @@ const OnboardingComp = (): JSX.Element => {
 			canvas.height = 700;
 			canvas.width = 500;
 			const imgs = document.getElementsByClassName('asset-img');
+			document.body.append(canvas);
 
 			// @ts-expect-error function inside function
 			async function draw(imgs) {
-				ctx.fillStyle = 'rgb(256, 256, 256';
+				ctx.fillStyle = 'rgb(256, 256, 0';
 				ctx.fillRect(0, 0, 500, 700);
 				for (let i = 0; i < imgs.length; i++) {
 					imgs[i].crossOrigin = 'anonymous';
+					console.log(imgs[i].getAttribute('src'));
 					ctx.drawImage(imgs[i], 20, 20, 450, 600);
 				}
 			}
