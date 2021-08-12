@@ -82,7 +82,9 @@ const Warrior = ({ warriorId, registry }: Props) => {
 				onError={() => setUrl(IPFS_FALLBACK_URL)}
 				position="absolute"
 			/>
-			<Text id="warrior-id" mt={{ mobS: '24rem', tabS: '55rem' }}>Warrior #{warriorId}</Text>
+			<Text id="warrior-id" mt={{ mobS: '24rem', tabS: '55rem' }}>
+				Warrior #{warriorId}
+			</Text>
 		</Box>
 	);
 };

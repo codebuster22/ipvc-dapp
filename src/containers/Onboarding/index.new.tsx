@@ -8,7 +8,7 @@ import theme from '@/styleguide/theme';
 import { ethers } from 'ethers';
 import generateWarrior from '@/ethereum/utils/generateWarrior';
 import { StatesContext } from '@/components/StatesContext';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import CloseIcon from '@/svgs/close.svg';

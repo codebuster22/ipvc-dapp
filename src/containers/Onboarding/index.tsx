@@ -1,3 +1,4 @@
+/* eslint-disable import/namespace */
 /* eslint-disable import/no-unresolved */
 import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
