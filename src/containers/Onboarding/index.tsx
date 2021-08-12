@@ -23,6 +23,7 @@ import { IRegistry } from '../Warrior/types';
 import { getAssetRegistry } from '@/api/queries';
 import { useQuery } from 'react-query';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const OnboardingComp = (): JSX.Element => {
 	const router = useRouter();
@@ -83,8 +84,9 @@ const OnboardingComp = (): JSX.Element => {
 		setWarrior(true);
 	};
 
-	const handleBlockWarrior = () => {
-		console.log('You have already fetched the warrior');
+	const handleViewWarrior = () => {
+		setWarrior(true);
+		console.log('here');
 	};
 
 	const handleCloseWarrior = () => {
@@ -300,16 +302,10 @@ const OnboardingComp = (): JSX.Element => {
 								color="white"
 								border="none"
 								borderRadius="7px"
-								onClick={success ? handleBlockWarrior : handleWarriorGenerate}
+								onClick={success ? handleViewWarrior : handleWarriorGenerate}
 								cursor="pointer"
-								disabled={loading == true || success == true}
-								css={`
-									:disabled {
-										cursor: not-allowed;
-									}
-								`}
 							>
-								{loading ? 'Fetching' : success ? 'Warrior fetched Successfully' : 'Get Warrior'}
+								{loading ? 'Fetching' : success ? `View Warrior` : 'Get Warrior'}
 							</Box>
 						}
 					/>
@@ -337,7 +333,7 @@ const OnboardingComp = (): JSX.Element => {
 				then={
 					<Box center position="absolute" height="100vh" bg="transparent">
 						<Box
-							height={{ mobS: '40vh', deskM: '80vh', tabS: '80vh', mobL: '60vh', tabL: '50vh' }}
+							height={{ mobS: '40vh', deskM: '80vh', tabS: '60vh', mobL: '75vh', tabL: '50vh' }}
 							width={{ mobS: '80vw', deskM: '40vw' }}
 							borderRadius="20px"
 							bg="pink"
@@ -356,8 +352,10 @@ const OnboardingComp = (): JSX.Element => {
 								<CloseIcon height="30px" cursor="pointer" onClick={handleCloseWarrior} />
 							</Box>
 							<Box
-								mx={{ mobS: 'wm', deskM: 'wxxl', tabS: 'wxl' }}
-								px={{ tabS: 'wl', tabL: 'wxl', mobL: 'wxxl' }}
+								display="flex"
+								justifyContent="flex-start"
+								mx={{ mobS: 'wm', deskM: 'mm', tabS: 'wxl', tabL: 'wxxl' }}
+								px={{ tabL: 'wxl' }}
 							>
 								<Warrior warriorId={warriorId} registry={registry} />
 							</Box>
