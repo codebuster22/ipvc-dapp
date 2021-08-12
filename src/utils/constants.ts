@@ -8,3 +8,5 @@ export const AWS_LAMBDA_WARRIOR_SIGNATURE_URL =
 export const IPFS_URL = 'https://gateway.pinata.cloud/ipfs/';
 
 export const IPFS_FALLBACK_URL = 'https://ipfs.io/ipfs/';
+
+export const IPFS_CID = process.env.NEXT_PUBLIC_IPFS_CID;
