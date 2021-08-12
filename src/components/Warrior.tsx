@@ -1,11 +1,12 @@
 /* eslint-disable import/no-unresolved */
 import { IRegistry } from '@/containers/Warrior/types';
 import getAssetIds, { IAssets } from '@/ethereum/utils/getAssetIds';
-import { IPFS_URL } from '@/utils/constants';
+import { IPFS_FALLBACK_URL, IPFS_URL } from '@/utils/constants';
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Box from './Box';
 import { StatesContext } from './StatesContext';
+import Text from './Text';
 
 interface Props {
 	warriorId: string;
@@ -16,6 +17,7 @@ const Warrior = ({ warriorId, registry }: Props) => {
 	const state = useContext(StatesContext);
 	const [assets, setAssets] = useState<IAssets>();
 	const [urls, setUrls] = useState([]);
+	const [url, setUrl] = useState(IPFS_URL);
 
 	// @ts-expect-error using async in useEffect
 	useEffect(async () => {
@@ -30,7 +32,7 @@ const Warrior = ({ warriorId, registry }: Props) => {
 			const results = [];
 			for (const k in assets) {
 				const cid = registry[k][assets[k]]?.cid;
-				results.push(`${IPFS_URL}${cid}`);
+				results.push(`${url}${cid}`);
 			}
 			setUrls(results);
 		}
@@ -38,12 +40,51 @@ const Warrior = ({ warriorId, registry }: Props) => {
 
 	return (
 		<Box fontSize="1rem">
-			<Asset as="img" className="asset-img" src={urls?.[0]} position="absolute" />
-			<Asset as="img" className="asset-img" src={urls?.[1]} position="absolute" />
-			<Asset as="img" className="asset-img" src={urls?.[2]} position="absolute" />
-			<Asset as="img" className="asset-img" src={urls?.[3]} position="absolute" />
-			<Asset as="img" className="asset-img" src={urls?.[4]} position="absolute" />
-			<Asset as="img" className="asset-img" src={urls?.[5]} position="absolute" />
+			<Asset
+				as="img"
+				className="asset-img"
+				src={urls?.[0]}
+				onError={() => setUrl(IPFS_FALLBACK_URL)}
+				position="absolute"
+			/>
+			<Asset
+				as="img"
+				className="asset-img"
+				src={urls?.[1]}
+				onError={() => setUrl(IPFS_FALLBACK_URL)}
+				position="absolute"
+			/>
+			<Asset
+				as="img"
+				className="asset-img"
+				src={urls?.[2]}
+				onError={() => setUrl(IPFS_FALLBACK_URL)}
+				position="absolute"
+			/>
+			<Asset
+				as="img"
+				className="asset-img"
+				src={urls?.[3]}
+				onError={() => setUrl(IPFS_FALLBACK_URL)}
+				position="absolute"
+			/>
+			<Asset
+				as="img"
+				className="asset-img"
+				src={urls?.[4]}
+				onError={() => setUrl(IPFS_FALLBACK_URL)}
+				position="absolute"
+			/>
+			<Asset
+				as="img"
+				className="asset-img"
+				src={urls?.[5]}
+				onError={() => setUrl(IPFS_FALLBACK_URL)}
+				position="absolute"
+			/>
+			<Text id="warrior-id" mt={{ mobS: '24rem', tabS: '55rem' }}>
+				Warrior #{warriorId}
+			</Text>
 		</Box>
 	);
 };

@@ -8,7 +8,7 @@ import theme from '@/styleguide/theme';
 import { ethers } from 'ethers';
 import generateWarrior from '@/ethereum/utils/generateWarrior';
 import { StatesContext } from '@/components/StatesContext';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import CloseIcon from '@/svgs/close.svg';
@@ -47,14 +47,16 @@ const OnboardingComp = (): JSX.Element => {
 
 	const handleWarriorGenerate = async (e) => {
 		e.preventDefault();
-		setLoading(true);
-		const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
-		const id = await generateWarrior(warriorCore, signer, metadata);
-		setWarriorId(id.toString());
-		setLoading(false);
-		setSuccess(true);
-		setWarriorId(id.toString());
-		setWarrior(true);
+		if (text.length !== 0) {
+			setLoading(true);
+			const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
+			const id = await generateWarrior(warriorCore, signer, metadata);
+			setWarriorId(id.toString());
+			setLoading(false);
+			setSuccess(true);
+			setWarriorId(id.toString());
+			setWarrior(true);
+		}
 	};
 
 	const handleViewWarrior = () => {
@@ -80,6 +82,9 @@ const OnboardingComp = (): JSX.Element => {
 				for (let i = 0; i < imgs.length; i++) {
 					imgs[i].crossOrigin = 'anonymous';
 					ctx.drawImage(imgs[i], 20, 20, 450, 600);
+					ctx.font = '30px Aria black';
+					ctx.fillStyle = 'black';
+					ctx.fillText(`#${warriorId}`, 250, 650);
 				}
 			}
 

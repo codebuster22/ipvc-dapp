@@ -6,3 +6,5 @@ export const AWS_LAMBDA_WARRIOR_SIGNATURE_URL =
 	'https://cf3yjpujmk.execute-api.ap-south-1.amazonaws.com/prod/sign-origin';
 
 export const IPFS_URL = 'https://gateway.pinata.cloud/ipfs/';
+
+export const IPFS_FALLBACK_URL = 'https://ipfs.io/ipfs/';
