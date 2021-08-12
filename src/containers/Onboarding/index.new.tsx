@@ -45,17 +45,28 @@ const OnboardingComp = (): JSX.Element => {
 		},
 	});
 
+	const getError = async (code) => {
+		if (code == 4001) return 'Proccess ended unacceptably. Please try again';
+		if (code == 'INVALID_ARGUMENT') return 'Please unlock your MetaMask';
+		if (code == 'UNPREDICTABLE_GAS_LIMIT') return 'Metadata already used';
+	};
+
 	const handleWarriorGenerate = async (e) => {
 		e.preventDefault();
 		if (text.length !== 0) {
 			setLoading(true);
-			const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
-			const id = await generateWarrior(warriorCore, signer, metadata);
-			setWarriorId(id.toString());
-			setLoading(false);
-			setSuccess(true);
-			setWarriorId(id.toString());
-			setWarrior(true);
+			// @ts-expect-error signer-props
+			const address = await signer?.getAddress();
+			const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(text.concat(address)));
+			try {
+				await generateWarrior(warriorCore, signer, metadata);
+				setLoading(false);
+				setSuccess(true);
+			} catch (err) {
+				let error = await getError(err.code);
+				toast.error(error);
+				setLoading(false);
+			}
 		}
 	};
 
