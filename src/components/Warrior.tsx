@@ -38,12 +38,12 @@ const Warrior = ({ warriorId, registry }: Props) => {
 
 	return (
 		<Box fontSize="1rem">
-			<Asset as="img" src={urls?.[0]} position="absolute" />
-			<Asset as="img" src={urls?.[1]} position="absolute" />
-			<Asset as="img" src={urls?.[2]} position="absolute" />
-			<Asset as="img" src={urls?.[3]} position="absolute" />
-			<Asset as="img" src={urls?.[4]} position="absolute" />
-			<Asset as="img" src={urls?.[5]} position="absolute" />
+			<Asset as="img" className="asset-img" src={urls?.[0]} position="absolute" />
+			<Asset as="img" className="asset-img" src={urls?.[1]} position="absolute" />
+			<Asset as="img" className="asset-img" src={urls?.[2]} position="absolute" />
+			<Asset as="img" className="asset-img" src={urls?.[3]} position="absolute" />
+			<Asset as="img" className="asset-img" src={urls?.[4]} position="absolute" />
+			<Asset as="img" className="asset-img" src={urls?.[5]} position="absolute" />
 		</Box>
 	);
 };

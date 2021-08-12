@@ -18,7 +18,6 @@ import { ethers } from 'ethers';
 import generateWarrior from '@/ethereum/utils/generateWarrior';
 import { StatesContext } from '@/components/StatesContext';
 import Warrior from '@/components/Warrior';
-import WarriorComp from '../Warrior';
 import { IRegistry } from '../Warrior/types';
 import { getAssetRegistry } from '@/api/queries';
 import { useQuery } from 'react-query';
@@ -86,7 +85,6 @@ const OnboardingComp = (): JSX.Element => {
 
 	const handleViewWarrior = () => {
 		setWarrior(true);
-		console.log('here');
 	};
 
 	const handleCloseWarrior = () => {
@@ -111,6 +109,41 @@ const OnboardingComp = (): JSX.Element => {
 	useEffect(() => {
 		gsap.to('#progress-bar', { width: `${progress}%` });
 	}, [progress]);
+
+	const download = () => {
+		if (process.browser) {
+			const canvas = document.createElement('canvas');
+			const ctx = canvas.getContext('2d');
+			canvas.height = 700;
+			canvas.width = 500;
+			const imgs = document.getElementsByClassName('asset-img');
+			document.body.append(canvas);
+
+			// @ts-expect-error function inside function
+			async function draw(imgs) {
+				ctx.fillStyle = 'rgb(256, 256, 0';
+				ctx.fillRect(0, 0, 500, 700);
+				for (let i = 0; i < imgs.length; i++) {
+					imgs[i].crossOrigin = 'anonymous';
+					console.log(imgs[i].getAttribute('src'));
+					ctx.drawImage(imgs[i], 20, 20, 450, 600);
+				}
+			}
+
+			draw(imgs).then(() => {
+				const link = document.getElementById('download');
+				link.setAttribute('download', `Warrior #${warriorId}.png`);
+				const imageLink = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+				link.setAttribute('href', imageLink);
+			});
+		}
+	};
+
+	useEffect(() => {
+		if (warrior) {
+			download();
+		}
+	}, [warrior]);
 
 	return (
 		<Box height="100vh" center bg="purple-10">
@@ -348,7 +381,9 @@ const OnboardingComp = (): JSX.Element => {
 								borderTopRightRadius="20px"
 								borderTopLeftRadius="20px"
 							>
-								<SaveAltIcon fontSize="large" cursor="pointer" />
+								<Box as="a" download="Warrior.png" id="download" fontSize="1.6rem">
+									<SaveAltIcon fontSize="large" cursor="pointer" />
+								</Box>
 								<CloseIcon height="30px" cursor="pointer" onClick={handleCloseWarrior} />
 							</Box>
 							<Box
