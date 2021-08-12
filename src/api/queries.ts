@@ -18,7 +18,6 @@ export const getBeneficiaries = async (): Promise<any> => {
 export const getAssetRegistry = async (): Promise<any> => {
 	try {
 		const res = await axios.get(`${URL}QmckjVxAfP8qyhrsF7FyRHMbE7MbUNFRYcKzQEUpcHxR1L`);
-		console.log(res);
 		return res.data;
 	} catch (e) {
 		console.log({ e });

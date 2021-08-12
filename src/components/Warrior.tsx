@@ -6,6 +6,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Box from './Box';
 import { StatesContext } from './StatesContext';
+import Text from './Text';
 
 interface Props {
 	warriorId: string;
@@ -39,12 +40,49 @@ const Warrior = ({ warriorId, registry }: Props) => {
 
 	return (
 		<Box fontSize="1rem">
-			<Asset as="img" src={urls?.[0]} onError={() => setUrl(IPFS_FALLBACK_URL)} position="absolute" />
-			<Asset as="img" src={urls?.[1]} onError={() => setUrl(IPFS_FALLBACK_URL)} position="absolute" />
-			<Asset as="img" src={urls?.[2]} onError={() => setUrl(IPFS_FALLBACK_URL)} position="absolute" />
-			<Asset as="img" src={urls?.[3]} onError={() => setUrl(IPFS_FALLBACK_URL)} position="absolute" />
-			<Asset as="img" src={urls?.[4]} onError={() => setUrl(IPFS_FALLBACK_URL)} position="absolute" />
-			<Asset as="img" src={urls?.[5]} onError={() => setUrl(IPFS_FALLBACK_URL)} position="absolute" />
+			<Asset
+				as="img"
+				className="asset-img"
+				src={urls?.[0]}
+				onError={() => setUrl(IPFS_FALLBACK_URL)}
+				position="absolute"
+			/>
+			<Asset
+				as="img"
+				className="asset-img"
+				src={urls?.[1]}
+				onError={() => setUrl(IPFS_FALLBACK_URL)}
+				position="absolute"
+			/>
+			<Asset
+				as="img"
+				className="asset-img"
+				src={urls?.[2]}
+				onError={() => setUrl(IPFS_FALLBACK_URL)}
+				position="absolute"
+			/>
+			<Asset
+				as="img"
+				className="asset-img"
+				src={urls?.[3]}
+				onError={() => setUrl(IPFS_FALLBACK_URL)}
+				position="absolute"
+			/>
+			<Asset
+				as="img"
+				className="asset-img"
+				src={urls?.[4]}
+				onError={() => setUrl(IPFS_FALLBACK_URL)}
+				position="absolute"
+			/>
+			<Asset
+				as="img"
+				className="asset-img"
+				src={urls?.[5]}
+				onError={() => setUrl(IPFS_FALLBACK_URL)}
+				position="absolute"
+			/>
+			<Text id="warrior-id" mt={{ mobS: '24rem', tabS: '55rem' }}>Warrior #{warriorId}</Text>
 		</Box>
 	);
 };
