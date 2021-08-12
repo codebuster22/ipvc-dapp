@@ -1,3 +1,4 @@
+/* eslint-disable import/namespace */
 /* eslint-disable import/no-unresolved */
 import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -14,9 +15,14 @@ import { parseImage, parsePDF } from '@/utils/parsing';
 import PDFIcon from '../../svgs/pdf.svg';
 import ImageIcon from '../../svgs/image-icon.svg';
 import CloseIcon from '../../svgs/close.svg';
-import { ethers, providers, Signer } from 'ethers';
+import { ethers } from 'ethers';
 import generateWarrior from '@/ethereum/utils/generateWarrior';
-import { StatesContext, StatesProviderProps } from '@/components/StatesContext';
+import { StatesContext } from '@/components/StatesContext';
+import Warrior from '@/components/Warrior';
+import { IRegistry } from '../Warrior/types';
+import { getAssetRegistry } from '@/api/queries';
+import { useQuery } from 'react-query';
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
 
 const OnboardingComp = (): JSX.Element => {
 	const router = useRouter();
@@ -26,6 +32,24 @@ const OnboardingComp = (): JSX.Element => {
 	const [text, setText] = useState<string>('');
 	const [success, setSuccess] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
+	const [registry, setRegistry] = useState<IRegistry>();
+	const [warriorId, setWarriorId] = useState<string>();
+	const [warrior, setWarrior] = useState<boolean>(false);
+	useQuery('registry-fetch', getAssetRegistry, {
+		enabled: true,
+		onSuccess: (result) => {
+			let key;
+			for (const k in result) {
+				key = k;
+				break;
+			}
+			const res = JSON.parse(key);
+			setRegistry(res);
+		},
+		onError: (error: any) => {
+			console.log({ error });
+		},
+	});
 
 	const { signer, warriorCore } = useContext(StatesContext);
 
@@ -46,20 +70,25 @@ const OnboardingComp = (): JSX.Element => {
 			setText(text);
 		}
 	};
-
 	const handleWarriorGenerate = async (e) => {
 		e.preventDefault();
 		setLoading(true);
 		const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
-		await generateWarrior(warriorCore, signer, metadata);
+		const id = await generateWarrior(warriorCore, signer, metadata);
+		setWarriorId(id.toString());
 		setLoading(false);
 		setSuccess(true);
+		setWarriorId(id.toString());
+		setWarrior(true);
 	};
 
-	const handleBlockWarrior = () => {
-		console.log('You have already fetched the warrior');
+	const handleViewWarrior = () => {
+		setWarrior(true);
 	};
 
+	const handleCloseWarrior = () => {
+		setWarrior(false);
+	};
 	useEffect(() => {
 		if (text?.length > 0) {
 			setStep(2);
@@ -79,6 +108,41 @@ const OnboardingComp = (): JSX.Element => {
 	useEffect(() => {
 		gsap.to('#progress-bar', { width: `${progress}%` });
 	}, [progress]);
+
+	const download = () => {
+		if (process.browser) {
+			const canvas = document.createElement('canvas');
+			const ctx = canvas.getContext('2d');
+			canvas.height = 700;
+			canvas.width = 500;
+			const imgs = document.getElementsByClassName('asset-img');
+			document.body.append(canvas);
+
+			// @ts-expect-error function inside function
+			async function draw(imgs) {
+				ctx.fillStyle = 'rgb(256, 256, 0';
+				ctx.fillRect(0, 0, 500, 700);
+				for (let i = 0; i < imgs.length; i++) {
+					imgs[i].crossOrigin = 'anonymous';
+					console.log(imgs[i].getAttribute('src'));
+					ctx.drawImage(imgs[i], 20, 20, 450, 600);
+				}
+			}
+
+			draw(imgs).then(() => {
+				const link = document.getElementById('download');
+				link.setAttribute('download', `Warrior #${warriorId}.png`);
+				const imageLink = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+				link.setAttribute('href', imageLink);
+			});
+		}
+	};
+
+	useEffect(() => {
+		if (warrior) {
+			download();
+		}
+	}, [warrior]);
 
 	return (
 		<Box height="100vh" center bg="purple-10">
@@ -270,16 +334,10 @@ const OnboardingComp = (): JSX.Element => {
 								color="white"
 								border="none"
 								borderRadius="7px"
-								onClick={success ? handleBlockWarrior : handleWarriorGenerate}
+								onClick={success ? handleViewWarrior : handleWarriorGenerate}
 								cursor="pointer"
-								disabled={loading == true || success == true}
-								css={`
-									:disabled {
-										cursor: not-allowed;
-									}
-								`}
 							>
-								{loading ? 'Fetching' : success ? 'Warrior fetched Successfully' : 'Get Warrior'}
+								{loading ? 'Fetching' : success ? `View Warrior` : 'Get Warrior'}
 							</Box>
 						}
 					/>
@@ -302,6 +360,43 @@ const OnboardingComp = (): JSX.Element => {
 					Logout
 				</Box>
 			</Box>
+			<If
+				condition={warrior == true}
+				then={
+					<Box center position="absolute" height="100vh" bg="transparent">
+						<Box
+							height={{ mobS: '40vh', deskM: '80vh', tabS: '60vh', mobL: '75vh', tabL: '50vh' }}
+							width={{ mobS: '80vw', deskM: '40vw' }}
+							borderRadius="20px"
+							bg="pink"
+							opacity="1"
+						>
+							<Box
+								display="flex"
+								justifyContent="space-between"
+								px="mm"
+								py="ms"
+								borderBottom="1px solid black"
+								borderTopRightRadius="20px"
+								borderTopLeftRadius="20px"
+							>
+								<Box as="a" download="Warrior.png" id="download" fontSize="1.6rem">
+									<SaveAltIcon fontSize="large" cursor="pointer" />
+								</Box>
+								<CloseIcon height="30px" cursor="pointer" onClick={handleCloseWarrior} />
+							</Box>
+							<Box
+								display="flex"
+								justifyContent="flex-start"
+								mx={{ mobS: 'wm', deskM: 'mm', tabS: 'wxl', tabL: 'wxxl' }}
+								px={{ tabL: 'wxl' }}
+							>
+								<Warrior warriorId={warriorId} registry={registry} />
+							</Box>
+						</Box>
+					</Box>
+				}
+			/>
 		</Box>
 	);
 };

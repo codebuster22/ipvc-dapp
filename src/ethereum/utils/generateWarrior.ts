@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { AWS_LAMBDA_WARRIOR_SIGNATURE_URL } from '@/utils/constants';
 
 const { default: axios } = require('axios');
@@ -23,7 +24,10 @@ const generateWarrior = async (warriorCore, signer, metadata) => {
 	alert(`maximum cost of transaction:- ${utils.formatUnits(cost.toString(), 'ether')} ETH`);
 	const transaction = await warriorCore?.connect(signer)?.generateWarrior(from, metadata, response?.data?.signature);
 	const event = (await transaction.wait())?.events?.filter((event) => event?.event == 'WarriorGenerated')[0]?.args;
+	let id = event[1];
+	console.log(event[1]);
 	alert(`Warrior generated for ${event[0]} with warrior id ${event[1]?.toString()}`);
+	return parseInt(id);
 };
 
 export default generateWarrior;

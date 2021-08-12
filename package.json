@@ -6,6 +6,8 @@
 	"author": "Angel Lakra <angel.lakra@chainlabs.in>",
 	"license": "MIT",
 	"dependencies": {
+		"@material-ui/core": "^4.12.3",
+		"@material-ui/icons": "^4.11.2",
 		"@styled-system/prop-types": "^5.1.5",
 		"@svgr/webpack": "^5.5.0",
 		"@types/styled-components": "^5.1.11",
