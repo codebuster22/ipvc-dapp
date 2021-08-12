@@ -18,6 +18,7 @@ import If from '@/components/If';
 import Warrior from '@/components/Warrior';
 import { getAssetRegistry } from '@/api/queries';
 import { useQuery } from 'react-query';
+import { IRegistry } from '../Warrior/types';
 
 const OnboardingComp = (): JSX.Element => {
 	const [text, setText] = useState<string>('');
