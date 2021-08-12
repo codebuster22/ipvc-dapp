@@ -1,4 +1,4 @@
-import OnboardingComp from '@/containers/Onboarding';
+import OnboardingComp from '@/containers/Onboarding/index.new';
 import Head from 'next/head';
 import React from 'react';
 
@@ -14,15 +14,3 @@ const OnboardingPage = (): JSX.Element => {
 };
 
 export default OnboardingPage;
-
-OnboardingPage.getInitialProps = (ctx) => {
-	if (ctx?.req?.cookies['access_token']) {
-		return { access_token: ctx?.req?.cookies['access_token'] ?? '' };
-	} else {
-		ctx?.res?.writeHead(301, {
-			Location: '/login',
-		});
-		ctx?.res?.end();
-	}
-	return {};
-};

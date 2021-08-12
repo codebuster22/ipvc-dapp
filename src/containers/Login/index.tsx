@@ -34,9 +34,6 @@ const LoginComp = (): JSX.Element => {
 			console.log(res);
 			nookies.set({}, 'access_token', res.token);
 			toast.success('Verification Succesful ✅✅');
-			debounce(() => {
-				router.push('/');
-			}, 1000);
 			router.push('/onboarding');
 		},
 		onError: (err) => {

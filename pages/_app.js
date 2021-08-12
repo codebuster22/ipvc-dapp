@@ -15,8 +15,8 @@ import chains from '@/ethereum/utils/chains';
 import contracts from '@/ethereum/utils/contracts';
 import useListeners from '@/ethereum/useListeners';
 import generateWarrior from '@/ethereum/utils/generateWarrior';
-import { EthersProvider } from '@/ethereum/EthersContext';
 import queryEvents from '../src/ethereum/utils/queryEvents';
+import { StatesProvider } from '@/components/StatesContext';
 
 const queryClient = new QueryClient();
 
@@ -69,9 +69,7 @@ const MyApp = ({ Component, pageProps }) => {
 
 	useEffect(() => {
 		if (warriorCore?.address && address) {
-			const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
 			getCurrentGen();
-			generateWarrior(warriorCore, signer, metadata);
 		}
 	}, [address, warriorCore]);
 
@@ -115,13 +113,13 @@ const MyApp = ({ Component, pageProps }) => {
 	};
 
 	return (
-		<EthersProvider provider={provider} signer={signer} warriorCore={warriorCore}>
+		<StatesProvider provider={provider} signer={signer} warriorCore={warriorCore}>
 			<QueryClientProvider client={queryClient}>
 				<ThemeProvider theme={theme}>
 					<Component {...pageProps} />
 				</ThemeProvider>
 			</QueryClientProvider>
-		</EthersProvider>
+		</StatesProvider>
 	);
 };
 
