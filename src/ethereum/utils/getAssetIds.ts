@@ -1,4 +1,4 @@
-const variations = {
+export const variations = {
 	layer_1: 3,
 	layer_2: 2,
 	layer_3: 2,
@@ -16,7 +16,7 @@ export interface IAssets {
 	layer_6: number;
 }
 
-const getAssetIds = async (warriorCore, warriorId): Promise<IAssets> => {
+const getAssetIds = async (warriorCore, warriorId, registry): Promise<IAssets> => {
 	const gene = await warriorCore?.getWarrior(warriorId);
 	if (!!gene) {
 		const attributes = gene?.toString()?.substring(4);
@@ -24,7 +24,8 @@ const getAssetIds = async (warriorCore, warriorId): Promise<IAssets> => {
 		const assetIds: IAssets = { ...variations };
 		attributeArray.map((attribute, idx) => {
 			const layer = `layer_${6 - idx}`;
-			assetIds[layer] = Number(attribute) % variations?.[layer];
+			console.log(registry?.[layer].length);
+			assetIds[layer] = Number(attribute) % registry?.[layer].length;
 		});
 		return assetIds;
 	}

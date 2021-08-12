@@ -17,12 +17,11 @@ const Warrior = ({ warriorId, registry }: Props) => {
 	const state = useContext(StatesContext);
 	const [assets, setAssets] = useState<IAssets>();
 	const [urls, setUrls] = useState([]);
-	const [url, setUrl] = useState(IPFS_URL);
 
 	// @ts-expect-error using async in useEffect
 	useEffect(async () => {
 		if (state?.warriorCore && warriorId) {
-			const assetIds = await getAssetIds(state?.warriorCore, warriorId?.toString());
+			const assetIds = await getAssetIds(state?.warriorCore, warriorId?.toString(), registry);
 			setAssets(assetIds);
 		}
 	}, [state?.warriorCore, warriorId]);
@@ -32,61 +31,68 @@ const Warrior = ({ warriorId, registry }: Props) => {
 			const results = [];
 			for (const k in assets) {
 				const cid = registry[k][assets[k]]?.cid;
-				results.push(`${url}${cid}`);
+				results.push(`${cid}`);
 			}
+			console.log({ results });
 			setUrls(results);
 		}
 	}, [assets]);
 
-	return (
-		<Box fontSize="1rem">
-			<Asset
-				as="img"
-				className="asset-img"
-				src={urls?.[0]}
-				onError={() => setUrl(IPFS_FALLBACK_URL)}
-				position="absolute"
-			/>
-			<Asset
-				as="img"
-				className="asset-img"
-				src={urls?.[1]}
-				onError={() => setUrl(IPFS_FALLBACK_URL)}
-				position="absolute"
-			/>
-			<Asset
-				as="img"
-				className="asset-img"
-				src={urls?.[2]}
-				onError={() => setUrl(IPFS_FALLBACK_URL)}
-				position="absolute"
-			/>
-			<Asset
-				as="img"
-				className="asset-img"
-				src={urls?.[3]}
-				onError={() => setUrl(IPFS_FALLBACK_URL)}
-				position="absolute"
-			/>
-			<Asset
-				as="img"
-				className="asset-img"
-				src={urls?.[4]}
-				onError={() => setUrl(IPFS_FALLBACK_URL)}
-				position="absolute"
-			/>
-			<Asset
-				as="img"
-				className="asset-img"
-				src={urls?.[5]}
-				onError={() => setUrl(IPFS_FALLBACK_URL)}
-				position="absolute"
-			/>
-			<Text id="warrior-id" mt={{ mobS: '24rem', tabS: '55rem' }}>
-				Warrior #{warriorId}
-			</Text>
-		</Box>
-	);
+	if (!assets) {
+		return <Text as="h3">Loading...</Text>;
+	}
+
+	if (assets) {
+		return (
+			<Box fontSize="1rem">
+				<Asset
+					as="img"
+					className="asset-img"
+					src={`${IPFS_URL}${urls?.[0]}`}
+					onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[0]}`)}
+					position="absolute"
+				/>
+				<Asset
+					as="img"
+					className="asset-img"
+					src={`${IPFS_URL}${urls?.[1]}`}
+					onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[1]}`)}
+					position="absolute"
+				/>
+				<Asset
+					as="img"
+					className="asset-img"
+					src={`${IPFS_URL}${urls?.[2]}`}
+					onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[2]}`)}
+					position="absolute"
+				/>
+				<Asset
+					as="img"
+					className="asset-img"
+					src={`${IPFS_URL}${urls?.[3]}`}
+					onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[3]}`)}
+					position="absolute"
+				/>
+				<Asset
+					as="img"
+					className="asset-img"
+					src={`${IPFS_URL}${urls?.[4]}`}
+					onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[4]}`)}
+					position="absolute"
+				/>
+				<Asset
+					as="img"
+					className="asset-img"
+					src={`${IPFS_URL}${urls?.[5]}`}
+					onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[5]}`)}
+					position="absolute"
+				/>
+				<Text id="warrior-id" mt={{ mobS: '24rem', tabS: '55rem' }}>
+					Warrior #{warriorId}
+				</Text>
+			</Box>
+		);
+	}
 };
 
 export default Warrior;
