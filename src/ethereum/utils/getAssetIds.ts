@@ -24,7 +24,6 @@ const getAssetIds = async (warriorCore, warriorId, registry): Promise<IAssets> =
 		const assetIds: IAssets = { ...variations };
 		attributeArray.map((attribute, idx) => {
 			const layer = `layer_${6 - idx}`;
-			console.log(registry?.[layer].length);
 			assetIds[layer] = Number(attribute) % registry?.[layer].length;
 		});
 		return assetIds;
