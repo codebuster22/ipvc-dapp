@@ -68,7 +68,7 @@ const MyApp = ({ Component, pageProps }) => {
 
 	useEffect(() => {
 		if (warriorCore?.address && address) {
-			// getCurrentGen();
+			getCurrentGen();
 		}
 	}, [address, warriorCore]);
 
