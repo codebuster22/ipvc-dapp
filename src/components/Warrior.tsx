@@ -45,48 +45,15 @@ const Warrior = ({ warriorId, registry }: Props) => {
 	if (assets) {
 		return (
 			<Box fontSize="1rem">
-				<Asset
-					as="img"
-					className="asset-img"
-					src={`${IPFS_URL}${urls?.[0]}`}
-					onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[0]}`)}
-					position="absolute"
-				/>
-				<Asset
-					as="img"
-					className="asset-img"
-					src={`${IPFS_URL}${urls?.[1]}`}
-					onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[1]}`)}
-					position="absolute"
-				/>
-				<Asset
-					as="img"
-					className="asset-img"
-					src={`${IPFS_URL}${urls?.[2]}`}
-					onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[2]}`)}
-					position="absolute"
-				/>
-				<Asset
-					as="img"
-					className="asset-img"
-					src={`${IPFS_URL}${urls?.[3]}`}
-					onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[3]}`)}
-					position="absolute"
-				/>
-				<Asset
-					as="img"
-					className="asset-img"
-					src={`${IPFS_URL}${urls?.[4]}`}
-					onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[4]}`)}
-					position="absolute"
-				/>
-				<Asset
-					as="img"
-					className="asset-img"
-					src={`${IPFS_URL}${urls?.[5]}`}
-					onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[5]}`)}
-					position="absolute"
-				/>
+				{urls?.map((url) => (
+					<Asset
+						as="img"
+						className="asset-img"
+						src={`${IPFS_URL}${url}`}
+						onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${url}`)}
+						position="absolute"
+					/>
+				))}
 				<Text id="warrior-id" mt={{ mobS: '24rem', tabS: '55rem' }}>
 					Warrior #{warriorId}
 				</Text>
