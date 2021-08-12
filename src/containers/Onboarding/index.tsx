@@ -18,12 +18,10 @@ import { ethers } from 'ethers';
 import generateWarrior from '@/ethereum/utils/generateWarrior';
 import { StatesContext } from '@/components/StatesContext';
 import Warrior from '@/components/Warrior';
-import WarriorComp from '../Warrior';
 import { IRegistry } from '../Warrior/types';
 import { getAssetRegistry } from '@/api/queries';
 import { useQuery } from 'react-query';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
-import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const OnboardingComp = (): JSX.Element => {
 	const router = useRouter();
@@ -36,7 +34,6 @@ const OnboardingComp = (): JSX.Element => {
 	const [registry, setRegistry] = useState<IRegistry>();
 	const [warriorId, setWarriorId] = useState<string>();
 	const [warrior, setWarrior] = useState<boolean>(false);
-	const id = 50;
 	useQuery('registry-fetch', getAssetRegistry, {
 		enabled: true,
 		onSuccess: (result) => {
@@ -76,7 +73,7 @@ const OnboardingComp = (): JSX.Element => {
 		e.preventDefault();
 		setLoading(true);
 		const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
-		let id = await generateWarrior(warriorCore, signer, metadata);
+		const id = await generateWarrior(warriorCore, signer, metadata);
 		setWarriorId(id.toString());
 		setLoading(false);
 		setSuccess(true);
@@ -86,7 +83,6 @@ const OnboardingComp = (): JSX.Element => {
 
 	const handleViewWarrior = () => {
 		setWarrior(true);
-		console.log('here');
 	};
 
 	const handleCloseWarrior = () => {
