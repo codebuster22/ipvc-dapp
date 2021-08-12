@@ -47,6 +47,7 @@ const Warrior = ({ warriorId, registry }: Props) => {
 			<Box fontSize="1rem">
 				{urls?.map((url) => (
 					<Asset
+						key={`key${url}`}
 						as="img"
 						className="asset-img"
 						src={`${IPFS_URL}${url}`}
