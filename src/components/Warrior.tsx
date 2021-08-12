@@ -6,7 +6,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Box from './Box';
 import { StatesContext } from './StatesContext';
-import Text from './Text';
 
 interface Props {
 	warriorId: string;
@@ -38,7 +37,7 @@ const Warrior = ({ warriorId, registry }: Props) => {
 	}, [assets]);
 
 	return (
-		<Box fontSize="1rem">
+		<Box fontSize="1rem" bg="red">
 			<Asset
 				as="img"
 				className="asset-img"
@@ -81,10 +80,6 @@ const Warrior = ({ warriorId, registry }: Props) => {
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[5].split('ipfs/')[1]}`)}
 				position="absolute"
 			/>
-
-			<Text id="warrior-id" mt={{ mobS: '24rem', tabS: '55rem' }}>
-				Warrior #{warriorId}
-			</Text>
 		</Box>
 	);
 };
