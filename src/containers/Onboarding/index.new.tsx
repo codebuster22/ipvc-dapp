@@ -19,6 +19,12 @@ const OnboardingComp = (): JSX.Element => {
 
 	const { signer, warriorCore } = useContext(StatesContext);
 
+	const getError = async (code) => {
+		if (code == 4001) return 'Proccess ended unacceptably. Please try again';
+		if (code == 'INVALID_ARGUMENT') return 'Please unlock your MetaMask';
+		if (code == 'UNPREDICTABLE_GAS_LIMIT') return 'Metadata already used';
+	};
+
 	const handleWarriorGenerate = async (e) => {
 		e.preventDefault();
 		if (text.length > 0) {
@@ -31,7 +37,8 @@ const OnboardingComp = (): JSX.Element => {
 				setLoading(false);
 				setSuccess(true);
 			} catch (err) {
-				toast.error('Metadata already used');
+				let error = await getError(err.code);
+				toast.error(error);
 				setLoading(false);
 			}
 		}
