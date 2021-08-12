@@ -1,7 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 
 //Breakpoints
-const breakpoints: DefaultTheme['breakpoints'] = ['319px', '424px', '767px', '1023px', '1199px'];
+const breakpoints: DefaultTheme['breakpoints'] = ['319px', '410px', '767px', '1023px', '1199px'];
 
 breakpoints.mobS = breakpoints[0]; // 319px
 breakpoints.mobL = breakpoints[1]; // 424px

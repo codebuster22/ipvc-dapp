@@ -55,8 +55,11 @@ const Asset = styled(Box)(
 
 	height: 50rem;
 
-	@media only screen and (min-width: ${theme.breakpoints.mobS}) and (max-width: ${theme.breakpoints.tabS}) {
-		height: 20rem;
+	@media only screen and (min-width: ${theme.breakpoints.mobS}) and (max-width: ${theme.breakpoints.mobL}) {
+		height: 17rem;
+	}
+	@media only screen and (min-width: ${theme.breakpoints.mobL}) and (max-width: ${theme.breakpoints.tabS}) {
+		height: 23rem;
 	}
 	@media only screen and (min-width: ${theme.breakpoints.tabS}) and (max-width: ${theme.breakpoints.tabL}) {
 		height: 45rem;
