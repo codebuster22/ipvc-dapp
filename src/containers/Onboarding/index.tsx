@@ -22,6 +22,7 @@ import { IRegistry } from '../Warrior/types';
 import { getAssetRegistry } from '@/api/queries';
 import { useQuery } from 'react-query';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const OnboardingComp = (): JSX.Element => {
 	const router = useRouter();
@@ -334,9 +335,8 @@ const OnboardingComp = (): JSX.Element => {
 								borderRadius="7px"
 								onClick={success ? handleViewWarrior : handleWarriorGenerate}
 								cursor="pointer"
-								disabled={loading == true}
 							>
-								{loading ? 'Fetching' : success ? 'View Warrior' : 'Get Warrior'}
+								{loading ? 'Fetching' : success ? `View Warrior` : 'Get Warrior'}
 							</Box>
 						}
 					/>
@@ -363,7 +363,13 @@ const OnboardingComp = (): JSX.Element => {
 				condition={warrior == true}
 				then={
 					<Box center position="absolute" height="100vh" bg="transparent">
-						<Box height="80vh" width="40vw" borderRadius="20px" bg="pink" opacity="1">
+						<Box
+							height={{ mobS: '40vh', deskM: '80vh', tabS: '60vh', mobL: '75vh', tabL: '50vh' }}
+							width={{ mobS: '80vw', deskM: '40vw' }}
+							borderRadius="20px"
+							bg="pink"
+							opacity="1"
+						>
 							<Box
 								display="flex"
 								justifyContent="space-between"
@@ -378,7 +384,12 @@ const OnboardingComp = (): JSX.Element => {
 								</Box>
 								<CloseIcon height="30px" cursor="pointer" onClick={handleCloseWarrior} />
 							</Box>
-							<Box mx="wxxl">
+							<Box
+								display="flex"
+								justifyContent="flex-start"
+								mx={{ mobS: 'wm', deskM: 'mm', tabS: 'wxl', tabL: 'wxxl' }}
+								px={{ tabL: 'wxl' }}
+							>
 								<Warrior warriorId={warriorId} registry={registry} />
 							</Box>
 						</Box>
