@@ -13,6 +13,7 @@
 		"@types/styled-components": "^5.1.11",
 		"@types/styled-system": "^5.1.12",
 		"axios": "^0.21.1",
+		"bs58": "^4.0.1",
 		"ethers": "^5.4.2",
 		"gsap": "^3.7.1",
 		"hash.js": "^1.1.7",
