@@ -90,14 +90,14 @@ const OnboardingComp = (): JSX.Element => {
 
 	const draw = async (ctx, imgs) => {
 		ctx.fillStyle = 'rgb(256, 256, 0)';
-		ctx.fillRect(0, 0, 500, 700);
-		ctx.font = '30px sans-serif black';
+		ctx.fillRect(0, 0, 1000, 1400);
+		ctx.font = '30px Comic Sans black';
 		ctx.fillStyle = 'black';
-		ctx.fillText(`#${warriorId}`, 250, 650);
+		ctx.fillText(`#${warriorId}`, 500, 1300);
 		for (let i = 0; i < imgs.length; i++) {
 			imgs[i].crossOrigin = 'anonymous';
 			imgs[i].onload = async () => {
-				await ctx.drawImage(imgs[i], 20, 20, 475, 600);
+				await ctx.drawImage(imgs[i], 40, 40, 950, 1200);
 			};
 		}
 	};
@@ -109,8 +109,8 @@ const OnboardingComp = (): JSX.Element => {
 		if (process.browser) {
 			const canvas = document.createElement('canvas');
 			const ctx = canvas.getContext('2d');
-			canvas.height = 700;
-			canvas.width = 500;
+			canvas.height = 1400;
+			canvas.width = 1000;
 			const imgs = document.getElementsByClassName('asset-img');
 
 			draw(ctx, imgs).then(() => {
