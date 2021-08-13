@@ -213,12 +213,13 @@ const OnboardingComp = (): JSX.Element => {
 				then={
 					<Box center position="absolute" height="100vh" width="100vw" bg="#000000a0">
 						<Box
-							height={{ mobS: '40vh', deskM: '80vh', tabS: '60vh', mobL: '75vh', tabL: '50vh' }}
+							minHeight={{ mobS: '40vh', deskM: '80vh', tabS: '60vh', mobL: '60vh', tabL: '50vh' }}
 							width={{ mobS: '80vw', deskM: '40vw' }}
 							borderRadius="8px"
 							bg="white"
 							opacity="1"
 							overflow="hidden"
+							pb="mm"
 						>
 							<Box
 								display="flex"
@@ -231,7 +232,13 @@ const OnboardingComp = (): JSX.Element => {
 								<Text id="warrior-id">Warrior #{warriorId}</Text>
 								<CloseIcon height="30px" cursor="pointer" onClick={handleCloseWarrior} />
 							</Box>
-							<Box display="flex" justifyContent="center" width="50%" height="60rem" position="relative">
+							<Box
+								display="flex"
+								justifyContent="center"
+								width="50%"
+								height={{ mobS: '20rem', mobL: '27rem', tabS: '50rem', tabL: '60rem' }}
+								position="relative"
+							>
 								<Warrior warriorId={warriorId} registry={registry} />
 							</Box>
 							<Box width="100%" center>
