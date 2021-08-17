@@ -1,4 +1,3 @@
-import Box from '@/components/Box';
 import React from 'react';
 import AllWarrior from '@/containers/gallery';
 

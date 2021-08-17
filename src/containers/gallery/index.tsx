@@ -81,11 +81,6 @@ const AllWarrior = (): JSX.Element => {
 					</Box>
 				))}
 			</Box>
-			{/* <Box>
-				<Warrior warriorId={'13'} registry={registry} />
-				<Warrior warriorId={warriors[14]} registry={registry} />
-				<Warrior warriorId={warriors[15]} registry={registry} />
-			</Box> */}
 		</Box>
 	);
 };

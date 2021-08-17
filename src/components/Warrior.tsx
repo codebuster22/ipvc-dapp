@@ -39,14 +39,14 @@ const Warrior = ({ warriorId, registry, ...styleProps }: Props) => {
 	}, [assets]);
 
 	return (
-		<Box fontSize="1rem" {...styleProps}>
+		<Box fontSize="1rem">
 			<Asset
 				as="img"
 				className="asset-img"
 				src={urls?.[0]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[0].split('ipfs/')[1]}`)}
 				position="absolute"
-				ht={styleProps.height}
+				height="100%"
 			/>
 			<Asset
 				as="img"
@@ -54,7 +54,7 @@ const Warrior = ({ warriorId, registry, ...styleProps }: Props) => {
 				src={urls?.[1]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[1].split('ipfs/')[1]}`)}
 				position="absolute"
-				ht={styleProps.height}
+				height="100%"
 			/>
 			<Asset
 				as="img"
@@ -62,7 +62,7 @@ const Warrior = ({ warriorId, registry, ...styleProps }: Props) => {
 				src={urls?.[2]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[2].split('ipfs/')[1]}`)}
 				position="absolute"
-				ht={styleProps.height}
+				height="100%"
 			/>
 			<Asset
 				as="img"
@@ -70,7 +70,7 @@ const Warrior = ({ warriorId, registry, ...styleProps }: Props) => {
 				src={urls?.[3]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[3].split('ipfs/')[1]}`)}
 				position="absolute"
-				ht={styleProps.height}
+				height="100%"
 			/>
 			<Asset
 				as="img"
@@ -78,7 +78,7 @@ const Warrior = ({ warriorId, registry, ...styleProps }: Props) => {
 				src={urls?.[4]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[4].split('ipfs/')[1]}`)}
 				position="absolute"
-				ht={styleProps.height}
+				height="100%"
 			/>
 			<Asset
 				as="img"
@@ -86,7 +86,7 @@ const Warrior = ({ warriorId, registry, ...styleProps }: Props) => {
 				src={urls?.[5]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[5].split('ipfs/')[1]}`)}
 				position="absolute"
-				ht={styleProps.height}
+				height="100%"
 			/>
 		</Box>
 	);
