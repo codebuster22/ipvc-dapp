@@ -6,6 +6,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Box, { BoxProps } from './Box';
 import { StatesContext } from './StatesContext';
+import Text from './Text';
 
 interface Props extends BoxProps {
 	warriorId: string;
@@ -39,7 +40,7 @@ const Warrior = ({ warriorId, registry, height, ...styleProps }: Props) => {
 	}, [assets]);
 
 	return (
-		<Box fontSize="1rem" height="100%" width="100%">
+		<Box fontSize="1rem" height="100%" width="100%" display="flex" justifyContent="center">
 			<Box
 				as="img"
 				className="asset-img"
@@ -47,7 +48,6 @@ const Warrior = ({ warriorId, registry, height, ...styleProps }: Props) => {
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[0].split('ipfs/')[1]}`)}
 				position="absolute"
 				height="100%"
-				border="1px solid black"
 			/>
 			<Box
 				as="img"

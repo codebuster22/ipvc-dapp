@@ -50,7 +50,7 @@ const AllWarrior = (): JSX.Element => {
 
 			Object.values(warrior).forEach((c) => {
 				console.log(c[0]);
-				return array.push(parseInt(c[1]._hex).toString());
+				return array.push({ id: parseInt(c[1]._hex).toString(), address: c[0] });
 			});
 			setWarriors(array);
 		};
@@ -80,10 +80,10 @@ const AllWarrior = (): JSX.Element => {
 				fontWeight="bold"
 				mb={{ mobS: 'mm', tabS: 'wm' }}
 				pb={{ mobS: 'mxl', tabS: 'wxl' }}
-				pt="wl"
+				pt={{ mobS: 'mxl', tabS: 'wl' }}
 				bg="purple-10"
 				color="white"
-				px={{ mobS: 'ms', tabS: '20rem' }}
+				px={{ mobS: 'mxs', tabS: '20rem' }}
 				width="100%"
 			>
 				Gallery
@@ -106,9 +106,21 @@ const AllWarrior = (): JSX.Element => {
 						mx="ms"
 						my="mxs"
 					>
-						{/* This code is not working for all warriors but if I am rendering for a particular one like
-							outside the loop that one is getting rendered */}
-						<Warrior warriorId={warrior} registry={registry} />
+						<Box>
+							<Warrior warriorId={warrior.id} registry={registry} />
+							<Box position="absolute" right="ml">
+								<Text>#{warrior.id}</Text>
+							</Box>
+							<Box
+								position="relative"
+								top={{ mobS: '133px', tabS: '240px' }}
+								mx={{ mobS: '10px', tabS: 'wl', deskM: 'wxs' }}
+							>
+								<Text fontSize={{ mobs: '0.45rem', deskM: '0.75rem' }}>
+									<strong>{warrior.address}</strong>
+								</Text>
+							</Box>
+						</Box>
 					</Box>
 				))}
 			</Box>
