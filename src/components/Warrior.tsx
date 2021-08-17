@@ -19,10 +19,10 @@ const Warrior = ({ warriorId, registry }: Props) => {
 
 	// @ts-expect-error using async in useEffect
 	useEffect(async () => {
-		if (state?.warriorCore && warriorId) {
-			const assetIds = await getAssetIds(state?.warriorCore, warriorId?.toString(), registry);
-			setAssets(assetIds);
-		}
+		// if (state?.warriorCore && warriorId) {
+		// 	const assetIds = await getAssetIds(state?.warriorCore, warriorId?.toString(), registry);
+		// 	setAssets(assetIds);
+		// }
 	}, [state?.warriorCore, warriorId]);
 
 	useEffect(() => {
