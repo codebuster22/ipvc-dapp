@@ -12,7 +12,7 @@ interface Props extends BoxProps {
 	registry: IRegistry;
 }
 
-const Warrior = ({ warriorId, registry, ...styleProps }: Props) => {
+const Warrior = ({ warriorId, registry, height, ...styleProps }: Props) => {
 	const state = useContext(StatesContext);
 	const [assets, setAssets] = useState<IAssets>();
 	const [urls, setUrls] = useState([]);
@@ -39,16 +39,17 @@ const Warrior = ({ warriorId, registry, ...styleProps }: Props) => {
 	}, [assets]);
 
 	return (
-		<Box fontSize="1rem">
-			<Asset
+		<Box fontSize="1rem" height="100%" width="100%">
+			<Box
 				as="img"
 				className="asset-img"
 				src={urls?.[0]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[0].split('ipfs/')[1]}`)}
 				position="absolute"
 				height="100%"
+				border="1px solid black"
 			/>
-			<Asset
+			<Box
 				as="img"
 				className="asset-img"
 				src={urls?.[1]}
@@ -56,7 +57,7 @@ const Warrior = ({ warriorId, registry, ...styleProps }: Props) => {
 				position="absolute"
 				height="100%"
 			/>
-			<Asset
+			<Box
 				as="img"
 				className="asset-img"
 				src={urls?.[2]}
@@ -64,7 +65,7 @@ const Warrior = ({ warriorId, registry, ...styleProps }: Props) => {
 				position="absolute"
 				height="100%"
 			/>
-			<Asset
+			<Box
 				as="img"
 				className="asset-img"
 				src={urls?.[3]}
@@ -72,7 +73,7 @@ const Warrior = ({ warriorId, registry, ...styleProps }: Props) => {
 				position="absolute"
 				height="100%"
 			/>
-			<Asset
+			<Box
 				as="img"
 				className="asset-img"
 				src={urls?.[4]}
@@ -80,7 +81,7 @@ const Warrior = ({ warriorId, registry, ...styleProps }: Props) => {
 				position="absolute"
 				height="100%"
 			/>
-			<Asset
+			<Box
 				as="img"
 				className="asset-img"
 				src={urls?.[5]}
@@ -92,21 +93,3 @@ const Warrior = ({ warriorId, registry, ...styleProps }: Props) => {
 	);
 };
 export default Warrior;
-
-const Asset = styled(Box)(
-	({ theme, ht }: { theme: any; ht?: string }) => `
-
-	height: ${ht};
-
-	@media only screen and (min-width: ${theme.breakpoints.mobS}) and (max-width: ${theme.breakpoints.mobL}) {
-		height: 17rem;
-	}
-	@media only screen and (min-width: ${theme.breakpoints.mobL}) and (max-width: ${theme.breakpoints.tabS}) {
-		height: 23rem;
-	}
-	@media only screen and (min-width: ${theme.breakpoints.tabS}) and (max-width: ${theme.breakpoints.tabL}) {
-		height: 45rem;
-	}
-
-`
-);

@@ -33,10 +33,25 @@ const AllWarrior = (): JSX.Element => {
 	});
 
 	useEffect(() => {
+		if (process.browser) {
+			window.addEventListener('onload', () => {
+				const block = document.getElementById('content');
+				if (block) {
+					block.style.display = 'flex';
+				}
+			});
+		}
+	}, []);
+
+	useEffect(() => {
 		const getWarrior = async () => {
 			const array = [];
 			const warrior = await getAllWarriors();
-			Object.values(warrior).forEach((c) => array.push(parseInt(c[1]._hex).toString()));
+
+			Object.values(warrior).forEach((c) => {
+				console.log(c[0]);
+				return array.push(parseInt(c[1]._hex).toString());
+			});
 			setWarriors(array);
 		};
 		if (state.warriorCore) {
@@ -59,16 +74,32 @@ const AllWarrior = (): JSX.Element => {
 	if (warriors.length <= 0) return <Box>Loading...</Box>;
 
 	return (
-		<Box bg="pink">
-			<Text fontSize="15rem" fontWeight="bold" mb="wm" pb="wxl" pt="wl" bg="purple-10" color="white" px="20rem">
+		<Box bg="pink" display="flex" id="content" center column maxWidth="100vw">
+			<Text
+				fontSize={{ mobS: '5rem', tabS: '15rem' }}
+				fontWeight="bold"
+				mb={{ mobS: 'mm', tabS: 'wm' }}
+				pb={{ mobS: 'mxl', tabS: 'wxl' }}
+				pt="wl"
+				bg="purple-10"
+				color="white"
+				px={{ mobS: 'ms', tabS: '20rem' }}
+				width="100%"
+			>
 				Gallery
 			</Text>
-			<Box display="flex" flexWrap="wrap" px="20rem">
+			<Box
+				display="flex"
+				flexWrap="wrap"
+				mx={{ mobS: 'ms', tabS: '20rem' }}
+				maxWidth="100%"
+				justifyContent="center"
+			>
 				{warriors?.map((warrior) => (
 					<Box
 						bg="white"
-						width="25rem"
-						height="25rem"
+						width={{ mobS: '14rem', tabS: '25rem' }}
+						height={{ mobS: '14rem', tabS: '25rem' }}
 						borderRadius="4px"
 						position="relative"
 						boxShadow="0 0 2px rgba(0,0,0,0.8)"
@@ -77,7 +108,7 @@ const AllWarrior = (): JSX.Element => {
 					>
 						{/* This code is not working for all warriors but if I am rendering for a particular one like
 							outside the loop that one is getting rendered */}
-						<Warrior warriorId={warrior} registry={registry} height="25rem" />
+						<Warrior warriorId={warrior} registry={registry} />
 					</Box>
 				))}
 			</Box>
