@@ -20,7 +20,6 @@ import Warrior from '@/components/Warrior';
 import { getAssetRegistry } from '@/api/queries';
 import { useQuery } from 'react-query';
 import { IRegistry } from '../Warrior/types';
-import { gsap, Linear } from 'gsap';
 import { rotate } from './animation';
 
 const OnboardingComp = (): JSX.Element => {
