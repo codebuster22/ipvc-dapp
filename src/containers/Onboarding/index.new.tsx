@@ -219,6 +219,8 @@ const OnboardingComp = (): JSX.Element => {
 							opacity="1"
 							overflow="hidden"
 							pb="mm"
+							alignItems="center"
+							column
 						>
 							<Box
 								display="flex"
@@ -227,6 +229,7 @@ const OnboardingComp = (): JSX.Element => {
 								py="ms"
 								borderBottom="1px solid grey"
 								bg="gray-100"
+								width="100%"
 							>
 								<Text id="warrior-id">Warrior #{warriorId}</Text>
 								<CloseIcon height="30px" cursor="pointer" onClick={handleCloseWarrior} />

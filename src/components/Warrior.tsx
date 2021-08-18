@@ -13,7 +13,7 @@ interface Props extends BoxProps {
 	registry: IRegistry;
 }
 
-const Warrior = ({ warriorId, registry, height, ...styleProps }: Props) => {
+const Warrior = ({ warriorId, registry }: Props) => {
 	const state = useContext(StatesContext);
 	const [assets, setAssets] = useState<IAssets>();
 	const [urls, setUrls] = useState([]);
@@ -40,14 +40,14 @@ const Warrior = ({ warriorId, registry, height, ...styleProps }: Props) => {
 	}, [assets]);
 
 	return (
-		<Box fontSize="1rem" height="100%" width="100%" display="flex" justifyContent="center">
+		<Box fontSize="1rem" height="50%" width="100%" display="flex" justifyContent="center">
 			<Box
 				as="img"
 				className="asset-img"
 				src={urls?.[0]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[0].split('ipfs/')[1]}`)}
 				position="absolute"
-				height="100%"
+				height="95%"
 			/>
 			<Box
 				as="img"
@@ -55,7 +55,7 @@ const Warrior = ({ warriorId, registry, height, ...styleProps }: Props) => {
 				src={urls?.[1]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[1].split('ipfs/')[1]}`)}
 				position="absolute"
-				height="100%"
+				height="95%"
 			/>
 			<Box
 				as="img"
@@ -63,7 +63,7 @@ const Warrior = ({ warriorId, registry, height, ...styleProps }: Props) => {
 				src={urls?.[2]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[2].split('ipfs/')[1]}`)}
 				position="absolute"
-				height="100%"
+				height="95%"
 			/>
 			<Box
 				as="img"
@@ -71,7 +71,7 @@ const Warrior = ({ warriorId, registry, height, ...styleProps }: Props) => {
 				src={urls?.[3]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[3].split('ipfs/')[1]}`)}
 				position="absolute"
-				height="100%"
+				height="95%"
 			/>
 			<Box
 				as="img"
@@ -79,7 +79,7 @@ const Warrior = ({ warriorId, registry, height, ...styleProps }: Props) => {
 				src={urls?.[4]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[4].split('ipfs/')[1]}`)}
 				position="absolute"
-				height="100%"
+				height="95%"
 			/>
 			<Box
 				as="img"
@@ -87,7 +87,7 @@ const Warrior = ({ warriorId, registry, height, ...styleProps }: Props) => {
 				src={urls?.[5]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[5].split('ipfs/')[1]}`)}
 				position="absolute"
-				height="100%"
+				height="95%"
 			/>
 		</Box>
 	);

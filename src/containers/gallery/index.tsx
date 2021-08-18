@@ -49,7 +49,6 @@ const AllWarrior = (): JSX.Element => {
 			const warrior = await getAllWarriors();
 
 			Object.values(warrior).forEach((c) => {
-				console.log(c[0]);
 				return array.push({ id: parseInt(c[1]._hex).toString(), address: c[0] });
 			});
 			setWarriors(array);
@@ -59,15 +58,8 @@ const AllWarrior = (): JSX.Element => {
 		}
 	}, [state?.warriorCore]);
 
-	// useEffect(() => {
-	// 	if (warriors.length > 0) {
-	// 		warriors.map((c) => console.log(c));
-	// 	}
-	// }, [warriors]);
-
 	const getAllWarriors = async () => {
 		const data = await queryEvents(state.warriorCore, 'WarriorGenerated');
-		// console.log('All Warriors', data);
 		return data;
 	};
 
@@ -76,14 +68,14 @@ const AllWarrior = (): JSX.Element => {
 	return (
 		<Box bg="pink" display="flex" id="content" center column maxWidth="100vw">
 			<Text
-				fontSize={{ mobS: '5rem', tabS: '15rem' }}
+				fontSize={{ mobS: '5rem', mobL: '8rem', tabL: '15rem' }}
 				fontWeight="bold"
-				mb={{ mobS: 'mm', tabS: 'wm' }}
-				pb={{ mobS: 'mxl', tabS: 'wxl' }}
-				pt={{ mobS: 'mxl', tabS: 'wl' }}
+				mb={{ mobS: 'mm', mobL: 'ml', tabS: 'wm' }}
+				pb={{ mobS: 'mxl', mobL: 'wm', tabS: 'wxl' }}
+				pt={{ mobS: 'mxl', mobL: 'wxs', tabS: 'wl' }}
 				bg="purple-10"
 				color="white"
-				px={{ mobS: 'mxs', tabS: '20rem' }}
+				px={{ mobS: 'ws', mobL: 'ws', tabS: '20rem' }}
 				width="100%"
 			>
 				Gallery
@@ -91,33 +83,30 @@ const AllWarrior = (): JSX.Element => {
 			<Box
 				display="flex"
 				flexWrap="wrap"
-				mx={{ mobS: 'ms', tabS: '20rem' }}
+				mx={{ mobS: 'ms', tabL: '16rem', webM: '20rem' }}
 				maxWidth="100%"
 				justifyContent="center"
 			>
 				{warriors?.map((warrior) => (
 					<Box
+						key={warrior.id}
 						bg="white"
-						width={{ mobS: '14rem', tabS: '25rem' }}
-						height={{ mobS: '14rem', tabS: '25rem' }}
+						width={{ mobS: '25rem', tabL: '30rem' }}
+						height={{ mobS: '25rem', tabL: '30rem' }}
 						borderRadius="4px"
 						position="relative"
 						boxShadow="0 0 2px rgba(0,0,0,0.8)"
 						mx="ms"
-						my="mxs"
+						my="ms"
 					>
 						<Box>
 							<Warrior warriorId={warrior.id} registry={registry} />
 							<Box position="absolute" right="ml">
 								<Text>#{warrior.id}</Text>
 							</Box>
-							<Box
-								position="relative"
-								top={{ mobS: '133px', tabS: '240px' }}
-								mx={{ mobS: '10px', tabS: 'wl', deskM: 'wxs' }}
-							>
-								<Text fontSize={{ mobs: '0.45rem', deskM: '0.75rem' }}>
-									<strong>{warrior.address}</strong>
+							<Box position="relative" top={{ mobS: '23.7rem', tabL: '28.5rem' }} center>
+								<Text fontSize={{ mobs: '0.75rem', deskM: '0.75rem' }} fontWeight="extra-bold">
+									{warrior.address}
 								</Text>
 							</Box>
 						</Box>
