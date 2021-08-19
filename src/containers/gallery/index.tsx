@@ -4,34 +4,16 @@ import Warrior from '@/components/Warrior';
 import React, { useContext, useEffect, useState } from 'react';
 import queryEvents from '../../ethereum/utils/queryEvents';
 import { StatesContext } from '@/components/StatesContext';
-import { IRegistry } from '../Warrior/types';
-import { getAssetRegistry } from '@/api/queries';
-import { useQuery } from 'react-query';
 import Text from '@/components/Text';
+import useRegistry from '@/components/hooks/useRegistry';
 
 const PER_PAGE = 15;
 
 const AllWarrior = (): JSX.Element => {
 	const state = useContext(StatesContext);
-	const [registry, setRegistry] = useState<IRegistry>();
 	const [warriors, setWarriors] = useState([]);
 	const [page, setPage] = useState(0);
-	useQuery('registry-fetch', getAssetRegistry, {
-		enabled: true,
-		onSuccess: (result) => {
-			let key;
-			for (const k in result) {
-				key = k;
-				break;
-			}
-			const res = JSON.parse(key);
-			setRegistry(res);
-		},
-		onError: (error: any) => {
-			console.log({ error });
-		},
-	});
-
+	const registry = useRegistry();
 	useEffect(() => {
 		if (process.browser) {
 			window.addEventListener('onload', () => {
@@ -56,6 +38,7 @@ const AllWarrior = (): JSX.Element => {
 		if (state.warriorCore) {
 			getWarrior();
 		}
+		console.log(registry);
 	}, [state?.warriorCore]);
 
 	const getAllWarriors = async () => {

@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import Box from '@/components/Box';
 import Text from '@/components/Text';
@@ -21,6 +21,8 @@ import { getAssetRegistry } from '@/api/queries';
 import { useQuery } from 'react-query';
 import { IRegistry } from '../Warrior/types';
 import { rotate } from './animation';
+import useRegistry from '@/components/hooks/useRegistry';
+import Confetti from 'react-confetti';
 
 const OnboardingComp = (): JSX.Element => {
 	const [text, setText] = useState<string>('');
@@ -28,24 +30,14 @@ const OnboardingComp = (): JSX.Element => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [warriorId, setWarriorId] = useState<string>();
 	const [warrior, setWarrior] = useState<boolean>(false);
-	const [registry, setRegistry] = useState<IRegistry>();
-
+	const registry = useRegistry();
 	const { signer, warriorCore } = useContext(StatesContext);
-	useQuery('registry-fetch', getAssetRegistry, {
-		enabled: true,
-		onSuccess: (result) => {
-			let key;
-			for (const k in result) {
-				key = k;
-				break;
-			}
-			const res = JSON.parse(key);
-			setRegistry(res);
-		},
-		onError: (error: any) => {
-			console.log({ error });
-		},
-	});
+	const [height, setHeight] = useState(null);
+	const [width, setWidth] = useState(null);
+	const confettiRef = useRef(null);
+	const [show, setShow] = useState<boolean>(false);
+	// const w = window.innerWidth
+	// const h = window.innerHeight
 
 	const getError = async (code) => {
 		if (code == 4001) return 'Proccess ended unacceptably. Please try again';
@@ -71,6 +63,7 @@ const OnboardingComp = (): JSX.Element => {
 				setSuccess(true);
 				setWarriorId(id.toString());
 				setWarrior(true);
+				setShow(true);
 			} catch (err) {
 				const error = await getError(err.code);
 				toast.error(error);
@@ -85,6 +78,7 @@ const OnboardingComp = (): JSX.Element => {
 
 	const handleCloseWarrior = () => {
 		setWarrior(false);
+		// setShow(false);
 	};
 
 	const draw = async (ctx, imgs) => {
@@ -124,6 +118,7 @@ const OnboardingComp = (): JSX.Element => {
 			});
 		}
 	};
+
 
 	return (
 		<Box height="100vh" center bg="purple-10">
@@ -222,6 +217,7 @@ const OnboardingComp = (): JSX.Element => {
 							alignItems="center"
 							column
 						>
+							<Confetti run={show} recycle={false} width={width} height={height} numberOfPieces={1000} />
 							<Box
 								display="flex"
 								justifyContent="space-between"
