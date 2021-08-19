@@ -49,6 +49,13 @@ const OnboardingComp = (): JSX.Element => {
 		if (loading) rotate('#loops');
 	}, [loading]);
 
+	useEffect(() => {
+		if (process.browser) {
+			setWidth(screen.availWidth - 10);
+			setHeight(screen.availHeight - 100);
+		}
+	}, [success]);
+
 	const handleWarriorGenerate = async (e) => {
 		e.preventDefault();
 		if (text.length !== 0) {
@@ -78,7 +85,9 @@ const OnboardingComp = (): JSX.Element => {
 
 	const handleCloseWarrior = () => {
 		setWarrior(false);
-		// setShow(false);
+		setShow(false);
+		setWidth(null);
+		setHeight(null);
 	};
 
 	const draw = async (ctx, imgs) => {
@@ -118,7 +127,6 @@ const OnboardingComp = (): JSX.Element => {
 			});
 		}
 	};
-
 
 	return (
 		<Box height="100vh" center bg="purple-10">
