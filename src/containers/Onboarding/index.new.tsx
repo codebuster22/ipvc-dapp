@@ -1,28 +1,24 @@
 /* eslint-disable import/no-unresolved */
 import React, { useContext, useEffect, useRef, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import Confetti from 'react-confetti';
+import { ethers } from 'ethers';
 
 import Box from '@/components/Box';
 import Text from '@/components/Text';
 import theme from '@/styleguide/theme';
-
-import { ethers } from 'ethers';
 import generateWarrior from '@/ethereum/utils/generateWarrior';
 import { StatesContext } from '@/components/StatesContext';
-import { toast, ToastContainer } from 'react-toastify';
-
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
-import CloseIcon from '@/svgs/close.svg';
-import LoopIcon from '@/svgs/loop.svg';
-
-import 'react-toastify/dist/ReactToastify.css';
 import If from '@/components/If';
 import Warrior from '@/components/Warrior';
-import { getAssetRegistry } from '@/api/queries';
-import { useQuery } from 'react-query';
-import { IRegistry } from '../Warrior/types';
-import { rotate } from './animation';
 import useRegistry from '@/components/hooks/useRegistry';
-import Confetti from 'react-confetti';
+import { rotate } from './animation';
+
+import LoopIcon from '@/svgs/loop.svg';
+import CloseIcon from '@/svgs/close.svg';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const OnboardingComp = (): JSX.Element => {
 	const [text, setText] = useState<string>('');
@@ -34,10 +30,7 @@ const OnboardingComp = (): JSX.Element => {
 	const { signer, warriorCore } = useContext(StatesContext);
 	const [height, setHeight] = useState(null);
 	const [width, setWidth] = useState(null);
-	const confettiRef = useRef(null);
 	const [show, setShow] = useState<boolean>(false);
-	// const w = window.innerWidth
-	// const h = window.innerHeight
 
 	const getError = async (code) => {
 		if (code == 4001) return 'Proccess ended unacceptably. Please try again';

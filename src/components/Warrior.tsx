@@ -3,10 +3,8 @@ import { IRegistry } from '@/containers/Warrior/types';
 import getAssetIds, { IAssets } from '@/ethereum/utils/getAssetIds';
 import { IPFS_FALLBACK_URL, IPFS_URL } from '@/utils/constants';
 import React, { useContext, useState, useEffect } from 'react';
-import styled from 'styled-components';
 import Box, { BoxProps } from './Box';
 import { StatesContext } from './StatesContext';
-import Text from './Text';
 
 interface Props extends BoxProps {
 	warriorId: string;
