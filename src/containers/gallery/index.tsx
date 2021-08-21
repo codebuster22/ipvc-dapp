@@ -6,6 +6,7 @@ import queryEvents from '../../ethereum/utils/queryEvents';
 import { StatesContext } from '@/components/StatesContext';
 import Text from '@/components/Text';
 import useRegistry from '@/components/hooks/useRegistry';
+import ReactTooltip from 'react-tooltip';
 
 const PER_PAGE = 15;
 
@@ -87,10 +88,19 @@ const AllWarrior = (): JSX.Element => {
 							<Box position="absolute" right="ml">
 								<Text>#{warrior.id}</Text>
 							</Box>
-							<Box position="relative" top={{ mobS: '23.7rem', tabL: '28.5rem' }} center>
+							<Box
+								position="relative"
+								top={{ mobS: '23.7rem', tabL: '28.5rem' }}
+								center
+								data-tip
+								data-for="registerTip"
+							>
 								<Text fontSize={{ mobs: '0.75rem', deskM: '0.75rem' }} fontWeight="extra-bold">
 									{warrior.address}
 								</Text>
+								<ReactTooltip id="registerTip" place="top" effect="solid">
+									Creator
+								</ReactTooltip>
 							</Box>
 						</Box>
 					</Box>
