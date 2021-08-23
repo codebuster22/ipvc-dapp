@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import WarriorComp from '@/containers/Warrior';
+import WarriorComp from 'containers/Warrior';
 
 const WarriorPage = () => {
 	return (

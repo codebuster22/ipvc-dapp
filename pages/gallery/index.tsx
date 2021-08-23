@@ -1,5 +1,5 @@
 import React from 'react';
-import AllWarrior from '@/containers/gallery';
+import AllWarrior from 'containers/gallery';
 
 const GalleryPage = (): JSX.Element => {
 	return (

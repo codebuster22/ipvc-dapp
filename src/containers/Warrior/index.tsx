@@ -1,30 +1,12 @@
-/* eslint-disable import/no-unresolved */
-import { getAssetRegistry } from '@/api/queries';
-import Box from '@/components/Box';
-import Warrior from '@/components/Warrior';
+import Box from 'components/Box';
+import useRegistry from 'components/hooks/useRegistry';
+import Warrior from 'components/Warrior';
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
-import { IRegistry } from './types';
 
 const WarriorComp = () => {
 	const [warriorId, setWarriorId] = useState<string>('0');
 	const [warrior, setWarrior] = useState<string>('0');
-	const [registry, setRegistry] = useState<IRegistry>();
-	useQuery('registry-fetch', getAssetRegistry, {
-		enabled: true,
-		onSuccess: (result) => {
-			let key;
-			for (const k in result) {
-				key = k;
-				break;
-			}
-			const res = JSON.parse(key);
-			setRegistry(res);
-		},
-		onError: (error: any) => {
-			console.log({ error });
-		},
-	});
+	const registry = useRegistry();
 
 	return (
 		<Box px={{ mobS: 'ms', tabS: 'auto' }} py={{ mobS: 'ml', tabS: 'wl' }} column width="100vw" height="100vh">

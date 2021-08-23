@@ -1,19 +1,15 @@
-/* eslint-disable import/no-unresolved */
-import Box from '@/components/Box';
-import Warrior from '@/components/Warrior';
+import Box from 'components/Box';
+import Warrior from 'components/Warrior';
 import React, { useContext, useEffect, useState } from 'react';
 import queryEvents from '../../ethereum/utils/queryEvents';
-import { StatesContext } from '@/components/StatesContext';
-import Text from '@/components/Text';
-import useRegistry from '@/components/hooks/useRegistry';
+import { StatesContext } from 'components/StatesContext';
+import Text from 'components/Text';
+import useRegistry from 'components/hooks/useRegistry';
 import ReactTooltip from 'react-tooltip';
-
-const PER_PAGE = 15;
 
 const AllWarrior = (): JSX.Element => {
 	const state = useContext(StatesContext);
 	const [warriors, setWarriors] = useState([]);
-	const [page, setPage] = useState(0);
 	const registry = useRegistry();
 	useEffect(() => {
 		if (process.browser) {
@@ -30,7 +26,6 @@ const AllWarrior = (): JSX.Element => {
 		const getWarrior = async () => {
 			const array = [];
 			const warrior = await getAllWarriors();
-
 			Object.values(warrior).forEach((c) => {
 				return array.push({ id: parseInt(c[1]._hex).toString(), address: c[0] });
 			});
@@ -39,7 +34,6 @@ const AllWarrior = (): JSX.Element => {
 		if (state.warriorCore) {
 			getWarrior();
 		}
-		console.log(registry);
 	}, [state?.warriorCore]);
 
 	const getAllWarriors = async () => {
@@ -47,7 +41,7 @@ const AllWarrior = (): JSX.Element => {
 		return data;
 	};
 
-	if (warriors.length <= 0) return <Box>Loading...</Box>;
+	if (warriors.length <= 0) return <Text as="h2">Loading...</Text>;
 
 	return (
 		<Box bg="pink" display="flex" id="content" center column maxWidth="100vw">

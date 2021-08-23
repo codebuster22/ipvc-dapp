@@ -1,5 +1,5 @@
 import React from 'react';
-import Box, { BoxProps } from '@/components/Box';
+import Box, { BoxProps } from 'components/Box';
 
 export const fontSizes = {
 	h1: { mobS: '2rem', tabS: '2.8rem', deskM: '3.2rem' },

@@ -1,7 +1,6 @@
-/* eslint-disable import/no-unresolved */
 import { useState } from 'react';
 import { IRegistry } from '../../containers/Warrior/types';
-import { getAssetRegistry } from '@/api/queries';
+import { getAssetRegistry } from 'api/queries';
 import { useQuery } from 'react-query';
 
 const useRegistry = () => {

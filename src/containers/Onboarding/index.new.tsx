@@ -1,42 +1,36 @@
-/* eslint-disable import/no-unresolved */
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import Confetti from 'react-confetti';
 import { ethers } from 'ethers';
 
-import Box from '@/components/Box';
-import Text from '@/components/Text';
-import theme from '@/styleguide/theme';
-import generateWarrior from '@/ethereum/utils/generateWarrior';
-import { StatesContext } from '@/components/StatesContext';
+import Box from 'components/Box';
+import Text from 'components/Text';
+import theme from 'styleguide/theme';
+import generateWarrior from 'ethereum/utils/generateWarrior';
+import { StatesContext } from 'components/StatesContext';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
-import If from '@/components/If';
-import Warrior from '@/components/Warrior';
-import useRegistry from '@/components/hooks/useRegistry';
+import If from 'components/If';
+import Warrior from 'components/Warrior';
+import useRegistry from 'components/hooks/useRegistry';
 import { rotate } from './animation';
 
-import LoopIcon from '@/svgs/loop.svg';
-import CloseIcon from '@/svgs/close.svg';
+import LoopIcon from 'svgs/loop.svg';
+import CloseIcon from 'svgs/close.svg';
 
 import 'react-toastify/dist/ReactToastify.css';
+import { getError } from 'utils/helpers';
 
 const OnboardingComp = (): JSX.Element => {
 	const [text, setText] = useState<string>('');
 	const [success, setSuccess] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [warriorId, setWarriorId] = useState<string>();
-	const [warrior, setWarrior] = useState<boolean>(false);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const registry = useRegistry();
 	const { signer, warriorCore } = useContext(StatesContext);
 	const [height, setHeight] = useState(null);
 	const [width, setWidth] = useState(null);
-	const [show, setShow] = useState<boolean>(false);
-
-	const getError = async (code) => {
-		if (code == 4001) return 'Proccess ended unacceptably. Please try again';
-		if (code == 'INVALID_ARGUMENT') return 'Please unlock your MetaMask';
-		if (code == 'UNPREDICTABLE_GAS_LIMIT') return 'Metadata already used';
-	};
+	const [showConfetti, setShowConfetti] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (loading) rotate('#loops');
@@ -61,9 +55,8 @@ const OnboardingComp = (): JSX.Element => {
 				setWarriorId(id.toString());
 				setLoading(false);
 				setSuccess(true);
-				setWarriorId(id.toString());
-				setWarrior(true);
-				setShow(true);
+				setIsModalOpen(true);
+				setShowConfetti(true);
 			} catch (err) {
 				const error = await getError(err.code);
 				toast.error(error);
@@ -73,12 +66,12 @@ const OnboardingComp = (): JSX.Element => {
 	};
 
 	const handleViewWarrior = () => {
-		setWarrior(true);
+		setIsModalOpen(true);
 	};
 
 	const handleCloseWarrior = () => {
-		setWarrior(false);
-		setShow(false);
+		setIsModalOpen(false);
+		setShowConfetti(false);
 		setWidth(null);
 		setHeight(null);
 	};
@@ -204,7 +197,7 @@ const OnboardingComp = (): JSX.Element => {
 				</Box>
 			</Box>
 			<If
-				condition={warrior == true}
+				condition={isModalOpen}
 				then={
 					<Box center position="absolute" height="100vh" width="100vw" bg="#000000a0">
 						<Box
@@ -218,7 +211,13 @@ const OnboardingComp = (): JSX.Element => {
 							alignItems="center"
 							column
 						>
-							<Confetti run={show} recycle={false} width={width} height={height} numberOfPieces={1000} />
+							<Confetti
+								run={showConfetti}
+								recycle={false}
+								width={width}
+								height={height}
+								numberOfPieces={1000}
+							/>
 							<Box
 								display="flex"
 								justifyContent="space-between"
