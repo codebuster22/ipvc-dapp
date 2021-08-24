@@ -34,14 +34,14 @@ module.exports = {
 		'import/resolver': {
 			alias: {
 				map: [
-					['@/containers/*', path.resolve(__dirname, './src/containers')],
-					['@/components/*', path.resolve(__dirname, './src/components')],
-					['@/styleguide/*', path.resolve(__dirname, './src/styleguide')],
-					['@/utils/*', path.resolve(__dirname, './src/utils/*')],
-					['@/api/*', path.resolve(__dirname, './src/api/*')],
-					['@/ethereum/*', path.resolve(__dirname, './src/ethereum/*')],
-					['@/svgs/*', path.resolve(__dirname, './src/svgs/*')],
-					['@/pages/*', path.resolve(__dirname, './pages')],
+					['containers/*', path.resolve(__dirname, './src/containers')],
+					['components/*', path.resolve(__dirname, './src/components')],
+					['styleguide/*', path.resolve(__dirname, './src/styleguide')],
+					['utils/*', path.resolve(__dirname, './src/utils/*')],
+					['api/*', path.resolve(__dirname, './src/api/*')],
+					['ethereum/*', path.resolve(__dirname, './src/ethereum/*')],
+					['svgs/*', path.resolve(__dirname, './src/svgs/*')],
+					['pages/*', path.resolve(__dirname, './pages')],
 				],
 				extensions: ['.ts', '.js', '.tsx', '.jsx', '.json'],
 			},
