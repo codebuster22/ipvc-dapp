@@ -10,6 +10,9 @@ import ReactTooltip from 'react-tooltip';
 const AllWarrior = (): JSX.Element => {
 	const state = useContext(StatesContext);
 	const [warriors, setWarriors] = useState([]);
+	const [page, setPage] = useState(0);
+	const [searchValue, setSearchValue] = useState<string>('');
+	const [searchError, setSearchError] = useState<string>('');
 	const registry = useRegistry();
 	useEffect(() => {
 		if (process.browser) {
@@ -36,28 +39,66 @@ const AllWarrior = (): JSX.Element => {
 		}
 	}, [state?.warriorCore]);
 
+	useEffect(() => {
+		const array = [];
+		if (searchValue) {
+			console.log('yes');
+			console.log(searchValue);
+			console.log(warriors);
+			warriors?.forEach((c) => {
+				console.log(searchValue);
+				if (c.id.includes(searchValue) || c.address.includes(searchValue)) {
+					console.log(searchValue, c);
+					array.push(c);
+				} else {
+					setSearchError('Invalid Search');
+				}
+			});
+			setWarriors(array);
+		}
+	}, [searchValue]);
+
 	const getAllWarriors = async () => {
 		const data = await queryEvents(state.warriorCore, 'WarriorGenerated');
 		return data;
 	};
 
-	if (warriors.length <= 0) return <Text as="h2">Loading...</Text>;
+	// if (warriors.length <= 0) return <Text as="h2">Loading...</Text>;
 
 	return (
 		<Box bg="pink" display="flex" id="content" center column maxWidth="100vw">
-			<Text
-				fontSize={{ mobS: '5rem', mobL: '8rem', tabL: '15rem' }}
-				fontWeight="bold"
-				mb={{ mobS: 'mm', mobL: 'ml', tabS: 'wm' }}
+			<Box
 				pb={{ mobS: 'mxl', mobL: 'wm', tabS: 'wxl' }}
 				pt={{ mobS: 'mxl', mobL: 'wxs', tabS: 'wl' }}
+				mb={{ mobS: 'mm', mobL: 'ml', tabS: 'wm' }}
 				bg="purple-10"
-				color="white"
-				px={{ mobS: 'ws', mobL: 'ws', tabS: '20rem' }}
 				width="100%"
 			>
-				Gallery
-			</Text>
+				<Text
+					fontSize={{ mobS: '5rem', mobL: '8rem', tabL: '15rem' }}
+					fontWeight="bold"
+					color="white"
+					px={{ mobS: 'ws', mobL: 'ws', tabS: '20rem' }}
+				>
+					Gallery
+				</Text>
+				<Box
+					as="input"
+					type="text"
+					value={searchValue}
+					onChange={(e) => setSearchValue(e.target.value)}
+					ml="20rem"
+					p="mxs"
+					placeholder="Search"
+					border="none"
+					pl="ms"
+					outline="none"
+					height="150%"
+					width="20%"
+					bg="white"
+					borderRadius="20px"
+				/>
+			</Box>
 			<Box
 				display="flex"
 				flexWrap="wrap"
@@ -99,6 +140,7 @@ const AllWarrior = (): JSX.Element => {
 						</Box>
 					</Box>
 				))}
+				{searchError != '' ? <Text>Invalid Search</Text> : ''}
 			</Box>
 		</Box>
 	);
