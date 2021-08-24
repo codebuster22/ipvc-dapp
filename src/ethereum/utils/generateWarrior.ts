@@ -1,5 +1,4 @@
-/* eslint-disable import/no-unresolved */
-import { AWS_LAMBDA_WARRIOR_SIGNATURE_URL } from '@/utils/constants';
+import { AWS_LAMBDA_WARRIOR_SIGNATURE_URL } from 'utils/constants';
 import { toast } from 'react-toastify';
 
 const { default: axios } = require('axios');
@@ -25,8 +24,8 @@ const generateWarrior = async (warriorCore, signer, metadata) => {
 	toast(`maximum cost of transaction:- ${utils.formatUnits(cost.toString(), 'ether')} ETH`);
 	const transaction = await warriorCore?.connect(signer)?.generateWarrior(from, metadata, response?.data?.signature);
 	const event = (await transaction.wait())?.events?.filter((event) => event?.event == 'WarriorGenerated')[0]?.args;
-	let id = event[1];
-	toast(`Warrior generated for ${event[0]} with warrior id ${event[1]?.toString()}`, {
+	const id = event[1];
+	toast(`Warrior generated for ${event[0]} with warrior id ${id?.toString()}`, {
 		autoClose: 7000,
 	});
 	return parseInt(id);

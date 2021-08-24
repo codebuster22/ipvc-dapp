@@ -1,4 +1,4 @@
-import { COWIN_API_KEY } from '@/utils/constants';
+import { COWIN_API_KEY } from 'utils/constants';
 import hash from 'hash.js';
 import axios from 'axios';
 

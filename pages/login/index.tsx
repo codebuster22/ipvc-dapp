@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import LoginComp from '@/containers/Login';
+import LoginComp from 'containers/Login';
 
 const LoginPage = (): JSX.Element => {
 	return (

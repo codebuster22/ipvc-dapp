@@ -1,26 +1,26 @@
 /* eslint-disable import/namespace */
-/* eslint-disable import/no-unresolved */
+
 import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import nookies from 'nookies';
 import { gsap } from 'gsap';
 
-import Box from '@/components/Box';
-import Text from '@/components/Text';
-import Dropzone from '@/components/Dropzone';
-import If from '@/components/If';
-import theme from '@/styleguide/theme';
-import { parseImage, parsePDF } from '@/utils/parsing';
+import Box from 'components/Box';
+import Text from 'components/Text';
+import Dropzone from 'components/Dropzone';
+import If from 'components/If';
+import theme from 'styleguide/theme';
+import { parseImage, parsePDF } from 'utils/parsing';
 
 import PDFIcon from '../../svgs/pdf.svg';
 import ImageIcon from '../../svgs/image-icon.svg';
 import CloseIcon from '../../svgs/close.svg';
 import { ethers } from 'ethers';
-import generateWarrior from '@/ethereum/utils/generateWarrior';
-import { StatesContext } from '@/components/StatesContext';
-import Warrior from '@/components/Warrior';
+import generateWarrior from 'ethereum/utils/generateWarrior';
+import { StatesContext } from 'components/StatesContext';
+import Warrior from 'components/Warrior';
 import { IRegistry } from '../Warrior/types';
-import { getAssetRegistry } from '@/api/queries';
+import { getAssetRegistry } from 'api/queries';
 import { useQuery } from 'react-query';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 

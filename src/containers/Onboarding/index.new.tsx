@@ -1,34 +1,33 @@
-/* eslint-disable import/no-unresolved */
 import React, { useContext, useEffect, useState } from 'react';
 
-import Box from '@/components/Box';
-import Text from '@/components/Text';
-import theme from '@/styleguide/theme';
+import Box from 'components/Box';
+import Text from 'components/Text';
+import theme from 'styleguide/theme';
 
 import { ethers } from 'ethers';
-import generateWarrior from '@/ethereum/utils/generateWarrior';
-import { StatesContext } from '@/components/StatesContext';
+import generateWarrior from 'ethereum/utils/generateWarrior';
+import { StatesContext } from 'components/StatesContext';
 import { toast, ToastContainer } from 'react-toastify';
 
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
-import CloseIcon from '@/svgs/close.svg';
-import LoopIcon from '@/svgs/loop.svg';
+import CloseIcon from 'svgs/close.svg';
+import LoopIcon from 'svgs/loop.svg';
 
 import 'react-toastify/dist/ReactToastify.css';
-import If from '@/components/If';
-import Warrior from '@/components/Warrior';
-import { getAssetRegistry } from '@/api/queries';
+import If from 'components/If';
+import Warrior from 'components/Warrior';
+import { getAssetRegistry } from 'api/queries';
 import { useQuery } from 'react-query';
 import { IRegistry } from '../Warrior/types';
-import { gsap, Linear } from 'gsap';
 import { rotate } from './animation';
+import { getError } from 'utils/helpers';
 
 const OnboardingComp = (): JSX.Element => {
 	const [text, setText] = useState<string>('');
 	const [success, setSuccess] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [warriorId, setWarriorId] = useState<string>();
-	const [warrior, setWarrior] = useState<boolean>(false);
+	const [ismodalopen, setIsModalOpen] = useState<boolean>(false);
 	const [registry, setRegistry] = useState<IRegistry>();
 
 	const { signer, warriorCore } = useContext(StatesContext);
@@ -48,12 +47,6 @@ const OnboardingComp = (): JSX.Element => {
 		},
 	});
 
-	const getError = async (code) => {
-		if (code == 4001) return 'Proccess ended unacceptably. Please try again';
-		if (code == 'INVALID_ARGUMENT') return 'Please unlock your MetaMask';
-		if (code == 'UNPREDICTABLE_GAS_LIMIT') return 'Metadata already used';
-	};
-
 	useEffect(() => {
 		if (loading) rotate('#loops');
 	}, [loading]);
@@ -71,7 +64,7 @@ const OnboardingComp = (): JSX.Element => {
 				setLoading(false);
 				setSuccess(true);
 				setWarriorId(id.toString());
-				setWarrior(true);
+				setIsModalOpen(true);
 			} catch (err) {
 				const error = await getError(err.code);
 				toast.error(error);
@@ -81,11 +74,11 @@ const OnboardingComp = (): JSX.Element => {
 	};
 
 	const handleViewWarrior = () => {
-		setWarrior(true);
+		setIsModalOpen(true);
 	};
 
 	const handleCloseWarrior = () => {
-		setWarrior(false);
+		setIsModalOpen(false);
 	};
 
 	const draw = async (ctx, imgs) => {
@@ -209,7 +202,7 @@ const OnboardingComp = (): JSX.Element => {
 				</Box>
 			</Box>
 			<If
-				condition={warrior == true}
+				condition={ismodalopen == true}
 				then={
 					<Box center position="absolute" height="100vh" width="100vw" bg="#000000a0">
 						<Box

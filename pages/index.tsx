@@ -1,6 +1,5 @@
-/* eslint-disable import/no-unresolved */
 import React from 'react';
-import Box from '@/components/Box';
+import Box from 'components/Box';
 
 const Home = (): JSX.Element => {
 	return <Box>Home</Box>;
