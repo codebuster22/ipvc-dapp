@@ -1,7 +1,6 @@
-/* eslint-disable import/no-unresolved */
-import { getAssetRegistry } from '@/api/queries';
-import Box from '@/components/Box';
-import Warrior from '@/components/Warrior';
+import { getAssetRegistry } from 'api/queries';
+import Box from 'components/Box';
+import Warrior from 'components/Warrior';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { IRegistry } from './types';

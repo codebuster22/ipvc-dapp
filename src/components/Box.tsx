@@ -29,7 +29,7 @@ import {
 	grid,
 } from 'styled-system';
 
-import { allStyledSystemProps } from '@/styleguide/filterStyledSystemProps';
+import { allStyledSystemProps } from 'styleguide/filterStyledSystemProps';
 
 export interface BoxProps
 	extends ColorProps,
