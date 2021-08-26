@@ -7,7 +7,6 @@ const OnboardingComp = () => {
 	return (
 		<Box bg="#0F1118" minHeight="100vh">
 			<Box
-				pt="ws"
 				backgroundImage="linear-gradient(180deg, #401F00 16.98%, #23000000 80.33%)"
 				minHeight="100vh"
 				fontFamily="Cinzel Decorative"
@@ -15,7 +14,7 @@ const OnboardingComp = () => {
 				column
 				alignItems="center"
 			>
-				<Box center mb={{ mobS: '10rem', tabS: '20rem' }} minWidth="100%">
+				<Box center mb={{ mobS: '10rem', tabS: '20rem' }} minWidth="100%" mt="ws">
 					<StyledLine flex={1} direction="right" />
 					<Diamond />
 					<Text as="h1" fontWeight="extra-bold" px={{ mobS: 'ml', tabS: 'wl' }}>
