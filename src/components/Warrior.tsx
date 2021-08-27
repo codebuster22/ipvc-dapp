@@ -87,10 +87,10 @@ export default Warrior;
 const Asset = styled(Box)(
 	({ theme }: { theme: any }) => `
 
-	height: 50rem;
+	height: 30rem;
 
 	@media only screen and (min-width: ${theme.breakpoints.mobS}) and (max-width: ${theme.breakpoints.mobL}) {
-		height: 17rem;
+		height: 19rem;
 	}
 	@media only screen and (min-width: ${theme.breakpoints.mobL}) and (max-width: ${theme.breakpoints.tabS}) {
 		height: 23rem;
