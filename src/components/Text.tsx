@@ -2,11 +2,12 @@ import React from 'react';
 import Box, { BoxProps } from 'components/Box';
 
 export const fontSizes = {
-	h1: { mobS: '2rem', tabS: '2.8rem', deskM: '3.2rem' },
-	h2: { mobS: '1.6rem', tabS: '2rem', deskM: '2.4rem' },
-	h3: { mobS: '1.4rem', tabS: '1.8rem', deskM: '2rem' },
-	h4: { mobS: '1.2rem', tabS: '1.4rem', deskM: '1.6rem' },
-	h5: { mobS: '1rem', tabS: '1.2rem', deskM: '1.4rem' },
+	h1: { mobS: '2.8rem', tabS: '3.2rem', deskM: '3.6rem' },
+	h2: { mobS: '2rem', tabS: '2.8rem', deskM: '3.2rem' },
+	h3: { mobS: '1.6rem', tabS: '2rem', deskM: '2.4rem' },
+	h4: { mobS: '1.4rem', tabS: '1.6rem', deskM: '2rem' },
+	h5: { mobS: '1.2rem', tabS: '1.4rem', deskM: '1.6rem' },
+	h6: { mobS: '1rem', tabS: '1.2rem', deskM: '1.4rem' },
 	p: { mobS: '1.4rem', tabS: '1.6rem', deskM: '2rem' },
 };
 
@@ -19,7 +20,7 @@ const fontWeights = {
 };
 
 export interface TextProps extends BoxProps {
-	as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+	as?: 'head' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 	fontWeight?: 'extra-bold' | 'bold' | 'medium' | 'regular' | 'thin';
 	children?: string | React.ReactNode;
 	id?: string;
