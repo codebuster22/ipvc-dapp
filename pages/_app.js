@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
 import { debounce } from 'lodash';
 import { ThemeProvider } from 'styled-components';

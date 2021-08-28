@@ -9,16 +9,15 @@ import theme from 'styleguide/theme';
 import generateWarrior from 'ethereum/utils/generateWarrior';
 import { StatesContext } from 'components/StatesContext';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
-import If from 'components/If';
-import Warrior from 'components/Warrior';
-import useRegistry from 'components/hooks/useRegistry';
-import { rotate } from './animation';
-
-import LoopIcon from 'svgs/loop.svg';
 import CloseIcon from 'svgs/close.svg';
+import LoopIcon from 'svgs/loop.svg';
 
 import 'react-toastify/dist/ReactToastify.css';
+import If from 'components/If';
+import Warrior from 'components/Warrior';
+import { rotate } from './animation';
 import { getError } from 'utils/helpers';
+import useRegistry from 'components/hooks/useRegistry';
 
 const OnboardingComp = (): JSX.Element => {
 	const [text, setText] = useState<string>('');
