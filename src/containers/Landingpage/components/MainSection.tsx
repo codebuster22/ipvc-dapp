@@ -15,7 +15,7 @@ const MainSection = () => {
 			<Box center mx="300px">
 				<Text
 					textAlign="center"
-					color="yellow-text-50"
+					color="yellow-text"
 					fontStyle="normal"
 					fontSize="60px"
 					fontWeight="bold"
