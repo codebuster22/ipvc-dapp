@@ -1,14 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import Confetti from 'react-confetti';
+import { ethers } from 'ethers';
 
 import Box from 'components/Box';
 import Text from 'components/Text';
 import theme from 'styleguide/theme';
-
-import { ethers } from 'ethers';
 import generateWarrior from 'ethereum/utils/generateWarrior';
 import { StatesContext } from 'components/StatesContext';
-import { toast, ToastContainer } from 'react-toastify';
-
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import CloseIcon from 'svgs/close.svg';
 import LoopIcon from 'svgs/loop.svg';
@@ -16,40 +15,32 @@ import LoopIcon from 'svgs/loop.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import If from 'components/If';
 import Warrior from 'components/Warrior';
-import { getAssetRegistry } from 'api/queries';
-import { useQuery } from 'react-query';
-import { IRegistry } from '../Warrior/types';
 import { rotate } from './animation';
 import { getError } from 'utils/helpers';
+import useRegistry from 'components/hooks/useRegistry';
 
 const OnboardingComp = (): JSX.Element => {
 	const [text, setText] = useState<string>('');
 	const [success, setSuccess] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [warriorId, setWarriorId] = useState<string>();
-	const [ismodalopen, setIsModalOpen] = useState<boolean>(false);
-	const [registry, setRegistry] = useState<IRegistry>();
-
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const registry = useRegistry();
 	const { signer, warriorCore } = useContext(StatesContext);
-	useQuery('registry-fetch', getAssetRegistry, {
-		enabled: true,
-		onSuccess: (result) => {
-			let key;
-			for (const k in result) {
-				key = k;
-				break;
-			}
-			const res = JSON.parse(key);
-			setRegistry(res);
-		},
-		onError: (error: any) => {
-			console.log({ error });
-		},
-	});
+	const [height, setHeight] = useState(null);
+	const [width, setWidth] = useState(null);
+	const [showConfetti, setShowConfetti] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (loading) rotate('#loops');
 	}, [loading]);
+
+	useEffect(() => {
+		if (process.browser) {
+			setWidth(screen.availWidth - 10);
+			setHeight(screen.availHeight - 100);
+		}
+	}, [success]);
 
 	const handleWarriorGenerate = async (e) => {
 		e.preventDefault();
@@ -63,8 +54,8 @@ const OnboardingComp = (): JSX.Element => {
 				setWarriorId(id.toString());
 				setLoading(false);
 				setSuccess(true);
-				setWarriorId(id.toString());
 				setIsModalOpen(true);
+				setShowConfetti(true);
 			} catch (err) {
 				const error = await getError(err.code);
 				toast.error(error);
@@ -79,6 +70,9 @@ const OnboardingComp = (): JSX.Element => {
 
 	const handleCloseWarrior = () => {
 		setIsModalOpen(false);
+		setShowConfetti(false);
+		setWidth(null);
+		setHeight(null);
 	};
 
 	const draw = async (ctx, imgs) => {
@@ -202,7 +196,7 @@ const OnboardingComp = (): JSX.Element => {
 				</Box>
 			</Box>
 			<If
-				condition={ismodalopen == true}
+				condition={isModalOpen}
 				then={
 					<Box center position="absolute" height="100vh" width="100vw" bg="#000000a0">
 						<Box
@@ -213,7 +207,16 @@ const OnboardingComp = (): JSX.Element => {
 							opacity="1"
 							overflow="hidden"
 							pb="mm"
+							alignItems="center"
+							column
 						>
+							<Confetti
+								run={showConfetti}
+								recycle={false}
+								width={width}
+								height={height}
+								numberOfPieces={1000}
+							/>
 							<Box
 								display="flex"
 								justifyContent="space-between"
@@ -221,6 +224,7 @@ const OnboardingComp = (): JSX.Element => {
 								py="ms"
 								borderBottom="1px solid grey"
 								bg="gray-100"
+								width="100%"
 							>
 								<Text id="warrior-id">Warrior #{warriorId}</Text>
 								<CloseIcon height="30px" cursor="pointer" onClick={handleCloseWarrior} />
