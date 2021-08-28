@@ -7,8 +7,13 @@ import HexaButton from './HexaButton';
 import { StepProps } from './Step0';
 import BorderDesign from './BorderDesign';
 
-const Step2 = ({ setStep }: StepProps) => {
-	const [formText, setFormText] = useState<string>('');
+interface Props extends StepProps {
+	handleWarriorGenerate: (any) => Promise<void>;
+	formText: string;
+	setFormText: (text: string) => void;
+}
+
+const Step2 = ({ setStep, handleWarriorGenerate, formText, setFormText }: Props) => {
 	return (
 		<Box alignSelf="flex-start" column alignItems="center" minWidth="100%">
 			<HexaAlert>
@@ -66,6 +71,7 @@ const Step2 = ({ setStep }: StepProps) => {
 						disabled={formText.length ? false : true}
 						alignSelf="center"
 						mx={{ deskM: 'wl' }}
+						onClick={handleWarriorGenerate}
 					>
 						<Text as="h5" fontFamily="El Messiri" textAlign="center">
 							Submit

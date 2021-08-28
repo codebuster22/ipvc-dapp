@@ -2,7 +2,7 @@ import Box, { BoxProps } from 'components/Box';
 
 interface Props extends BoxProps {
 	children: React.ReactNode;
-	onClick?: () => any;
+	onClick?: (any) => any;
 	size?: 'small' | 'large';
 	disabled?: boolean;
 }

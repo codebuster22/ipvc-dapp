@@ -4,10 +4,57 @@ import Step0 from './components/Step0';
 import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import theme from 'styleguide/theme';
+import { ethers } from 'ethers';
+import generateWarrior from 'ethereum/utils/generateWarrior';
+import { useContext } from 'react';
+import { StatesContext } from 'components/StatesContext';
+import { getError } from 'utils/helpers';
+import { toast } from 'react-toastify';
+import Step3 from './components/Step3';
+import Step5 from './components/Step5';
 
 const OnboardingComp = () => {
 	const [step, setStep] = useState<number>(0);
-	const stepsComponents = [<Step0 {...{ setStep }} />, <Step1 {...{ setStep }} />, <Step2 {...{ setStep }} />];
+	const [formText, setFormText] = useState<string>('');
+	const [warriorId, setWarriorId] = useState<string>('');
+
+	const { warriorCore, signer } = useContext(StatesContext);
+
+	console.log({ signer });
+
+	const handleWarriorGenerate = async (e) => {
+		e.preventDefault();
+
+		if (formText.length !== 0) {
+			// setLoading(true);
+			// @ts-expect-error signer-props
+			const address = await signer?.getAddress();
+			const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(formText.concat(address)));
+			try {
+				const id = await generateWarrior(warriorCore, signer, metadata, setStep);
+				setStep(5);
+				// setWarriorId(id.toString());
+				// setLoading(false);
+				// setSuccess(true);
+				setWarriorId(id.toString());
+				// setIsModalOpen(true);
+			} catch (err) {
+				const error = await getError(err.code);
+				toast.error(error);
+				// setLoading(false);
+			}
+		}
+	};
+
+	const stepsComponents = [
+		<Step0 {...{ setStep }} />,
+		<Step1 {...{ setStep }} />,
+		<Step2 {...{ setStep, handleWarriorGenerate, formText, setFormText }} />,
+		<Step3 {...{ setStep }} />,
+		<Step0 {...{ setStep }} />,
+		<Step5 {...{ setStep, warriorId }} />,
+	];
+
 	return (
 		<Box bg="black-20" minHeight="100vh">
 			<Box

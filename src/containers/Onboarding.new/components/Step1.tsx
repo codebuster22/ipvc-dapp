@@ -29,6 +29,7 @@ const Step1 = ({ setStep }: StepProps) => {
 	useEffect(() => {
 		if (signer?.provider) {
 			const getAddress = async () => {
+				state.setSigner(signer);
 				try {
 					const address = await signer?.getAddress();
 					setAddress(address);
@@ -43,7 +44,7 @@ const Step1 = ({ setStep }: StepProps) => {
 	}, [signer]);
 
 	useEffect(() => {
-		if (address) {
+		if (address && signer != null) {
 			console.log({ address });
 			clearInterval();
 			setTimeout(() => {

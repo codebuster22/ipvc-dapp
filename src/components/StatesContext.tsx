@@ -1,6 +1,5 @@
 import useListeners from 'ethereum/useListeners';
-import React from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ProviderProps, SignerProps } from '../ethereum/types';
 
 const StatesContext = React.createContext({
@@ -20,6 +19,10 @@ const StatesProvider = ({ children }: StatesProviderProps): JSX.Element => {
 	const [provider, setProvider] = useState<ProviderProps>(null);
 	const [signer, setSigner] = useState<SignerProps>(null);
 	const [warriorCore, setWarriorCore] = useState<any>(null);
+
+	useEffect(() => {
+		console.log('Signer=', signer);
+	}, [signer]);
 
 	useListeners(provider, setProvider, setSigner);
 
