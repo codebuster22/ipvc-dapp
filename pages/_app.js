@@ -13,7 +13,6 @@ import useSigner from 'ethereum/useSigner';
 import chains from 'ethereum/utils/chains';
 import contracts from 'ethereum/utils/contracts';
 import useListeners from 'ethereum/useListeners';
-import generateWarrior from 'ethereum/utils/generateWarrior';
 import queryEvents from '../src/ethereum/utils/queryEvents';
 import { StatesProvider } from 'components/StatesContext';
 import { toast } from 'react-toastify';
