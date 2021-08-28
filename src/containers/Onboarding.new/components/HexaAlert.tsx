@@ -3,9 +3,12 @@ import Box from 'components/Box';
 const HexaAlert = ({ children }) => {
 	return (
 		<Box
+			position="absolute"
+			display="flex"
 			bg="yellow-text-50"
 			p="4px"
 			pt="0"
+			zIndex={2}
 			css={`
 				clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 50% 100%, 0% 85%);
 			`}
