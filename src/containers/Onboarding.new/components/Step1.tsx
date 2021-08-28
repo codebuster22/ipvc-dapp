@@ -68,7 +68,7 @@ const Step1 = ({ setStep }: StepProps) => {
 				<Text as="h1" fontWeight="bold" fontFamily="El Messiri" lineHeight="28.8px">
 					Connect Metamask
 				</Text>
-				<Text as="h3" color="yellow-text-50" fontFamily="El Messiri" mt="mm" textAlign="center" mb="wxs">
+				<Text as="h3" color="yellow-text-50" fontFamily="El Messiri" mt="mm" textAlign="center">
 					Allow Metamask to connect with https://warriors.chainlabs.in
 				</Text>
 			</HexaAlert>

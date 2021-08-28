@@ -28,7 +28,7 @@ const HexaButton = ({ children, onClick, size, disabled, ...otherProps }: Props)
 				css={`
 					clip-path: polygon(7% 0%, 93% 0%, 100% 50%, 93% 100%, 7% 100%, 0% 50%);
 				`}
-				bg="#1F1D19"
+				bg="#1F242D"
 				opacity={1}
 			>
 				{children}

@@ -14,9 +14,9 @@ export const fontSizes = {
 const fontWeights = {
 	'extra-bold': 800,
 	bold: 700,
-	thin: 600,
 	medium: 600,
-	regular: 400,
+	regular: 500,
+	thin: 400,
 };
 
 export interface TextProps extends BoxProps {

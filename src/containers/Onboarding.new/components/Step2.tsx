@@ -1,19 +1,16 @@
 import Box from 'components/Box';
-import { StatesContext } from 'components/StatesContext';
 import Text from 'components/Text';
-import useContract from 'ethereum/useContract';
-import useEthers from 'ethereum/useEthers';
-import useListeners from 'ethereum/useListeners';
-import useSigner from 'ethereum/useSigner';
-import contracts from 'ethereum/utils/contracts';
-import React, { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
+import theme from 'styleguide/theme';
 import HexaAlert from './HexaAlert';
 import HexaButton from './HexaButton';
 import { StepProps } from './Step0';
+import BorderDesign from './BorderDesign';
 
 const Step2 = ({ setStep }: StepProps) => {
+	const [formText, setFormText] = useState<string>('');
 	return (
-		<Box alignSelf="flex-start" mx="wxxl">
+		<Box alignSelf="flex-start" column alignItems="center" minWidth="100%">
 			<HexaAlert>
 				<Text as="h3" fontFamily="Cinzel" fontWeight="bold" mt="mxxxl" mb="mxl">
 					Step. 2
@@ -24,49 +21,68 @@ const Step2 = ({ setStep }: StepProps) => {
 				<Text as="h3" color="yellow-text-50" fontFamily="El Messiri" mt="mm" textAlign="center">
 					Describe your victory over this pandemic and submit.
 				</Text>
-				<HexaButton mb="wxs" size="small" disabled alignSelf="center">
-					<Text as="h6" fontFamily="El Messiri" zIndex={1}>
-						Next
-					</Text>
-				</HexaButton>
 			</HexaAlert>
-			<Box
-				mx={{ tabS: '33rem', mobS: '0rem' }}
-				position={{ tabS: 'absolute', mobS: 'relative' }}
-				width={{ tabS: '30%', mobs: '' }}
-				top={{ tabS: 'wxl' }}
-				left={{ tabS: '16rem', mobS: '0' }}
-				px="wm"
-				pt="wl"
-				display="block"
-				border="1px solid #7A7369"
-				zIndex={1}
-				backgroundColor="linear-gradient(180deg, #401F00 -8.92%, rgba(35, 0, 0, 0) 48.15%)"
-			>
-				<Text as="h3">Describe your victory over this pandemic and submit.</Text>
+			<Box bg="black-20" alignSelf="center" maxWidth="58rem" mt="15.4rem">
 				<Box
-					as="textarea"
-					mt="ms"
-					css={`
-						resize: none;
-					`}
-					border="none"
-					height="30vh"
-					placeholder="start typing here..."
-					color="#FFD37E80"
-					justifyContent="center"
-					fontFamily="inherit"
-					fontSize="medium"
-					fontWeight="inherit"
-					width="100%"
-					outline="none"
-					backgroundColor="rgba(192, 150, 69, 0.1)"
-				></Box>
-				<HexaButton my="wxs" size="small" disabled alignSelf="center" mx={{ deskM: 'wl' }}>
-					<Text as="h5" fontFamily="El Messiri" textAlign="center">
-						Submit
+					border={`4px solid ${theme.colors['yellow-10']}`}
+					zIndex={1}
+					backgroundImage={`linear-gradient(180deg, ${theme.colors['blue-50']}CC -8.11%, ${theme.colors['blue-10']}00 31.22%)`}
+					px="wxl"
+					position="relative"
+				>
+					<BorderDesign />
+					<Text as="h1" fontWeight="medium" fontFamily="El Messiri" lineHeight="43.2px" mt="wl">
+						Describe your victory over this pandemic and submit.
 					</Text>
-				</HexaButton>
+					<Box
+						as="textarea"
+						mt="ms"
+						css={`
+							resize: none;
+							&:placeholder {
+								text-transform: none;
+							}
+						`}
+						p="mm"
+						border="none"
+						height="30vh"
+						placeholder="Start typing here..."
+						color="yellow-text"
+						justifyContent="center"
+						fontFamily="El Messiri"
+						fontWeight="medium"
+						lineHeight="31.26px"
+						fontSize="2rem"
+						width="100%"
+						outline="none"
+						bg="#0D1C2B"
+						value={formText}
+						onChange={(e) => setFormText(e.target.value)}
+					></Box>
+					<HexaButton
+						mt="wxs"
+						mb="wl"
+						size="small"
+						disabled={formText.length ? false : true}
+						alignSelf="center"
+						mx={{ deskM: 'wl' }}
+					>
+						<Text as="h5" fontFamily="El Messiri" textAlign="center">
+							Submit
+						</Text>
+					</HexaButton>
+					<Box
+						width="100%"
+						transform="rotate(180deg)"
+						css={`
+							transform-origin: 50% 50%;
+						`}
+						position="absolute"
+						left={0}
+					>
+						<BorderDesign rotated />
+					</Box>
+				</Box>
 			</Box>
 		</Box>
 	);

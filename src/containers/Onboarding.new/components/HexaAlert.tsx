@@ -1,12 +1,15 @@
 import Box from 'components/Box';
+import theme from 'styleguide/theme';
 
 const HexaAlert = ({ children }) => {
 	return (
 		<Box
+			top={0}
+			left={150}
 			position="absolute"
 			display="flex"
 			bg="yellow-text-50"
-			p="4px"
+			p="mxxs"
 			pt="0"
 			zIndex={2}
 			css={`
@@ -14,10 +17,11 @@ const HexaAlert = ({ children }) => {
 			`}
 		>
 			<Box
-				bg="#1F1D19"
+				bg="black-20"
 				css={`
 					clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 50% 100%, 0% 85%);
 				`}
+				pb="ws"
 			>
 				<Box
 					color="yellow-text"
@@ -25,7 +29,7 @@ const HexaAlert = ({ children }) => {
 					maxWidth="41.4rem"
 					column
 					alignItems="flex-start"
-					backgroundImage="linear-gradient(180deg, #401F00 16.98%, #23000000 80.33%)"
+					backgroundImage={`linear-gradient(180deg, ${theme.colors['blue-40']} -8.92%, ${theme.colors['blue-10']}00 56.66%)`}
 				>
 					{children}
 				</Box>

@@ -37,8 +37,18 @@ declare module 'styled-components' {
 			'gray-100': string;
 			'orange-50': string;
 			'green-100': string;
+
+			'yellow-10': string;
 			'yellow-text': string;
 			'yellow-text-50': string;
+
+			'black-10': string;
+			'black-20': string;
+			'black-30': string;
+
+			'blue-50': string;
+			'blue-40': string;
+			'blue-10': string;
 		};
 		space: string[] & Partial<ISpace>;
 		breakpoints: string[] & Partial<IBreakpoints>;
