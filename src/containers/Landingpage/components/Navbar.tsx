@@ -15,30 +15,61 @@ const Navbar = () => {
 					color="yellow-text"
 					py="ml"
 				>
-					<Text as="h1" fontFamily="Cinzel Decorative" fontWeight="bold">
-						Warriors
-					</Text>
+					<a href="/">
+						<Text as="h1" fontFamily="Cinzel Decorative" fontWeight="bold">
+							Warriors
+						</Text>
+					</a>
 				</Box>
 				<Box display="flex" justifyContent="space-around" py="ml">
-					<Text as="h3" color="#D0D0D0" mx="wxxs" fontWeight="bold" fontFamily="El Messiri" lineHeight="44px">
-						About
-					</Text>
-					<Text as="h3" color="#D0D0D0" mx="wxxs" fontWeight="bold" fontFamily="El Messiri" lineHeight="44px">
-						Roadmap
-					</Text>
-					<Text as="h3" color="#D0D0D0" mx="wxxs" fontWeight="bold" fontFamily="El Messiri" lineHeight="44px">
-						FAQ
-					</Text>
-					<Text
-						as="h3"
-						color="yellow-text-50"
-						mx="wxxs"
-						fontWeight="bold"
-						fontFamily="El Messiri"
-						lineHeight="44px"
-					>
-						Contact
-					</Text>
+					<a href="#about">
+						<Text
+							as="h3"
+							color="#D0D0D0"
+							mx="wxxs"
+							fontWeight="bold"
+							fontFamily="El Messiri"
+							lineHeight="44px"
+						>
+							About
+						</Text>
+					</a>
+					<a href="#roadmap">
+						<Text
+							as="h3"
+							color="#D0D0D0"
+							mx="wxxs"
+							fontWeight="bold"
+							fontFamily="El Messiri"
+							lineHeight="44px"
+						>
+							Roadmap
+						</Text>
+					</a>
+					<a href="#faq">
+						<Text
+							as="h3"
+							color="#D0D0D0"
+							mx="wxxs"
+							fontWeight="bold"
+							fontFamily="El Messiri"
+							lineHeight="44px"
+						>
+							FAQ
+						</Text>
+					</a>
+					<a href="#footer">
+						<Text
+							as="h3"
+							color="yellow-text-50"
+							mx="wxxs"
+							fontWeight="bold"
+							fontFamily="El Messiri"
+							lineHeight="44px"
+						>
+							Contact
+						</Text>
+					</a>
 				</Box>
 			</Box>
 		</Box>
