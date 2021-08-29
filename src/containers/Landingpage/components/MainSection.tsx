@@ -50,9 +50,9 @@ const MainSection = () => {
 				</Box>
 			</Box>
 
-			<Box mx={{ mobS: 'mxxl', deskL: 'wxxl' }}>
+			<Box mx={{ mobS: 'mxxl', deskM: 'wxxl' }}>
 				<Box row>
-					<Box mt="mxxl" mr="mxxl">
+					<Box mt="mxxl" mr="mxxl" minWidth="57rem">
 						<Text fontSize={{ mobS: '45px', tabL: '48px' }} lineHeight="75px">
 							What are Warriors?
 						</Text>
@@ -69,7 +69,7 @@ const MainSection = () => {
 						<Warriors />
 					</Box>
 				</Box>
-				<Box mt="wl" row>
+				<Box mt="wl" center>
 					<Box>
 						<QuestionMark width="620px" />
 					</Box>
@@ -85,10 +85,10 @@ const MainSection = () => {
 						</Text>
 					</Box>
 				</Box>
-				<Box mr="wxl" row>
-					<Box mt="wxxl" mr="mxxl" maxWidth="54rem">
+				<Box mr="wxl" center>
+					<Box mt="wxxl" mr="mxxl" maxWidth="60rem">
 						<Text fontSize={{ mobS: '45px', tabL: '48px' }} lineHeight="75px">
-							What will I be charged?{' '}
+							What will I be charged?
 						</Text>
 						<Text as="h3" textAlign="initial" mr="wxxl" color="white-text">
 							The price to mint a warrior is decided by the DAO. For the first generation, it is set to

@@ -14,7 +14,7 @@ const LandingPageComp = () => {
 				minHeight="100vh"
 				color="yellow-text"
 				fontFamily="El Messiri"
-				px={{ mobS: 'wxxl', deskL: '21rem' }}
+				px={{ mobS: 'wxxl', deskM: '21rem' }}
 			>
 				<MainSection />
 			</Box>
