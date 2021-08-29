@@ -1,19 +1,32 @@
 import Box from 'components/Box';
 import Text from 'components/Text';
-import React from 'react';
+import React, { useEffect } from 'react';
 import DownArrow from '../../../svgs/downarrow.svg';
-import Warriors from '../../../svgs/warrior.svg';
+import Warrior1 from '../../../svgs/warrior1.svg';
+import Warrior2 from '../../../svgs/warrior2.svg';
+import Warrior3 from '../../../svgs/warrior3.svg';
+
 import QuestionMark from '../../../svgs/Questionmark.svg';
 import Ethereum from '../../../svgs/ethereum.svg';
 import RoadMap from './RoadMap';
 import styled from 'styled-components';
 import FAQ from './FAQ';
 import HexaButton from 'components/HexaButton';
+import { animateTop } from './../animation';
+import { animateLeft } from './../animation';
+import { animateDown } from './../animation';
+import { animateRight } from './../animation';
 
 const MainSection = () => {
+	useEffect(() => {
+		animateTop('#top');
+		animateDown('#down');
+		animateLeft('#left');
+		animateRight('#right');
+	}, []);
 	return (
 		<Box mb="wxs" pt="30rem" column alignSelf="center">
-			<Box maxWidth="80rem" alignSelf="center" column>
+			<Box maxWidth="80rem" alignSelf="center" column id="top">
 				<Text
 					maxWidth="80rem"
 					textAlign="center"
@@ -52,11 +65,11 @@ const MainSection = () => {
 
 			<Box mx={{ mobS: 'mxxl', deskM: 'wxxl' }}>
 				<Box row>
-					<Box mt="mxxl" mr="mxxl" minWidth="57rem">
+					<Box mt="mxxl" minWidth="57rem">
 						<Text fontSize={{ mobS: '45px', tabL: '48px' }} lineHeight="75px">
 							What are Warriors?
 						</Text>
-						<Text as="h3" textAlign="initial" mr="wxxl" color="white-text">
+						<Text as="h3" textAlign="initial" color="white-text">
 							Warriors is an NFT project which started to display the fight people had against Covid, but
 							the potential is far more. Warriors NFT now aim to represent the fight against any crisis
 							the world will face. Artists from all around the world could participate in this process.
@@ -65,8 +78,16 @@ const MainSection = () => {
 							design.
 						</Text>
 					</Box>
-					<Box>
-						<Warriors />
+					<Box display="flex" mr="680px">
+						<Box id="right">
+							<Warrior1 />
+						</Box>
+						<Box position="absolute" ml="180px" id="down" zIndex={2}>
+							<Warrior2 />
+						</Box>
+						<Box position="absolute" ml="180px" id="left">
+							<Warrior3 />
+						</Box>
 					</Box>
 				</Box>
 				<Box mt="wl" center>
