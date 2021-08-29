@@ -17,7 +17,7 @@ const HexaAlert = ({ children }) => {
 			`}
 		>
 			<Box
-				bg="black-20"
+				bg="black-30"
 				css={`
 					clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 50% 100%, 0% 85%);
 				`}

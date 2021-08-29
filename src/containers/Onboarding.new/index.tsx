@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Box from 'components/Box';
 import Step0 from './components/Step0';
 import Step1 from './components/Step1';
@@ -6,21 +6,23 @@ import Step2 from './components/Step2';
 import theme from 'styleguide/theme';
 import { ethers } from 'ethers';
 import generateWarrior from 'ethereum/utils/generateWarrior';
-import { useContext } from 'react';
 import { StatesContext } from 'components/StatesContext';
 import { getError } from 'utils/helpers';
 import { toast } from 'react-toastify';
 import Step3 from './components/Step3';
 import Step5 from './components/Step5';
+import useRegistry from 'components/hooks/useRegistry';
+import { useEffect } from 'react';
 
 const OnboardingComp = () => {
 	const [step, setStep] = useState<number>(0);
 	const [formText, setFormText] = useState<string>('');
 	const [warriorId, setWarriorId] = useState<string>('');
+	const [address, setAddress] = useState<string>('');
 
 	const { warriorCore, signer } = useContext(StatesContext);
+	const registry = useRegistry();
 
-	console.log({ signer });
 
 	const handleWarriorGenerate = async (e) => {
 		e.preventDefault();
@@ -48,15 +50,15 @@ const OnboardingComp = () => {
 
 	const stepsComponents = [
 		<Step0 {...{ setStep }} />,
-		<Step1 {...{ setStep }} />,
+		<Step1 {...{ setStep, setAddress }} />,
 		<Step2 {...{ setStep, handleWarriorGenerate, formText, setFormText }} />,
 		<Step3 {...{ setStep }} />,
 		<Step0 {...{ setStep }} />,
-		<Step5 {...{ setStep, warriorId }} />,
+		<Step5 {...{ setStep, warriorId, registry, address }} />,
 	];
 
 	return (
-		<Box bg="black-20" minHeight="100vh">
+		<Box bg="black-30" minHeight="100vh">
 			<Box
 				backgroundImage={`linear-gradient(180deg, ${theme.colors['blue-50']}CC -8.11%, ${theme.colors['blue-10']}00 41.22%)`}
 				minHeight="100vh"

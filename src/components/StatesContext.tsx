@@ -24,8 +24,6 @@ const StatesProvider = ({ children }: StatesProviderProps): JSX.Element => {
 		console.log('Signer=', signer);
 	}, [signer]);
 
-	useListeners(provider, setProvider, setSigner);
-
 	return (
 		<StatesContext.Provider
 			value={{

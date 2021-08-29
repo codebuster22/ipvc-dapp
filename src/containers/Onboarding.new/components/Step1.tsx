@@ -8,14 +8,19 @@ import useSigner from 'ethereum/useSigner';
 import contracts from 'ethereum/utils/contracts';
 import React, { useContext, useEffect, useState } from 'react';
 import HexaAlert from './HexaAlert';
-import HexaButton from './HexaButton';
 import { StepProps } from './Step0';
 
-const Step1 = ({ setStep }: StepProps) => {
+interface Props extends StepProps {
+	setAddress: (string) => void;
+}
+
+const Step1 = (props: Props) => {
 	const [provider, setProvider] = useEthers();
 	const [signer, setSigner] = useSigner(provider);
-	const [address, setAddress] = useState(null);
+	const [address, setAddress] = useState<string>('');
 	const warriorCore = useContract(contracts.warrior, provider);
+
+	useListeners(provider, setProvider, setSigner);
 
 	const state = useContext(StatesContext);
 
@@ -27,14 +32,19 @@ const Step1 = ({ setStep }: StepProps) => {
 	}, [provider]);
 
 	useEffect(() => {
-		if (signer?.provider) {
+		if (signer !== null) {
 			const getAddress = async () => {
-				state.setSigner(signer);
+				state?.setSigner(signer);
+
 				try {
 					const address = await signer?.getAddress();
+					console.log({ address });
+
 					setAddress(address);
+					props.setAddress(address);
 				} catch (e) {
 					setAddress(null);
+					props.setAddress('');
 				}
 				// setChainName(chains[signer.provider.provider.chainId.toString()]);
 			};
@@ -44,11 +54,13 @@ const Step1 = ({ setStep }: StepProps) => {
 	}, [signer]);
 
 	useEffect(() => {
+		console.log(address);
+
 		if (address && signer != null) {
 			console.log({ address });
 			clearInterval();
 			setTimeout(() => {
-				setStep(2);
+				props.setStep(2);
 			}, 1000);
 		}
 	}, [address]);

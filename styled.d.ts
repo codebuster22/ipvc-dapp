@@ -45,10 +45,12 @@ declare module 'styled-components' {
 			'black-10': string;
 			'black-20': string;
 			'black-30': string;
+			'black-40': string;
 
-			'blue-50': string;
-			'blue-40': string;
 			'blue-10': string;
+			'blue-20': string;
+			'blue-40': string;
+			'blue-50': string;
 		};
 		space: string[] & Partial<ISpace>;
 		breakpoints: string[] & Partial<IBreakpoints>;

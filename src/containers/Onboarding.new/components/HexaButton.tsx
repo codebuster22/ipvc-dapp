@@ -5,12 +5,14 @@ interface Props extends BoxProps {
 	onClick?: (any) => any;
 	size?: 'small' | 'large';
 	disabled?: boolean;
+	id?: string;
 }
 
-const HexaButton = ({ children, onClick, size, disabled, ...otherProps }: Props) => {
+const HexaButton = ({ children, onClick, size, disabled, id, ...otherProps }: Props) => {
 	return (
 		// @ts-expect-error BoxProps
 		<Box
+			id={id}
 			px="mxxs"
 			py="mxxs"
 			css={`

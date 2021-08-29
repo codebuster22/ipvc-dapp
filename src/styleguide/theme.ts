@@ -61,12 +61,14 @@ const colors: DefaultTheme['colors'] = {
 	'yellow-text-50': '#E2CBA6',
 
 	'black-10': '#000000',
-	'black-20': '#0F1118',
-	'black-30': '#1F242D',
+	'black-20': '#020100',
+	'black-30': '#0F1118',
+	'black-40': '#1F242D',
 
-	'blue-50': '#015490',
-	'blue-40': '#044678',
 	'blue-10': '#000823',
+	'blue-20': '#000B30',
+	'blue-40': '#044678',
+	'blue-50': '#015490',
 };
 
 const theme: DefaultTheme = {

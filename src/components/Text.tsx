@@ -25,6 +25,7 @@ export interface TextProps extends BoxProps {
 	children?: string | React.ReactNode;
 	id?: string;
 	dangerouslySetInnerHTML?: { __html: string };
+	onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 const Text = ({
