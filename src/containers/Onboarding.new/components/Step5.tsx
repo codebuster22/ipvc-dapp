@@ -94,6 +94,7 @@ const Step5 = ({ setStep, warriorId, registry, address }: Props) => {
 			const imgs = document.getElementsByClassName('asset-img');
 			let loaded = 0;
 			for (let i = 0; i < imgs.length; i++) {
+				// @ts-expect-error onload in Element
 				imgs[i].onload = async () => {
 					loaded++;
 					console.log(loaded);
