@@ -38,6 +38,8 @@ declare module 'styled-components' {
 			'orange-50': string;
 			'green-100': string;
 
+			'white-text': string;
+
 			'yellow-10': string;
 			'yellow-text': string;
 			'yellow-text-50': string;

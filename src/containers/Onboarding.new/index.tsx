@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import Step3 from './components/Step3';
 import Step5 from './components/Step5';
 import useRegistry from 'components/hooks/useRegistry';
+import Step4 from './components/Step4';
 
 const OnboardingComp = () => {
 	const [step, setStep] = useState<number>(0);
@@ -51,7 +52,7 @@ const OnboardingComp = () => {
 		<Step1 {...{ setStep, setAddress }} />,
 		<Step2 {...{ setStep, handleWarriorGenerate, formText, setFormText }} />,
 		<Step3 {...{ setStep }} />,
-		<Step0 {...{ setStep }} />,
+		<Step4 {...{ setStep }} />,
 		<Step5 {...{ setStep, warriorId, registry, address }} />,
 	];
 
