@@ -6,13 +6,12 @@ import styled from 'styled-components';
 import queryEvents from '../../ethereum/utils/queryEvents';
 import { StatesContext } from 'components/StatesContext';
 import useRegistry from 'components/hooks/useRegistry';
-import ReactTooltip from 'react-tooltip';
 import Warrior from 'components/Warrior';
+import theme from 'styleguide/theme';
 
 const AllWarrior = () => {
 	const state = useContext(StatesContext);
 	const [warriors, setWarriors] = useState([]);
-	const [page, setPage] = useState(0);
 	const [searchValue, setSearchValue] = useState<string>('');
 	const [searchError, setSearchError] = useState<string>('');
 	const registry = useRegistry();
@@ -77,9 +76,9 @@ const AllWarrior = () => {
 	};
 
 	return (
-		<Box bg="#0F1118" minHeight="100vh">
+		<Box bg="black-30" minHeight="100vh">
 			<Box
-				backgroundImage="linear-gradient(180deg, #401F00 16.98%, #23000000 80.33%)"
+				backgroundImage={`linear-gradient(180deg, ${theme.colors['blue-40']} -41.98%, ${theme.colors['blue-10']}00 12.33%)`}
 				minHeight="100vh"
 				fontFamily="Cinzel Decorative"
 				color="yellow-text"
@@ -87,7 +86,7 @@ const AllWarrior = () => {
 				alignItems="flex-start"
 			>
 				<Box pl="wxl" py="mxl" color="#FFD37E" display="flex" minWidth="100%">
-					<Box pt="ms">
+					<Box pt="ms" onClick={() => window.history.back()}>
 						<ArrowIcon />
 					</Box>
 					<Text

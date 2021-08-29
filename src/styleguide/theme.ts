@@ -1,13 +1,14 @@
 import { DefaultTheme } from 'styled-components';
 
 //Breakpoints
-const breakpoints: DefaultTheme['breakpoints'] = ['319px', '410px', '767px', '1023px', '1199px'];
+const breakpoints: DefaultTheme['breakpoints'] = ['319px', '410px', '767px', '1023px', '1199px', '1440'];
 
 breakpoints.mobS = breakpoints[0]; // 319px
 breakpoints.mobL = breakpoints[1]; // 424px
 breakpoints.tabS = breakpoints[2]; // 767px
 breakpoints.tabL = breakpoints[3]; // 1023px
 breakpoints.deskM = breakpoints[4]; //1199px
+breakpoints.deskL = breakpoints[5]; //1440px
 
 //Spacing
 const space: DefaultTheme['space'] = [
@@ -55,8 +56,21 @@ const colors: DefaultTheme['colors'] = {
 	'orange-50': '#F65F59',
 	'green-100': '#96E6B3',
 
+	'white-text': '#D0D0D0',
+
+	'yellow-10': '#7A7369',
 	'yellow-text': '#FFD37E',
 	'yellow-text-50': '#E2CBA6',
+
+	'black-10': '#000000',
+	'black-20': '#020100',
+	'black-30': '#0F1118',
+	'black-40': '#1F242D',
+
+	'blue-10': '#000823',
+	'blue-20': '#000B30',
+	'blue-40': '#044678',
+	'blue-50': '#015490',
 };
 
 const theme: DefaultTheme = {
