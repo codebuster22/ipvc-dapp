@@ -2,7 +2,7 @@ import LandingPageComp from 'containers/Landingpage';
 import Head from 'next/head';
 import React from 'react';
 
-const LandingPage = (): JSX.Element => {
+const HomePage = (): JSX.Element => {
 	return (
 		<>
 			<Head>
@@ -13,4 +13,4 @@ const LandingPage = (): JSX.Element => {
 	);
 };
 
-export default LandingPage;
+export default HomePage;

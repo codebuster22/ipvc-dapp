@@ -1,17 +1,8 @@
+import LandingPageComp from 'containers/Landingpage';
 import React from 'react';
-import Box from 'components/Box';
 
 const Home = (): JSX.Element => {
-	return <Box>Home</Box>;
+	return <LandingPageComp />;
 };
 
 export default Home;
-
-Home.getInitialProps = (ctx) => {
-	ctx?.res?.writeHead(301, {
-		Location: '/home',
-	});
-	ctx?.res?.end();
-
-	return {};
-};
