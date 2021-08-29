@@ -5,7 +5,7 @@ import BackgroundMap from '../../../svgs/background.svg';
 
 const RoadMap = () => {
 	return (
-		<Box display="flex" justifyContent="center">
+		<Box display="flex" justifyContent="center" id="roadmap">
 			<BackgroundMap height="450px" />
 			<Box position="absolute">
 				<Box display="flex">

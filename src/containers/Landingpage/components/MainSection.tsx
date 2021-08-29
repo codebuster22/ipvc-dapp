@@ -9,8 +9,10 @@ import RoadMap from './RoadMap';
 import styled from 'styled-components';
 import FAQ from './FAQ';
 import HexaButton from 'components/HexaButton';
+import { useRouter } from 'next/router';
 
 const MainSection = () => {
+	const router = useRouter();
 	return (
 		<Box mb="wxs" pt="30rem" column alignSelf="center">
 			<Box maxWidth="80rem" alignSelf="center" column>
@@ -39,7 +41,7 @@ const MainSection = () => {
 				</Text>
 
 				<Box center mt="ws">
-					<HexaButton bg="blue-20">
+					<HexaButton bg="blue-20" onClick={() => router.push('/onboarding')}>
 						<Text as="h1" fontWeight="thin" color="yellow-text">
 							I want one!
 						</Text>
@@ -50,7 +52,7 @@ const MainSection = () => {
 				</Box>
 			</Box>
 
-			<Box mx={{ mobS: 'mxxl', deskM: 'wxxl' }}>
+			<Box mx={{ mobS: 'mxxl', deskM: 'wxxl' }} id="about">
 				<Box row>
 					<Box mt="mxxl" mr="mxxl" minWidth="57rem">
 						<Text fontSize={{ mobS: '45px', tabL: '48px' }} lineHeight="75px">

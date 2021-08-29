@@ -7,7 +7,7 @@ import Telegram from 'svgs/telegram.svg';
 
 const Footer = () => {
 	return (
-		<Box backgroundColor="blue-20" width="100%">
+		<Box backgroundColor="blue-20" width="100%" id="footer">
 			<Box mx="wxxl">
 				<Box between mx="wxxl" alignItems="initial">
 					<Box mr="wxxl" mt="wxl">
