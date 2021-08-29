@@ -16,7 +16,6 @@ const generateWarrior = async (warriorCore, signer, metadata, setStep) => {
 	const from = await signer?.getAddress();
 	const messageHash = await warriorCore?.generateHash(to, from, metadata);
 	const response = await axios.get(`${AWS_LAMBDA_WARRIOR_SIGNATURE_URL}?metadata=${messageHash}`);
-	setStep(3);
 	const gas = await warriorCore
 		?.connect(signer)
 		?.estimateGas?.generateWarrior(from, metadata, response.data.signature);

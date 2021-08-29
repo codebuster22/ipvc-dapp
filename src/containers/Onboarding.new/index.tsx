@@ -25,6 +25,7 @@ const OnboardingComp = () => {
 
 	const handleWarriorGenerate = async (e) => {
 		e.preventDefault();
+		setStep(3);
 
 		if (formText.length !== 0) {
 			// setLoading(true);
@@ -42,8 +43,9 @@ const OnboardingComp = () => {
 			} catch (err) {
 				const error = await getError(err.code);
 				toast.error(error);
-				// setLoading(false);
+				setStep(2);
 			}
+			setFormText('');
 		}
 	};
 

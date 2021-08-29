@@ -26,6 +26,7 @@ const Step5 = ({ setStep, warriorId, registry, address }: Props) => {
 	const [currentGenInfo, setCurrentGenInfo] = useState({ currentPopulation: '0', currentGenMaxPopulation: '0' });
 	const [showDownloadModal, setShowDownloadModal] = useState(false);
 	const [showShareModal, setShowShareModal] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	const router = useRouter();
 
@@ -88,6 +89,23 @@ const Step5 = ({ setStep, warriorId, registry, address }: Props) => {
 		height = screen.availHeight - 100;
 	}
 
+	useEffect(() => {
+		if (process.browser) {
+			const imgs = document.getElementsByClassName('asset-img');
+			let loaded = 0;
+			for (let i = 0; i < imgs.length; i++) {
+				imgs[i].onload = async () => {
+					loaded++;
+					console.log(loaded);
+
+					if (loaded >= 5) {
+						setLoading(false);
+					}
+				};
+			}
+		}
+	});
+
 	return (
 		<Box alignSelf="flex-start" pl="wl" pt="wxs">
 			<Confetti run recycle={false} width={width} height={height} numberOfPieces={1000} />
@@ -123,6 +141,18 @@ const Step5 = ({ setStep, warriorId, registry, address }: Props) => {
 							bottom={0}
 						>
 							<BorderDesign rotated color={theme.colors['yellow-text-50']} />
+						</Box>
+						<Box
+							position="absolute"
+							center
+							height="100%"
+							width="100%"
+							bg="blue-10"
+							display={!loading ? 'none' : 'flex'}
+						>
+							<Text as="h2" color="white-text">
+								Loading...
+							</Text>
 						</Box>
 					</Box>
 				</Box>

@@ -55,6 +55,7 @@ const Step0 = ({ setStep }: StepProps) => {
 					fontFamily="El Messiri"
 					ml={{ mobS: 'ml', tabS: 'wl' }}
 					onClick={() => router.push('/gallery')}
+					cursor="pointer"
 				>
 					View Gallery
 				</Text>

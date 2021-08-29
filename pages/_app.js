@@ -17,7 +17,8 @@ import queryEvents from '../src/ethereum/utils/queryEvents';
 import { StatesProvider } from 'components/StatesContext';
 import ProgressBar from '@badrap/bar-of-progress';
 import Router from 'next/router';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const progress = new ProgressBar({
 	size: 2,
@@ -121,6 +122,7 @@ const MyApp = ({ Component, pageProps }) => {
 			<QueryClientProvider client={queryClient}>
 				<ThemeProvider theme={theme}>
 					<Component {...pageProps} />
+					<ToastContainer style={{ fontSize: '14px', fontFamily: 'Nunito Sans' }} />
 				</ThemeProvider>
 			</QueryClientProvider>
 		</StatesProvider>
