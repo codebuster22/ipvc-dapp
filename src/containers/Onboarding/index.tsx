@@ -19,10 +19,8 @@ import { ethers } from 'ethers';
 import generateWarrior from 'ethereum/utils/generateWarrior';
 import { StatesContext } from 'components/StatesContext';
 import Warrior from 'components/Warrior';
-import { IRegistry } from '../Warrior/types';
-import { getAssetRegistry } from 'api/queries';
-import { useQuery } from 'react-query';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import useRegistry from 'components/hooks/useRegistry';
 
 const OnboardingComp = (): JSX.Element => {
 	const router = useRouter();
@@ -32,24 +30,9 @@ const OnboardingComp = (): JSX.Element => {
 	const [text, setText] = useState<string>('');
 	const [success, setSuccess] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
-	const [registry, setRegistry] = useState<IRegistry>();
+	const registry = useRegistry();
 	const [warriorId, setWarriorId] = useState<string>();
 	const [warrior, setWarrior] = useState<boolean>(false);
-	useQuery('registry-fetch', getAssetRegistry, {
-		enabled: true,
-		onSuccess: (result) => {
-			let key;
-			for (const k in result) {
-				key = k;
-				break;
-			}
-			const res = JSON.parse(key);
-			setRegistry(res);
-		},
-		onError: (error: any) => {
-			console.log({ error });
-		},
-	});
 
 	const { signer, warriorCore } = useContext(StatesContext);
 
