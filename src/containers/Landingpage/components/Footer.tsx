@@ -1,17 +1,23 @@
 import Box from 'components/Box';
 import Text from 'components/Text';
 import React from 'react';
-import Twitter from '../../../svgs/twitter.svg';
-import Discord from '../../../svgs/discord.svg';
-import Telegram from '../../../svgs/telegram.svg';
+import Twitter from 'svgs/twitter.svg';
+import Discord from 'svgs/discord.svg';
+import Telegram from 'svgs/telegram.svg';
 
 const Footer = () => {
 	return (
-		<Box backgroundColor="#000B30">
+		<Box backgroundColor="blue-20" width="100%">
 			<Box mx="wxxl">
 				<Box between mx="wxxl" alignItems="initial">
 					<Box mr="wxxl" mt="wxl">
-						<Text fontSize="41px" fontFamily="Cinzel Decorative" fontWeight="bold" lineHeight="56px">
+						<Text
+							fontSize="41px"
+							fontFamily="Cinzel Decorative"
+							fontWeight="bold"
+							lineHeight="56px"
+							color="yellow-text"
+						>
 							Warriors
 						</Text>
 						<Text

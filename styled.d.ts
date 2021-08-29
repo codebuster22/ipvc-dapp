@@ -25,6 +25,7 @@ interface IBreakpoints {
 	tabS: string;
 	tabL: string;
 	deskM: string;
+	deskL: string;
 }
 
 declare module 'styled-components' {
@@ -37,6 +38,8 @@ declare module 'styled-components' {
 			'gray-100': string;
 			'orange-50': string;
 			'green-100': string;
+
+			'white-text': string;
 
 			'yellow-10': string;
 			'yellow-text': string;

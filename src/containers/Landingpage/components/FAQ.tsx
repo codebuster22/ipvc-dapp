@@ -4,7 +4,7 @@ import React from 'react';
 
 const FAQ = () => {
 	return (
-		<Box mx="wxxl" mt="wl" fontWeight="700">
+		<Box mx="wxxl" mt="wl" fontWeight="700" alignSelf="flex-start">
 			<Box mx="ml" fontWeight="700">
 				<Text
 					fontFamily="El Messiri"

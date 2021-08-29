@@ -4,8 +4,8 @@ import React from 'react';
 
 const Navbar = () => {
 	return (
-		<Box borderBottom="4px solid yellow">
-			<Box mx="wxxl" between>
+		<Box borderBottom="4px solid" borderBottomColor="yellow-text" position="absolute" width="100%" left={0}>
+			<Box mx="21rem" between>
 				<Box
 					display="flex"
 					alignItems="center"
