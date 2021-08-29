@@ -1,4 +1,3 @@
-import useListeners from 'ethereum/useListeners';
 import React, { useEffect, useState } from 'react';
 import { ProviderProps, SignerProps } from '../ethereum/types';
 
@@ -7,7 +6,7 @@ const StatesContext = React.createContext({
 	setProvider: null,
 	signer: {},
 	setSigner: null,
-	warriorCore: {},
+	warriorCore: {} as any,
 	setWarriorCore: null,
 });
 

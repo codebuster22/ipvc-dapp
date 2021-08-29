@@ -6,7 +6,6 @@ import { ethers } from 'ethers';
 import Box from 'components/Box';
 import Text from 'components/Text';
 import theme from 'styleguide/theme';
-import generateWarrior from 'ethereum/utils/generateWarrior';
 import { StatesContext } from 'components/StatesContext';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import CloseIcon from 'svgs/close.svg';
@@ -26,7 +25,7 @@ const OnboardingComp = (): JSX.Element => {
 	const [warriorId, setWarriorId] = useState<string>();
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const registry = useRegistry();
-	const { signer, warriorCore } = useContext(StatesContext);
+	const { signer } = useContext(StatesContext);
 	const [height, setHeight] = useState(null);
 	const [width, setWidth] = useState(null);
 	const [showConfetti, setShowConfetti] = useState<boolean>(false);
@@ -48,10 +47,10 @@ const OnboardingComp = (): JSX.Element => {
 			setLoading(true);
 			// @ts-expect-error signer-props
 			const address = await signer?.getAddress();
-			const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(text.concat(address)));
+			// const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(text.concat(address)));
 			try {
-				const id = await generateWarrior(warriorCore, signer, metadata);
-				setWarriorId(id.toString());
+				// const id = await generateWarrior(warriorCore, signer, metadata);
+				// setWarriorId(id.toString());
 				setLoading(false);
 				setSuccess(true);
 				setIsModalOpen(true);

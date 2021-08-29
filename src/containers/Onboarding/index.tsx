@@ -1,6 +1,6 @@
 /* eslint-disable import/namespace */
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import nookies from 'nookies';
 import { gsap } from 'gsap';
@@ -15,9 +15,6 @@ import { parseImage, parsePDF } from 'utils/parsing';
 import PDFIcon from '../../svgs/pdf.svg';
 import ImageIcon from '../../svgs/image-icon.svg';
 import CloseIcon from '../../svgs/close.svg';
-import { ethers } from 'ethers';
-import generateWarrior from 'ethereum/utils/generateWarrior';
-import { StatesContext } from 'components/StatesContext';
 import Warrior from 'components/Warrior';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import useRegistry from 'components/hooks/useRegistry';
@@ -33,8 +30,6 @@ const OnboardingComp = (): JSX.Element => {
 	const registry = useRegistry();
 	const [warriorId, setWarriorId] = useState<string>();
 	const [warrior, setWarrior] = useState<boolean>(false);
-
-	const { signer, warriorCore } = useContext(StatesContext);
 
 	// Temporary Logout Function
 	const handleLogout = () => {
@@ -56,12 +51,12 @@ const OnboardingComp = (): JSX.Element => {
 	const handleWarriorGenerate = async (e) => {
 		e.preventDefault();
 		setLoading(true);
-		const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
-		const id = await generateWarrior(warriorCore, signer, metadata);
-		setWarriorId(id.toString());
+		// const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
+		// const id = await generateWarrior(warriorCore, signer, metadata);
+		// setWarriorId(id.toString());
 		setLoading(false);
 		setSuccess(true);
-		setWarriorId(id.toString());
+		// setWarriorId(id.toString());
 		setWarrior(true);
 	};
 

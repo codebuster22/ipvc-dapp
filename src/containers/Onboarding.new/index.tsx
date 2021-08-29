@@ -12,7 +12,6 @@ import { toast } from 'react-toastify';
 import Step3 from './components/Step3';
 import Step5 from './components/Step5';
 import useRegistry from 'components/hooks/useRegistry';
-import { useEffect } from 'react';
 
 const OnboardingComp = () => {
 	const [step, setStep] = useState<number>(0);
@@ -22,7 +21,6 @@ const OnboardingComp = () => {
 
 	const { warriorCore, signer } = useContext(StatesContext);
 	const registry = useRegistry();
-
 
 	const handleWarriorGenerate = async (e) => {
 		e.preventDefault();

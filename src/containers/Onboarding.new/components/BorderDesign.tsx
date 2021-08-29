@@ -1,5 +1,4 @@
 import Box from 'components/Box';
-import theme from 'styleguide/theme';
 
 const BorderDesign = ({ rotated, color }: { rotated?: boolean; color: string }) => {
 	const styles = rotated ? { bottom: 0, transform: 'rotate(45deg)' } : { top: 0 };

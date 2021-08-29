@@ -1,6 +1,6 @@
 import Box from 'components/Box';
 import Text from 'components/Text';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 import HexaButton from './HexaButton';
@@ -54,7 +54,6 @@ const Step0 = ({ setStep }: StepProps) => {
 					as="h1"
 					fontFamily="El Messiri"
 					ml={{ mobS: 'ml', tabS: 'wl' }}
-					// @ts-expect-error onclick event on text
 					onClick={() => router.push('/gallery')}
 				>
 					View Gallery
