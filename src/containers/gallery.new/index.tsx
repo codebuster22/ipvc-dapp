@@ -137,7 +137,7 @@ const AllWarrior = () => {
 										fontWeight="600"
 										position="relative"
 										top="wxl"
-										left="wl"
+										left={{ tabL: 'wl', mobS: 'ws' }}
 									>
 										<Box display="flex">
 											<Text>Warrior Id:</Text>

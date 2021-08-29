@@ -93,10 +93,10 @@ const Asset = styled(Box)(
 		height: 19rem;
 	}
 	@media only screen and (min-width: ${theme.breakpoints.mobL}) and (max-width: ${theme.breakpoints.tabS}) {
-		height: 23rem;
+		height: 20rem;
 	}
 	@media only screen and (min-width: ${theme.breakpoints.tabS}) and (max-width: ${theme.breakpoints.tabL}) {
-		height: 45rem;
+		height: 20rem;
 	}
 
 `
