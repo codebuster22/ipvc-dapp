@@ -55,8 +55,20 @@ const colors: DefaultTheme['colors'] = {
 	'orange-50': '#F65F59',
 	'green-100': '#96E6B3',
 
+	'yellow-10': '#7A7369',
+
 	'yellow-text': '#FFD37E',
 	'yellow-text-50': '#E2CBA6',
+
+	'black-10': '#000000',
+	'black-20': '#020100',
+	'black-30': '#0F1118',
+	'black-40': '#1F242D',
+
+	'blue-10': '#000823',
+	'blue-20': '#000B30',
+	'blue-40': '#044678',
+	'blue-50': '#015490',
 };
 
 const theme: DefaultTheme = {

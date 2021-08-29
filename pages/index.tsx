@@ -9,7 +9,7 @@ export default Home;
 
 Home.getInitialProps = (ctx) => {
 	ctx?.res?.writeHead(301, {
-		Location: '/onboarding',
+		Location: '/home',
 	});
 	ctx?.res?.end();
 

@@ -3,7 +3,6 @@ import React from 'react';
 import Footer from './components/Footer';
 import MainSection from './components/MainSection';
 import Navbar from './components/Navbar';
-import RoadMap from './components/RoadMap';
 
 const LandingPageComp = () => {
 	return (
