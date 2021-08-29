@@ -16,7 +16,6 @@ import { animateTop } from './../animation';
 import { animateLeft } from './../animation';
 import { animateDown } from './../animation';
 import { animateRight } from './../animation';
-import { useRouter } from 'next/router';
 
 const MainSection = () => {
 	useEffect(() => {
@@ -25,6 +24,7 @@ const MainSection = () => {
 		animateLeft('#left');
 		animateRight('#right');
 	}, []);
+import { useRouter } from 'next/router';
 
 const MainSection = () => {
 	const router = useRouter();
