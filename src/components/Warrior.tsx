@@ -4,6 +4,7 @@ import { IPFS_FALLBACK_URL, IPFS_URL } from 'utils/constants';
 import React, { useContext, useState, useEffect } from 'react';
 import Box, { BoxProps } from './Box';
 import { StatesContext } from './StatesContext';
+import styled from 'styled-components';
 
 interface Props extends BoxProps {
 	warriorId: string;
@@ -107,4 +108,3 @@ const Asset = styled(Box)(
 	}
 `
 );
-
