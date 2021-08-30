@@ -20,6 +20,5 @@ LoginPage.getInitialProps = async (ctx): Promise<any> => {
 		Location: '/onboarding',
 	});
 	ctx?.res?.end();
-
 	return {};
 };
