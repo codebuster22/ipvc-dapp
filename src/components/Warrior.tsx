@@ -2,6 +2,7 @@ import { IRegistry } from 'containers/Warrior/types';
 import getAssetIds, { IAssets } from 'ethereum/utils/getAssetIds';
 import { IPFS_FALLBACK_URL, IPFS_URL } from 'utils/constants';
 import React, { useContext, useState, useEffect } from 'react';
+import styled from 'styled-components';
 import Box, { BoxProps } from './Box';
 import { StatesContext } from './StatesContext';
 
@@ -90,3 +91,21 @@ const Warrior = ({ warriorId, registry }: Props) => {
 	);
 };
 export default Warrior;
+
+const Asset = styled(Box)(
+	({ theme }: { theme: any }) => `
+
+	height: 30rem;
+
+	@media only screen and (min-width: ${theme.breakpoints.mobS}) and (max-width: ${theme.breakpoints.mobL}) {
+		height: 19rem;
+	}
+	@media only screen and (min-width: ${theme.breakpoints.mobL}) and (max-width: ${theme.breakpoints.tabS}) {
+		height: 20rem;
+	}
+	@media only screen and (min-width: ${theme.breakpoints.tabS}) and (max-width: ${theme.breakpoints.tabL}) {
+		height: 20rem;
+	}
+
+`
+);

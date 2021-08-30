@@ -59,7 +59,7 @@ const colors: DefaultTheme['colors'] = {
 	'white-text': '#D0D0D0',
 
 	'yellow-10': '#7A7369',
-  
+
 	'yellow-text': '#FFD37E',
 	'yellow-text-50': '#E2CBA6',
 
