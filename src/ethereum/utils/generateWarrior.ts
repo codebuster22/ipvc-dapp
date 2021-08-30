@@ -11,7 +11,7 @@ const getGasPrice = async () => {
 	return utils.parseUnits(unparsedGasPrice.toString(), 'gwei');
 };
 
-const generateWarrior = async (warriorCore, signer, metadata) => {
+const generateWarrior = async (warriorCore, signer, metadata, setStep) => {
 	const to = warriorCore?.address;
 	const from = await signer?.getAddress();
 	const messageHash = await warriorCore?.generateHash(to, from, metadata);
@@ -23,6 +23,7 @@ const generateWarrior = async (warriorCore, signer, metadata) => {
 	const cost = gasPrice?.mul(gas);
 	toast(`maximum cost of transaction:- ${utils.formatUnits(cost.toString(), 'ether')} ETH`);
 	const transaction = await warriorCore?.connect(signer)?.generateWarrior(from, metadata, response?.data?.signature);
+	setStep(4);
 	const event = (await transaction.wait())?.events?.filter((event) => event?.event == 'WarriorGenerated')[0]?.args;
 	const id = event[1];
 	toast(`Warrior generated for ${event[0]} with warrior id ${id?.toString()}`, {
