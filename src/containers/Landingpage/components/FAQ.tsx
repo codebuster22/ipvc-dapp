@@ -61,17 +61,6 @@ const FAQ = () => {
 				>
 					What information do we store?{' '}
 				</Text>
-				<Text
-					fontFamily="El Messiri"
-					fontSize="28px"
-					lineHeight="44px"
-					textAlign="initial"
-					color="rgba(255, 211, 126, 0.8)"
-					fontWeight="regular"
-					mb="mxxl"
-				>
-					What information do we store?{' '}
-				</Text>
 			</Box>
 		</Box>
 	);
