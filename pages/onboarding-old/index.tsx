@@ -1,4 +1,4 @@
-import OnboardingComp from 'containers/Onboarding.new';
+import OnboardingComp from 'containers/Onboarding/index.new';
 import Head from 'next/head';
 import React from 'react';
 
