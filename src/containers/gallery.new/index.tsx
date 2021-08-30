@@ -116,41 +116,37 @@ const AllWarrior = () => {
 							my="ms"
 							border="1px solid yellow"
 						>
-							<Box>
-								<Box
-									mx="mm"
-									id={warrior.id}
-									opacity={1}
-									onMouseEnter={() => handleShow(warrior.id)}
-									onMouseLeave={() => handleLeave(warrior.id)}
-								>
+							<Box
+								onMouseEnter={() => handleShow(warrior.id)}
+								onMouseLeave={() => handleLeave(warrior.id)}
+							>
+								<Box mx="mm" id={warrior.id} opacity={1}>
 									<Warrior warriorId={warrior.id} registry={registry} />
 								</Box>
-								<Box
-									id={`detail-${warrior.id}`}
-									display="none"
-									// mx="wxl"
-								>
+								<Box id={`detail-${warrior.id}`} display="none">
 									<Box
 										fontFamily="El Messiri"
 										fontWeight="600"
 										position="relative"
 										top="wxl"
-										left={{ tabL: 'wl', mobS: 'ws' }}
+										left={{ tabL: 'mxxs', mobS: 'ws' }}
 									>
-										<Box display="flex">
+										<Box display="flex" justifyContent="center">
 											<Text>Warrior Id:</Text>
 											<Text color="#FFA15C">#{warrior.id}</Text>
 										</Box>
-										<Box display="flex">
-											<Text>Warrior Gen:</Text>
+										<Box display="flex" justifyContent="center">
+											<Text textAlign="center">Warrior Gen:</Text>
 											<Text color="#FFA15C">0</Text>
 										</Box>
-										<Box mr={{ tabS: 'wl' }}>
-											<Text>Creator Address:</Text>
-											{/* <Text as="p" pr={{ tabS: 'wl' }} color="#FFA15C">
-												{warrior.address}
-											</Text> */}
+										<Box justifyContent="center">
+											<Text textAlign="center">Creator Address:</Text>
+											<Text as="p" color="#FFA15C" textAlign="center">
+												{warrior.address.substr(0, 20)}
+											</Text>
+											<Text as="p" color="#FFA15C" textAlign="center">
+												{warrior.address.substr(21, 42)}
+											</Text>
 										</Box>
 									</Box>
 								</Box>
