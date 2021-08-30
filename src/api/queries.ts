@@ -1,5 +1,7 @@
-import { COWIN_API_KEY } from '@/utils/constants';
+import { COWIN_API_KEY, IPFS_CID, IPFS_FALLBACK_URL, IPFS_URL } from 'utils/constants';
 import axios from 'axios';
+
+let URL: string = IPFS_URL;
 
 export const getBeneficiaries = async (): Promise<any> => {
 	const res = await axios({
@@ -10,4 +12,18 @@ export const getBeneficiaries = async (): Promise<any> => {
 		},
 	});
 	return res.data;
+};
+
+export const getAssetRegistry = async (): Promise<any> => {
+	try {
+		const res = await axios.get(`${URL}${IPFS_CID}`);
+		return res.data;
+	} catch (e) {
+		console.log({ e });
+		if (URL === IPFS_FALLBACK_URL) {
+			URL = IPFS_URL;
+		} else {
+			URL = IPFS_FALLBACK_URL;
+		}
+	}
 };

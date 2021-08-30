@@ -1,24 +1,16 @@
-/* eslint-disable import/no-unresolved */
+import LandingPageComp from 'containers/Landingpage';
+import Head from 'next/head';
 import React from 'react';
-import Box from '@/components/Box';
 
 const Home = (): JSX.Element => {
-	return <Box>Home</Box>;
+	return (
+		<>
+			<Head>
+				<title>Warriors</title>
+			</Head>
+			<LandingPageComp />
+		</>
+	);
 };
 
 export default Home;
-
-Home.getInitialProps = (ctx) => {
-	if (ctx?.req?.cookies['access_token']) {
-		ctx?.res?.writeHead(301, {
-			Location: '/onboarding',
-		});
-		ctx?.res?.end();
-	} else {
-		ctx?.res?.writeHead(301, {
-			Location: '/login',
-		});
-		ctx?.res?.end();
-	}
-	return {};
-};

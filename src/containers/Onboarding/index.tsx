@@ -1,19 +1,23 @@
-/* eslint-disable import/no-unresolved */
+/* eslint-disable import/namespace */
+
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import nookies from 'nookies';
 import { gsap } from 'gsap';
 
-import Box from '@/components/Box';
-import Text from '@/components/Text';
-import Dropzone from '@/components/Dropzone';
-import If from '@/components/If';
-import theme from '@/styleguide/theme';
-import { parseImage, parsePDF } from '@/utils/parsing';
+import Box from 'components/Box';
+import Text from 'components/Text';
+import Dropzone from 'components/Dropzone';
+import If from 'components/If';
+import theme from 'styleguide/theme';
+import { parseImage, parsePDF } from 'utils/parsing';
 
 import PDFIcon from '../../svgs/pdf.svg';
 import ImageIcon from '../../svgs/image-icon.svg';
 import CloseIcon from '../../svgs/close.svg';
+import Warrior from 'components/Warrior';
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import useRegistry from 'components/hooks/useRegistry';
 
 const OnboardingComp = (): JSX.Element => {
 	const router = useRouter();
@@ -21,6 +25,11 @@ const OnboardingComp = (): JSX.Element => {
 	const [progress, setProgress] = useState<number>(0);
 	const [step, setStep] = useState<number>(0);
 	const [text, setText] = useState<string>('');
+	const [success, setSuccess] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(false);
+	const registry = useRegistry();
+	const [warriorId, setWarriorId] = useState<string>();
+	const [warrior, setWarrior] = useState<boolean>(false);
 
 	// Temporary Logout Function
 	const handleLogout = () => {
@@ -39,7 +48,25 @@ const OnboardingComp = (): JSX.Element => {
 			setText(text);
 		}
 	};
+	const handleWarriorGenerate = async (e) => {
+		e.preventDefault();
+		setLoading(true);
+		// const metadata = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Date.now().toString()));
+		// const id = await generateWarrior(warriorCore, signer, metadata);
+		// setWarriorId(id.toString());
+		setLoading(false);
+		setSuccess(true);
+		// setWarriorId(id.toString());
+		setWarrior(true);
+	};
 
+	const handleViewWarrior = () => {
+		setWarrior(true);
+	};
+
+	const handleCloseWarrior = () => {
+		setWarrior(false);
+	};
 	useEffect(() => {
 		if (text?.length > 0) {
 			setStep(2);
@@ -60,6 +87,41 @@ const OnboardingComp = (): JSX.Element => {
 		gsap.to('#progress-bar', { width: `${progress}%` });
 	}, [progress]);
 
+	const download = () => {
+		if (process.browser) {
+			const canvas = document.createElement('canvas');
+			const ctx = canvas.getContext('2d');
+			canvas.height = 700;
+			canvas.width = 500;
+			const imgs = document.getElementsByClassName('asset-img');
+			document.body.append(canvas);
+
+			// @ts-expect-error function inside function
+			async function draw(imgs) {
+				ctx.fillStyle = 'rgb(256, 256, 0';
+				ctx.fillRect(0, 0, 500, 700);
+				for (let i = 0; i < imgs.length; i++) {
+					imgs[i].crossOrigin = 'anonymous';
+					console.log(imgs[i].getAttribute('src'));
+					ctx.drawImage(imgs[i], 20, 20, 450, 600);
+				}
+			}
+
+			draw(imgs).then(() => {
+				const link = document.getElementById('download');
+				link.setAttribute('download', `Warrior #${warriorId}.png`);
+				const imageLink = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+				link.setAttribute('href', imageLink);
+			});
+		}
+	};
+
+	useEffect(() => {
+		if (warrior) {
+			download();
+		}
+	}, [warrior]);
+
 	return (
 		<Box height="100vh" center bg="purple-10">
 			<Box
@@ -72,7 +134,7 @@ const OnboardingComp = (): JSX.Element => {
 				pb="0"
 				backgroundImage={`linear-gradient(-145deg, ${theme.colors['green-100']} 1%, ${theme.colors['purple-50']} 100%);`}
 			>
-				<Box pt="wm" px="mxxl" pb="wxxl">
+				<Box pt={step > 3 ? 'mxl' : 'wm'} px="mxxl" pb="wxxl">
 					<Text as="h1" fontWeight="bold">
 						Verify Certificate
 					</Text>
@@ -93,7 +155,6 @@ const OnboardingComp = (): JSX.Element => {
 					px="mxxl"
 					pt="wxxs"
 					mx="mxs"
-					mb="mxl"
 				>
 					<Text as="h3" fontWeight="medium" mb="mm">
 						Upload Certificate
@@ -224,8 +285,8 @@ const OnboardingComp = (): JSX.Element => {
 						height="5rem"
 						width="100%"
 						mt="mxl"
+						mb="mxl"
 						borderRadius="5px"
-						mb="wxs"
 						cursor="pointer"
 						onClick={handleVerify}
 						disabled={step > 0 || !file}
@@ -237,6 +298,27 @@ const OnboardingComp = (): JSX.Element => {
 					>
 						{step > 0 ? (step > 3 ? 'Succesful' : 'Processing') : 'Verify Certificate'}
 					</Box>
+					<If
+						condition={step > 3}
+						then={
+							<Box
+								as="button"
+								className="get-btn"
+								height="5rem"
+								width="100%"
+								bg={loading ? 'gray-100' : success ? 'green' : 'orange-50'}
+								fontFamily="inherit"
+								mb="ml"
+								color="white"
+								border="none"
+								borderRadius="7px"
+								onClick={success ? handleViewWarrior : handleWarriorGenerate}
+								cursor="pointer"
+							>
+								{loading ? 'Fetching' : success ? `View Warrior` : 'Get Warrior'}
+							</Box>
+						}
+					/>
 				</Box>
 				<Box
 					as="button"
@@ -249,12 +331,50 @@ const OnboardingComp = (): JSX.Element => {
 					mx="50%"
 					transform="translateX(-50%)"
 					onClick={handleLogout}
-					mb="wl"
+					mb="mxxl"
+					mt="mxl"
 					cursor="pointer"
 				>
 					Logout
 				</Box>
 			</Box>
+			<If
+				condition={warrior == true}
+				then={
+					<Box center position="absolute" height="100vh" bg="transparent">
+						<Box
+							height={{ mobS: '40vh', deskM: '80vh', tabS: '60vh', mobL: '75vh', tabL: '50vh' }}
+							width={{ mobS: '80vw', deskM: '40vw' }}
+							borderRadius="20px"
+							bg="pink"
+							opacity="1"
+						>
+							<Box
+								display="flex"
+								justifyContent="space-between"
+								px="mm"
+								py="ms"
+								borderBottom="1px solid black"
+								borderTopRightRadius="20px"
+								borderTopLeftRadius="20px"
+							>
+								<Box as="a" download="Warrior.png" id="download" fontSize="1.6rem">
+									<SaveAltIcon fontSize="large" cursor="pointer" />
+								</Box>
+								<CloseIcon height="30px" cursor="pointer" onClick={handleCloseWarrior} />
+							</Box>
+							<Box
+								display="flex"
+								justifyContent="flex-start"
+								mx={{ mobS: 'wm', deskM: 'mm', tabS: 'wxl', tabL: 'wxxl' }}
+								px={{ tabL: 'wxl' }}
+							>
+								<Warrior warriorId={warriorId} registry={registry} />
+							</Box>
+						</Box>
+					</Box>
+				}
+			/>
 		</Box>
 	);
 };

@@ -2,12 +2,14 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"@/api/*": ["src/api/*"],
-			"@/utils/*": ["src/utils/*"],
-			"@/containers/*": ["src/containers/*"],
-			"@/components/*": ["src/components/*"],
-			"@/styleguide/*": ["src/styleguide/*"],
-			"@/pages/*": ["pages/*"]
+			"api/*": ["src/api/*"],
+			"utils/*": ["src/utils/*"],
+			"containers/*": ["src/containers/*"],
+			"components/*": ["src/components/*"],
+			"styleguide/*": ["src/styleguide/*"],
+			"ethereum/*": ["src/ethereum/*"],
+			"svgs/*": ["src/svgs/*"],
+			"pages/*": ["pages/*"]
 		},
 		"target": "es5",
 		"lib": ["dom", "dom.iterable", "esnext"],

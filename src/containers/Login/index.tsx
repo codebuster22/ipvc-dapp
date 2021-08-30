@@ -1,15 +1,13 @@
-// eslint-disable-next-line import/no-unresolved
-import { getOtp, verifyOtp } from '@/api/mutations';
+import React, { useState } from 'react';
+import { getOtp, verifyOtp } from 'api/mutations';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
-import { debounce } from 'lodash';
-import 'react-toastify/dist/ReactToastify.css';
 import nookies from 'nookies';
-import Box from '@/components/Box';
-import React, { useState } from 'react';
+import Box from 'components/Box';
 import { useMutation } from 'react-query';
 import { revertStep2, startStep2 } from './animations';
-import theme from '@/styleguide/theme';
+import theme from 'styleguide/theme';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginComp = (): JSX.Element => {
 	const [mobileNumber, setMobileNumber] = useState<string>('');
@@ -34,9 +32,6 @@ const LoginComp = (): JSX.Element => {
 			console.log(res);
 			nookies.set({}, 'access_token', res.token);
 			toast.success('Verification Succesful ✅✅');
-			debounce(() => {
-				router.push('/');
-			}, 1000);
 			router.push('/onboarding');
 		},
 		onError: (err) => {
