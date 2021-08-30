@@ -48,7 +48,6 @@ const Step1 = (props: Props) => {
 				}
 				// setChainName(chains[signer.provider.provider.chainId.toString()]);
 			};
-			setInterval(getAddress, 2000);
 			getAddress();
 		}
 	}, [signer]);
