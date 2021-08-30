@@ -8,13 +8,30 @@ import { StatesContext } from 'components/StatesContext';
 import useRegistry from 'components/hooks/useRegistry';
 import Warrior from 'components/Warrior';
 import theme from 'styleguide/theme';
+import useListeners from 'ethereum/useListeners';
+import contracts from 'ethereum/utils/contracts';
+import useEthers from 'ethereum/useEthers';
+import useContract from 'ethereum/useContract';
+import useSigner from 'ethereum/useSigner';
 
 const AllWarrior = () => {
 	const state = useContext(StatesContext);
 	const [warriors, setWarriors] = useState([]);
 	const [searchValue, setSearchValue] = useState<string>('');
 	const [searchError, setSearchError] = useState<string>('');
+	const [provider, setProvider] = useEthers();
+	const [signer, setSigner] = useSigner(provider);
+	const warriorCore = useContract(contracts.warrior, provider);
 	const registry = useRegistry();
+
+	useListeners(provider, setProvider, setSigner);
+
+	useEffect(() => {
+		if (provider) {
+			state?.setProvider(provider);
+			console.log({ provider });
+		}
+	}, [provider]);
 
 	useEffect(() => {
 		if (process.browser) {
@@ -26,6 +43,13 @@ const AllWarrior = () => {
 			});
 		}
 	}, []);
+
+	useEffect(() => {
+		if (warriorCore) {
+			console.log(warriorCore);
+			state?.setWarriorCore(warriorCore);
+		}
+	}, [warriorCore]);
 
 	useEffect(() => {
 		const getWarrior = async () => {
