@@ -5,7 +5,7 @@
       "chainId": "4",
       "contracts": {
         "WarriorCore": {
-          "address": "0x70E120170bA836f50B824Efa0b67B42aC1CACB2A",
+          "address": "0x573c7217139bAAFdd87b1507B16221141CCEEA03",
           "abi": [
             {
               "inputs": [
@@ -302,6 +302,19 @@
               "type": "function"
             },
             {
+              "inputs": [],
+              "name": "feeReceiver",
+              "outputs": [
+                {
+                  "internalType": "address",
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
               "inputs": [
                 {
                   "internalType": "address",
@@ -350,7 +363,7 @@
               ],
               "name": "generateWarrior",
               "outputs": [],
-              "stateMutability": "nonpayable",
+              "stateMutability": "payable",
               "type": "function"
             },
             {
@@ -447,6 +460,11 @@
                 {
                   "internalType": "address",
                   "name": "_origin",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "_feeReceiver",
                   "type": "address"
                 },
                 {
@@ -564,6 +582,19 @@
             {
               "inputs": [],
               "name": "maxPopulationPerGen",
+              "outputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "",
+                  "type": "uint256"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
+              "inputs": [],
+              "name": "mintFee",
               "outputs": [
                 {
                   "internalType": "uint256",
@@ -760,11 +791,37 @@
               "inputs": [
                 {
                   "internalType": "address",
+                  "name": "_feeReceiver",
+                  "type": "address"
+                }
+              ],
+              "name": "setFeeReceiver",
+              "outputs": [],
+              "stateMutability": "nonpayable",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "address",
                   "name": "_newGeneGenerator",
                   "type": "address"
                 }
               ],
               "name": "setGeneGenerator",
+              "outputs": [],
+              "stateMutability": "nonpayable",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "_mintFee",
+                  "type": "uint256"
+                }
+              ],
+              "name": "setMintFee",
               "outputs": [],
               "stateMutability": "nonpayable",
               "type": "function"
@@ -940,7 +997,7 @@
           ]
         },
         "WarriorGeneGenerator": {
-          "address": "0x88828abb899417eDef9abE4a8c97ac7EBdB5217D",
+          "address": "0x0eE89c125a3289ADCbe5a2c751c1c43aca2B3d21",
           "abi": [
             {
               "inputs": [

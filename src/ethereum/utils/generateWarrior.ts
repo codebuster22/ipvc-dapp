@@ -16,7 +16,7 @@ const getGasPrice = async () => {
 	return toGwei(unparsedGasPrice);
 };
 
-const generateWarrior = async (warriorCore, signer, metadata) => {
+const generateWarrior = async (warriorCore, signer, metadata, setStep) => {
 	const to = warriorCore?.address;
 	const from = await signer?.getAddress();
 	const messageHash = await warriorCore?.generateHash(to, from, metadata);
