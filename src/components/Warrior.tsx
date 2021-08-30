@@ -5,7 +5,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Box from './Box';
 import { StatesContext } from './StatesContext';
-import styled from 'styled-components';
 
 interface Props {
 	warriorId: string;
