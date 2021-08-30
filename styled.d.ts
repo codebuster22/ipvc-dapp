@@ -25,6 +25,7 @@ interface IBreakpoints {
 	tabS: string;
 	tabL: string;
 	deskM: string;
+	deskL: string;
 }
 
 declare module 'styled-components' {
