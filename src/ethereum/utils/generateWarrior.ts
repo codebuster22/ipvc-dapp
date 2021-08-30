@@ -21,13 +21,12 @@ const generateWarrior = async (warriorCore, signer, metadata, setStep) => {
 	const from = await signer?.getAddress();
 	const messageHash = await warriorCore?.generateHash(to, from, metadata);
 	const response = await axios.get(`${AWS_LAMBDA_WARRIOR_SIGNATURE_URL}?metadata=${messageHash}`);
+	const mintFee = await warriorCore?.mintFee();
 	const gas = await warriorCore
 		?.connect(signer)
-		?.estimateGas?.generateWarrior(from, metadata, response.data.signature);
+		?.estimateGas?.generateWarrior(from, metadata, response.data.signature, { value: mintFee.toString() });
 	const gasPrice = await getGasPrice();
-	const mintFee = warriorCore?.mintFee !== undefined ? await warriorCore?.mintFee() : BigNumber.from('0');
-	const cost = gasPrice?.mul(gas)?.add(utils.formatUnits(mintFee.toString(), 'ether'));
-	console.log('Generating warrior');
+	const cost = gasPrice?.mul(gas)?.add(mintFee);
 	toast(`maximum cost of transaction:- ${toEther(cost)} ETH`);
 	const transaction = await warriorCore
 		?.connect(signer)
