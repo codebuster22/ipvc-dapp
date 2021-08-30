@@ -31,6 +31,7 @@ const generateWarrior = async (warriorCore, signer, metadata, setStep) => {
 	const transaction = await warriorCore
 		?.connect(signer)
 		?.generateWarrior(from, metadata, response?.data?.signature, { value: mintFee.toString() });
+	setStep(4);
 	const event = (await transaction.wait())?.events?.filter((event) => event?.event == 'WarriorGenerated')[0]?.args;
 	const id = event[1];
 	toast(`Warrior generated for ${event[0]} with warrior id ${id?.toString()}`, {
