@@ -2,11 +2,12 @@ import { IRegistry } from 'containers/Warrior/types';
 import getAssetIds, { IAssets } from 'ethereum/utils/getAssetIds';
 import { IPFS_FALLBACK_URL, IPFS_URL } from 'utils/constants';
 import React, { useContext, useState, useEffect } from 'react';
-import Box, { BoxProps } from './Box';
+import styled from 'styled-components';
+import Box from './Box';
 import { StatesContext } from './StatesContext';
 import styled from 'styled-components';
 
-interface Props extends BoxProps {
+interface Props {
 	warriorId: string;
 	registry: IRegistry;
 }
@@ -16,13 +17,11 @@ const Warrior = ({ warriorId, registry }: Props) => {
 	const [assets, setAssets] = useState<IAssets>();
 	const [urls, setUrls] = useState([]);
 
-	useEffect(() => {
-		const getAssets = async () => {
+	// @ts-expect-error using async in useEffect
+	useEffect(async () => {
+		if (state?.warriorCore && warriorId) {
 			const assetIds = await getAssetIds(state?.warriorCore, warriorId?.toString(), registry);
 			setAssets(assetIds);
-		};
-		if (state?.warriorCore && warriorId) {
-			getAssets();
 		}
 	}, [state?.warriorCore, warriorId]);
 
@@ -38,54 +37,48 @@ const Warrior = ({ warriorId, registry }: Props) => {
 	}, [assets]);
 
 	return (
-		<Box fontSize="1rem" height="50%" width="100%" display="flex" justifyContent="center">
-			<Box
+		<Box fontSize="1rem" bg="red">
+			<Asset
 				as="img"
 				className="asset-img"
 				src={urls?.[0]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[0].split('ipfs/')[1]}`)}
 				position="absolute"
-				height="95%"
 			/>
-			<Box
+			<Asset
 				as="img"
 				className="asset-img"
 				src={urls?.[1]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[1].split('ipfs/')[1]}`)}
 				position="absolute"
-				height="95%"
 			/>
-			<Box
+			<Asset
 				as="img"
 				className="asset-img"
 				src={urls?.[2]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[2].split('ipfs/')[1]}`)}
 				position="absolute"
-				height="95%"
 			/>
-			<Box
+			<Asset
 				as="img"
 				className="asset-img"
 				src={urls?.[3]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[3].split('ipfs/')[1]}`)}
 				position="absolute"
-				height="95%"
 			/>
-			<Box
+			<Asset
 				as="img"
 				className="asset-img"
 				src={urls?.[4]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[4].split('ipfs/')[1]}`)}
 				position="absolute"
-				height="95%"
 			/>
-			<Box
+			<Asset
 				as="img"
 				className="asset-img"
 				src={urls?.[5]}
 				onError={(e) => (e.target.src = `${IPFS_FALLBACK_URL}${urls?.[5].split('ipfs/')[1]}`)}
 				position="absolute"
-				height="95%"
 			/>
 		</Box>
 	);
@@ -106,5 +99,6 @@ const Asset = styled(Box)(
 	@media only screen and (min-width: ${theme.breakpoints.tabS}) and (max-width: ${theme.breakpoints.tabL}) {
 		height: 20rem;
 	}
+
 `
 );

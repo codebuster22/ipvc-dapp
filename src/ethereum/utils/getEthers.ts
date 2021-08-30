@@ -12,15 +12,17 @@ export interface IEthers {
 const getEthers = (): Promise<IEthers> =>
 	new Promise((resolve, reject) => {
 		try {
-			try {
-				const provider = new ethers.providers.Web3Provider(window.ethereum);
-				window.ethereum.enable();
-				resolve({ provider, ethers });
-			} catch (error) {
-				const provider = ethers.getDefaultProvider('rinkeby');
-				console.log('No web3 instance injected, using rinkeby web3.');
-				resolve({ provider, ethers });
-			}
+			window.addEventListener('load', async () => {
+				try {
+					const provider = new ethers.providers.Web3Provider(window.ethereum);
+					await window.ethereum.enable();
+					resolve({ provider, ethers });
+				} catch (error) {
+					const provider = ethers.getDefaultProvider('rinkeby');
+					console.log('No web3 instance injected, using rinkeby web3.');
+					resolve({ provider, ethers });
+				}
+			});
 		} catch (error) {
 			alert(error.message);
 			reject(error.message);

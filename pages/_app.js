@@ -13,23 +13,10 @@ import useSigner from 'ethereum/useSigner';
 import chains from 'ethereum/utils/chains';
 import contracts from 'ethereum/utils/contracts';
 import useListeners from 'ethereum/useListeners';
+import generateWarrior from 'ethereum/utils/generateWarrior';
 import queryEvents from '../src/ethereum/utils/queryEvents';
 import { StatesProvider } from 'components/StatesContext';
-import ProgressBar from '@badrap/bar-of-progress';
-import Router from 'next/router';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-const progress = new ProgressBar({
-	size: 2,
-	color: '#38a169',
-	className: 'bar-of-progress',
-	delay: 100,
-});
-
-Router.events.on('routeChangeStart', progress.start);
-Router.events.on('routeChangeComplete', progress.finish);
-Router.events.on('routeChangeError', progress.finish);
+import { toast } from 'react-toastify';
 
 const queryClient = new QueryClient();
 
@@ -62,41 +49,41 @@ const MyApp = ({ Component, pageProps }) => {
 
 	// this should be on the topmost element
 	// starting from here
-	// const [provider, setProvider] = useEthers();
-	// const [signer, setSigner] = useSigner(provider);
-	// const [address, setAddress] = useState();
-	// const [chainName, setChainName] = useState();
-	// const warriorCore = useContract(contracts.warrior, provider);
+	const [provider, setProvider] = useEthers();
+	const [signer, setSigner] = useSigner(provider);
+	const [address, setAddress] = useState();
+	const [chainName, setChainName] = useState();
+	const warriorCore = useContract(contracts.warrior, provider);
 
-	// useListeners(provider, setProvider, setSigner);
+	useListeners(provider, setProvider, setSigner);
 
-	// useEffect(() => {
-	// 	if (signer?.provider) {
-	// 		const getAddress = async () => {
-	// 			setAddress(await signer.getAddress());
-	// 			setChainName(chains[signer.provider.provider.chainId.toString()]);
-	// 		};
-	// 		getAddress();
-	// 	}
-	// }, [signer]);
+	useEffect(() => {
+		if (signer?.provider) {
+			const getAddress = async () => {
+				setAddress(await signer.getAddress());
+				setChainName(chains[signer.provider.provider.chainId.toString()]);
+			};
+			getAddress();
+		}
+	}, [signer]);
 
-	// useEffect(() => {
-	// 	if (warriorCore?.address && address) {
-	// 		getCurrentGen();
-	// 	}
-	// }, [address, warriorCore]);
+	useEffect(() => {
+		if (warriorCore?.address && address) {
+			getCurrentGen();
+		}
+	}, [address, warriorCore]);
 
-	// // get all the warriors which were minted
-	// const getAllWarriors = async () => {
-	// 	const data = await queryEvents(warriorCore, 'WarriorGenerated');
-	// 	console.log('All Warriors', data);
-	// };
+	// get all the warriors which were minted
+	const getAllWarriors = async () => {
+		const data = await queryEvents(warriorCore, 'WarriorGenerated');
+		console.log('All Warriors', data);
+	};
 
-	// // get the warriors that this person created
-	// const getUserHolding = async (address) => {
-	// 	const data = await queryEvents(warriorCore, 'WarriorGenerated', [address]);
-	// 	console.log('User warriors', data);
-	// };
+	// get the warriors that this person created
+	const getUserHolding = async (address) => {
+		const data = await queryEvents(warriorCore, 'WarriorGenerated', [address]);
+		console.log('User warriors', data);
+	};
 
 	// Not yet live on rinkeby
 	// const getAllAssets = async () => {
@@ -104,25 +91,24 @@ const MyApp = ({ Component, pageProps }) => {
 	// 	console.log("All Assets", data);
 	// }
 
-	// const getCurrentGen = async () => {
-	// 	const currentGen = (await warriorCore?.currentGeneration())?.toString();
-	// 	const currentGenMax = (await warriorCore?.currentGenerationMaxPopulation())?.toString();
-	// 	const currentPopulation = (await warriorCore?.currentGenerationPopulation())?.toString();
-	// 	const maxPopulation = (await warriorCore?.maxPopulation())?.toString();
-	// 	const header = `Few details on warriors:-\n`;
-	// 	const line1 = `Current Generation: ${currentGen}\n`;
-	// 	const line2 = `Current Generation Population: ${currentPopulation}\n`;
-	// 	const line3 = `Current Generation Maximum Population: ${currentGenMax}\n`;
-	// 	const line4 = `Max Population: ${maxPopulation}`;
-	// 	toast(`${header}${line1}${line2}${line3}${line4}`);
-	// };
+	const getCurrentGen = async () => {
+		const currentGen = (await warriorCore?.currentGeneration())?.toString();
+		const currentGenMax = (await warriorCore?.currentGenerationMaxPopulation())?.toString();
+		const currentPopulation = (await warriorCore?.currentGenerationPopulation())?.toString();
+		const maxPopulation = (await warriorCore?.maxPopulation())?.toString();
+		const header = `Few details on warriors:-\n`;
+		const line1 = `Current Generation: ${currentGen}\n`;
+		const line2 = `Current Generation Population: ${currentPopulation}\n`;
+		const line3 = `Current Generation Maximum Population: ${currentGenMax}\n`;
+		const line4 = `Max Population: ${maxPopulation}`;
+		toast(`${header}${line1}${line2}${line3}${line4}`);
+	};
 
 	return (
-		<StatesProvider>
+		<StatesProvider provider={provider} signer={signer} warriorCore={warriorCore}>
 			<QueryClientProvider client={queryClient}>
 				<ThemeProvider theme={theme}>
 					<Component {...pageProps} />
-					<ToastContainer style={{ fontSize: '14px', fontFamily: 'Nunito Sans' }} />
 				</ThemeProvider>
 			</QueryClientProvider>
 		</StatesProvider>

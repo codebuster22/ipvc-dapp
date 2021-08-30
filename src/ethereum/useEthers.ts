@@ -15,16 +15,8 @@ const useEthers = (): UseEthersResult => {
 	};
 
 	useEffect(() => {
-		const process = async () => {
-			const { provider, ethers } = await getEthers();
-			setProvider(provider as ProviderProps);
-			setEthers(ethers);
-		};
-		process();
-	}, []);
-
-	useEffect(() => {
 		const connectToEthereum = async () => {
+			const { provider, ethers } = await getEthers();
 			if (provider) {
 				try {
 					await requestAccount();
@@ -32,6 +24,8 @@ const useEthers = (): UseEthersResult => {
 					console.log(e);
 				}
 			}
+			setProvider(provider as ProviderProps);
+			setEthers(ethers);
 		};
 		connectToEthereum();
 	}, [provider]);
