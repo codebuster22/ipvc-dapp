@@ -4,8 +4,10 @@ import React from 'react';
 import Twitter from 'svgs/twitter.svg';
 import Discord from 'svgs/discord.svg';
 import Telegram from 'svgs/telegram.svg';
+import { useRouter } from 'next/router';
 
 const Footer = () => {
+	const router = useRouter();
 	return (
 		<Box backgroundColor="blue-20" width="100%" id="footer">
 			<Box mx="wxxl">
@@ -83,9 +85,9 @@ const Footer = () => {
 							Contact us
 						</Text>
 						<Box display="flex" justifyContent="space-evenly" mx="mxs">
-							<Twitter />
-							<Discord />
-							<Telegram />
+							<Twitter cursor="pointer" />
+							<Discord onClick={() => router.push('https://discord.gg/fhZzy9Bw')} cursor="pointer" />
+							<Telegram cursor="pointer" />
 						</Box>
 					</Box>
 				</Box>
