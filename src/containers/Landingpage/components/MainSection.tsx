@@ -12,23 +12,20 @@ import RoadMap from './RoadMap';
 import styled from 'styled-components';
 import FAQ from './FAQ';
 import HexaButton from 'components/HexaButton';
-import { animateTop } from './../animation';
-import { animateLeft } from './../animation';
-import { animateDown } from './../animation';
-import { animateRight } from './../animation';
+import { animate } from './../animation';
+import AOS from 'aos';
 import { useRouter } from 'next/router';
+import 'aos/dist/aos.css';
 
 const MainSection = () => {
 	useEffect(() => {
-		animateTop('#top');
-		animateDown('#down');
-		animateLeft('#left');
-		animateRight('#right');
+		animate();
+		AOS.init({ duration: 2000, delay: 2 });
 	}, []);
 	const router = useRouter();
 	return (
 		<Box mb="wxs" pt="30rem" column alignSelf="center">
-			<Box maxWidth="80rem" alignSelf="center" column id="top">
+			<Box maxWidth="80rem" alignSelf="center" column>
 				<Text
 					maxWidth="80rem"
 					textAlign="center"
@@ -38,6 +35,7 @@ const MainSection = () => {
 					fontFamily="Cinzel Decorative"
 					lineHeight="79.92px"
 					mb="mxxxl"
+					id="head1"
 				>
 					NfT CollectibleS for THe fIghteRS
 				</Text>
@@ -49,25 +47,26 @@ const MainSection = () => {
 					textAlign="center"
 					maxWidth="64rem"
 					alignSelf="center"
+					id="head2"
 				>
 					Digital artefacts that represent the fight that the world fought against Covid.
 				</Text>
 
-				<Box center mt="ws">
+				<Box center mt="ws" id="head3">
 					<HexaButton bg="blue-20" onClick={() => router.push('/onboarding')}>
 						<Text as="h1" fontWeight="thin" color="yellow-text">
 							I want one!
 						</Text>
 					</HexaButton>
 				</Box>
-				<Box center mx="wxl" mt="wxxl">
+				<Box center mx="wxl" mt="wxl">
 					<DownArrow />
 				</Box>
 			</Box>
 
 			<Box mx={{ mobS: 'mxxl', deskM: 'wxxl' }} id="about">
 				<Box row>
-					<Box mt="mxxl" minWidth="57rem">
+					<Box mt="wxxs" minWidth="57rem">
 						<Text fontSize={{ mobS: '45px', tabL: '48px' }} lineHeight="75px">
 							What are Warriors?
 						</Text>
@@ -81,18 +80,25 @@ const MainSection = () => {
 						</Text>
 					</Box>
 					<Box display="flex" mr="680px">
-						<Box id="right">
+						<Box id="right" data-aos="fade-right">
 							<Warrior1 />
 						</Box>
-						<Box position="absolute" ml="180px" id="down" zIndex={2}>
+						<Box
+							position="absolute"
+							ml="180px"
+							id="down"
+							zIndex={2}
+							data-aos="fade-down"
+							data-aos-delay="2"
+						>
 							<Warrior2 />
 						</Box>
-						<Box position="absolute" ml="180px" id="left">
+						<Box position="absolute" ml="400px" id="left" data-aos="fade-left">
 							<Warrior3 />
 						</Box>
 					</Box>
 				</Box>
-				<Box mt="wl" center>
+				<Box mt="wl" center data-aos="fade-up" data-aos-delay="4">
 					<Box>
 						<QuestionMark width="620px" />
 					</Box>
@@ -109,7 +115,7 @@ const MainSection = () => {
 					</Box>
 				</Box>
 				<Box mr="wxl" center>
-					<Box mt="wxxl" mr="mxxl" maxWidth="60rem">
+					<Box mt="wxxl" mr="mxxl" maxWidth="60rem" data-aos="zoom-out-left">
 						<Text fontSize={{ mobS: '45px', tabL: '48px' }} lineHeight="75px">
 							What will I be charged?
 						</Text>
@@ -118,12 +124,12 @@ const MainSection = () => {
 							<Text color="yellow-text">0.08 ETH.</Text>
 						</Text>
 					</Box>
-					<Box width="50%" height="436px">
+					<Box width="50%" height="436px" data-aos="zoom-out-right">
 						<Ethereum />
 					</Box>
 				</Box>
 			</Box>
-			<Box row mt="wxxl" width="100%">
+			<Box row mt="wxxl" width="100%" data-aos="fade-up">
 				<Diamond mt="mm" />
 				<StyledLine flex={1} direction="left" mt="ml" width="50%" />
 				<Text as="h1" fontFamily="Cinzel Decorative" fontWeight="bold" textAlign="center" px="ml">
@@ -132,10 +138,10 @@ const MainSection = () => {
 				<StyledLine flex={1} direction="right" mt="ml" />
 				<Diamond mt="mm" />
 			</Box>
-			<Box mt="wl" mx="wxl">
+			<Box mt="wl" mx="wxl" data-aos="fade-up">
 				<RoadMap />
 			</Box>
-			<Box display="flex" mt="wxxl" width="100%">
+			<Box display="flex" mt="wxxl" width="100%" data-aos="zoom-in-up">
 				<Diamond mt="mm" />
 				<StyledLine flex={1} direction="left" mt="ml" />
 				<Text as="h1" fontFamily="Cinzel Decorative" fontWeight="bold" textAlign="center" px="ml">
