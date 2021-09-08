@@ -85,8 +85,8 @@ const Step5 = ({ setStep, warriorId, registry, address }: Props) => {
 	};
 
 	if (process.browser) {
-		width = screen.availWidth - 10;
-		height = screen.availHeight - 100;
+		width = window.innerWidth;
+		height = window.innerHeight;
 	}
 
 	useEffect(() => {
