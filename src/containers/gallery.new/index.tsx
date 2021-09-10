@@ -85,7 +85,7 @@ const AllWarrior = () => {
 				column
 				alignItems="flex-start"
 			>
-				<Box pl="wxl" py="mxl" color="#FFD37E" display="flex" minWidth="100%">
+				<Box pl={{ tabL: 'wxxl', mobS: 'mxxl' }} py="mxl" color="#FFD37E" display="flex" minWidth="100%">
 					<Box pt="ms" onClick={() => window.history.back()}>
 						<ArrowIcon />
 					</Box>
@@ -94,7 +94,7 @@ const AllWarrior = () => {
 						fontWeight="extra-bold"
 						fontFamily="Cinzel Decorative"
 						px={{ mobS: 'ml', tabS: 'wxs' }}
-						mt="mxs"
+						mt={{ tabL: 'mxs', mobS: 'mm' }}
 					>
 						Gallery
 					</Text>
@@ -128,8 +128,8 @@ const AllWarrior = () => {
 										fontFamily="El Messiri"
 										fontWeight="600"
 										position="relative"
-										top="wxl"
-										left={{ tabL: 'mxxs', mobS: 'ws' }}
+										top={{ tabL: 'wxl', mobS: 'wxs' }}
+										left={{ tabL: 'mxxs' }}
 									>
 										<Box display="flex" justifyContent="center">
 											<Text>Warrior Id:</Text>
