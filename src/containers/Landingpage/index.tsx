@@ -1,4 +1,5 @@
 import Box from 'components/Box';
+import Container from 'components/Container';
 import React from 'react';
 import theme from 'styleguide/theme';
 import Footer from './components/Footer';
@@ -14,9 +15,10 @@ const LandingPageComp = () => {
 				minHeight="100vh"
 				color="yellow-text"
 				fontFamily="El Messiri"
-				px={{ mobS: 'wxxl', deskM: '21rem' }}
 			>
-				<MainSection />
+				<Container>
+					<MainSection />
+				</Container>
 			</Box>
 			<Footer />
 		</Box>

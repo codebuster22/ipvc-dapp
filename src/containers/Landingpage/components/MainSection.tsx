@@ -1,13 +1,13 @@
 import Box from 'components/Box';
 import Text from 'components/Text';
 import React, { useEffect } from 'react';
-import DownArrow from '../../../svgs/downarrow.svg';
-import Warrior1 from '../../../svgs/warrior1.svg';
-import Warrior2 from '../../../svgs/warrior2.svg';
-import Warrior3 from '../../../svgs/warrior3.svg';
+import DownArrow from 'svgs/downarrow.svg';
+import Warrior1 from 'svgs/warrior1.svg';
+import Warrior2 from 'svgs/warrior2.svg';
+import Warrior3 from 'svgs/warrior3.svg';
 
-import QuestionMark from '../../../svgs/Questionmark.svg';
-import Ethereum from '../../../svgs/ethereum.svg';
+import QuestionMark from 'svgs/Questionmark.svg';
+import Ethereum from 'svgs/ethereum.svg';
 import RoadMap from './RoadMap';
 import styled from 'styled-components';
 import FAQ from './FAQ';
@@ -20,7 +20,7 @@ import 'aos/dist/aos.css';
 const MainSection = () => {
 	useEffect(() => {
 		animate();
-		AOS.init({ duration: 2000, delay: 2 });
+		AOS.init({ duration: 800, delay: 1 });
 	}, []);
 	const router = useRouter();
 	return (
@@ -64,7 +64,7 @@ const MainSection = () => {
 				</Box>
 			</Box>
 
-			<Box mx={{ mobS: 'mxxl', deskM: 'wxxl' }} id="about">
+			<Box id="about">
 				<Box row>
 					<Box mt="wxxs" minWidth="57rem">
 						<Text fontSize={{ mobS: '45px', tabL: '48px' }} lineHeight="75px">
@@ -79,23 +79,48 @@ const MainSection = () => {
 							design.
 						</Text>
 					</Box>
-					<Box display="flex" mr="680px">
-						<Box id="right" data-aos="fade-right">
-							<Warrior1 />
-						</Box>
+					<Box
+						display="flex"
+						mr="680px"
+						alignItems="flex-end"
+						position="relative"
+						justifyContent="space-between"
+						flex={1}
+					>
+						<Box as="img" src="./images/base.png" top="350px" width="55rem"></Box>
 						<Box
+							as="img"
+							src="./images/warrior_1.png"
 							position="absolute"
-							ml="180px"
+							left="50%"
+							zIndex={1}
+							id="right"
+							data-aos="fade-right"
+							data-aos-offset="50"
+							height="300px"
+						></Box>
+						<Box
+							as="img"
+							src="./images/warrior_2.png"
+							position="absolute"
+							left="13rem"
 							id="down"
 							zIndex={2}
-							data-aos="fade-down"
+							data-aos="fade"
 							data-aos-delay="2"
-						>
-							<Warrior2 />
-						</Box>
-						<Box position="absolute" ml="400px" id="left" data-aos="fade-left">
-							<Warrior3 />
-						</Box>
+							data-aos-offset="50"
+							height="350px"
+						></Box>
+						<Box
+							as="img"
+							src="./images/warrior_3.png"
+							position="absolute"
+							id="left"
+							data-aos="fade-left"
+							data-aos-offset="50"
+							height="300px"
+							zIndex={1}
+						></Box>
 					</Box>
 				</Box>
 				<Box mt="wl" center data-aos="fade-up" data-aos-delay="4">
