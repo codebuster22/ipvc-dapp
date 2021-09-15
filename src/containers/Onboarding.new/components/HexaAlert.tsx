@@ -5,7 +5,7 @@ const HexaAlert = ({ children }) => {
 	return (
 		<Box
 			top={0}
-			left={150}
+			left={{ tabL: '150px' }}
 			position="absolute"
 			display="flex"
 			bg="yellow-text-50"
