@@ -8,7 +8,7 @@ import Navbar from './components/Navbar';
 
 const LandingPageComp = () => {
 	return (
-		<Box minHeight="100vh" bg="black-30">
+		<Box minHeight="100vh" maxWidth="100vw" bg="black-30" overflowX="hidden">
 			<Navbar />
 			<Box
 				backgroundImage={`linear-gradient(180deg, ${theme.colors['blue-50']} -20.11%, ${theme.colors['blue-10']}00 12.76%)`}

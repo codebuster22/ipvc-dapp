@@ -16,6 +16,7 @@ import { animate } from './../animation';
 import AOS from 'aos';
 import { useRouter } from 'next/router';
 import 'aos/dist/aos.css';
+import theme from 'styleguide/theme';
 
 const MainSection = () => {
 	useEffect(() => {
@@ -24,26 +25,33 @@ const MainSection = () => {
 	}, []);
 	const router = useRouter();
 	return (
-		<Box mb="wxs" pt="30rem" column alignSelf="center">
-			<Box maxWidth="80rem" alignSelf="center" column>
+		<Box mb="wxs" pt={{ mobS: '20rem', tabS: '30rem' }} column alignSelf="center">
+			<Box
+				maxWidth="80rem"
+				alignSelf="center"
+				column
+				px={{ mobS: 'ml', tabS: '0' }}
+				mb={{ mobS: 'ml', tabS: 'wxxl' }}
+			>
 				<Text
 					maxWidth="80rem"
 					textAlign="center"
 					color="yellow-text"
-					fontSize="72px"
-					fontWeight="bold"
+					fontSize={{ mobS: '40px', tabS: '72px' }}
+					fontWeight="extra-bold"
 					fontFamily="Cinzel Decorative"
-					lineHeight="79.92px"
-					mb="mxxxl"
+					lineHeight={{ mobS: '44.4px', tabS: '79.92px' }}
+					mb={{ mobS: 'mm', tabS: 'mxxxl' }}
 					id="head1"
+					zIndex={1}
 				>
 					NfT CollectibleS for THe fIghteRS
 				</Text>
 				<Text
-					as="h1"
+					as="h2"
 					color="white-text"
 					fontWeight="bold"
-					lineHeight="44px"
+					lineHeight="34px"
 					textAlign="center"
 					maxWidth="64rem"
 					alignSelf="center"
@@ -52,22 +60,40 @@ const MainSection = () => {
 					Digital artefacts that represent the fight that the world fought against Covid.
 				</Text>
 
-				<Box center mt="ws" id="head3">
+				<Box center mt={{ mobS: 'mxxxl', tabS: 'ws' }} id="head3">
 					<HexaButton bg="blue-20" onClick={() => router.push('/onboarding')}>
 						<Text as="h1" fontWeight="thin" color="yellow-text">
 							I want one!
 						</Text>
 					</HexaButton>
 				</Box>
-				<Box center mx="wxl" mt="wxl">
+				<Box
+					id="arrow"
+					justifyContent="center"
+					mx="wxl"
+					mt="mxl"
+					display="flex"
+					css={`
+						& svg {
+							width: 90px;
+							@media screen and (max-width: ${theme.breakpoints.tabS}) {
+								width: 45px;
+							}
+						}
+					`}
+				>
 					<DownArrow />
 				</Box>
 			</Box>
 
 			<Box id="about">
-				<Box row>
-					<Box mt="wxxs" minWidth="57rem">
-						<Text fontSize={{ mobS: '45px', tabL: '48px' }} lineHeight="75px">
+				<Box
+					display="flex"
+					flexDirection={{ mobS: 'column', deskM: 'row' }}
+					alignItems={{ mobS: 'center', tabS: 'inherit' }}
+				>
+					<Box mt="wxxs" minWidth={{ mobS: '0', tabS: '57rem' }} px="mxxxl">
+						<Text fontSize={{ mobS: '32px', tabL: '48px' }} lineHeight="75px">
 							What are Warriors?
 						</Text>
 						<Text as="h3" textAlign="initial" color="white-text">
@@ -79,59 +105,34 @@ const MainSection = () => {
 							design.
 						</Text>
 					</Box>
-					<Box
-						display="flex"
-						mr="680px"
-						alignItems="flex-end"
-						position="relative"
-						justifyContent="space-between"
-						flex={1}
-					>
-						<Box as="img" src="./images/base.png" top="350px" width="55rem"></Box>
-						<Box
-							as="img"
-							src="./images/warrior_1.png"
-							position="absolute"
-							left="50%"
-							zIndex={1}
-							id="right"
-							data-aos="fade-right"
-							data-aos-offset="50"
-							height="300px"
-						></Box>
-						<Box
-							as="img"
-							src="./images/warrior_2.png"
-							position="absolute"
-							left="13rem"
-							id="down"
-							zIndex={2}
-							data-aos="fade"
-							data-aos-delay="2"
-							data-aos-offset="50"
-							height="350px"
-						></Box>
-						<Box
-							as="img"
-							src="./images/warrior_3.png"
-							position="absolute"
-							id="left"
-							data-aos="fade-left"
-							data-aos-offset="50"
-							height="300px"
-							zIndex={1}
-						></Box>
-					</Box>
+					<Warriors />
 				</Box>
-				<Box mt="wl" center data-aos="fade-up" data-aos-delay="4">
-					<Box>
-						<QuestionMark width="620px" />
+				<Box
+					mt="wl"
+					display="flex"
+					flexDirection={{ mobS: 'column', tabS: 'row' }}
+					data-aos="fade-up"
+					data-aos-delay="4"
+				>
+					<Box
+						alignSelf="center"
+						css={`
+							& svg {
+								width: 62rem;
+
+								@media only screen and (max-width: ${theme.breakpoints.tabS}) {
+									width: 32rem;
+								}
+							}
+						`}
+					>
+						<QuestionMark />
 					</Box>
-					<Box mx="mxxl" mt="wl" maxWidth="60rem">
-						<Text fontSize={{ mobS: '45px', tabL: '48px' }} lineHeight="75px">
+					<Box ml="mxxl" mt={{ mobS: 'ml', tabS: 'wl' }}>
+						<Text fontSize={{ mobS: '32px', tabL: '48px' }} lineHeight="75px">
 							Why do I need one?
 						</Text>
-						<Text as="h3" textAlign="initial" color="white-text" mr="wxxl">
+						<Text as="h3" textAlign="initial" color="white-text">
 							Warriors is a generation-based NFT Project, with each warrior being unique and accompanied
 							by a story. It can be for a social cause, fundraising or a brand collectible. It will take
 							over 920 generations to mint all the warriors. To have one, is like being part of something
@@ -139,22 +140,37 @@ const MainSection = () => {
 						</Text>
 					</Box>
 				</Box>
-				<Box mr="wxl" center>
-					<Box mt="wxxl" mr="mxxl" maxWidth="60rem" data-aos="zoom-out-left">
-						<Text fontSize={{ mobS: '45px', tabL: '48px' }} lineHeight="75px">
+				<Box
+					ml={{ mobS: 'mxxl', tabS: 'wxl' }}
+					display="flex"
+					flexDirection={{ mobS: 'column-reverse', tabS: 'row' }}
+				>
+					<Box mt={{ mobS: 'mxxl', tabS: 'wxxl' }} data-aos="zoom-out-left">
+						<Text fontSize={{ mobS: '32px', tabL: '48px' }} lineHeight="75px">
 							What will I be charged?
 						</Text>
-						<Text as="h3" textAlign="initial" mr="wxxl" color="white-text">
+						<Text as="h3" textAlign="initial" color="white-text">
 							The price to mint a warrior is decided by the DAO. For the first generation, it is set to
 							<Text color="yellow-text">0.08 ETH.</Text>
 						</Text>
 					</Box>
-					<Box width="50%" height="436px" data-aos="zoom-out-right">
+					<Box
+						data-aos="zoom-out-right"
+						css={`
+							& svg {
+								width: 637px;
+
+								@media only screen and (max-width: ${theme.breakpoints.mobL}) {
+									width: 319px;
+								}
+							}
+						`}
+					>
 						<Ethereum />
 					</Box>
 				</Box>
 			</Box>
-			<Box row mt="wxxl" width="100%" data-aos="fade-up">
+			<Box row mt={{ mobS: 'mxxl', tabS: 'wxxl' }} width="100%" data-aos="fade-up" px="mxl">
 				<Diamond mt="mm" />
 				<StyledLine flex={1} direction="left" mt="ml" width="50%" />
 				<Text as="h1" fontFamily="Cinzel Decorative" fontWeight="bold" textAlign="center" px="ml">
@@ -163,24 +179,100 @@ const MainSection = () => {
 				<StyledLine flex={1} direction="right" mt="ml" />
 				<Diamond mt="mm" />
 			</Box>
-			<Box mt="wl" mx="wxl" data-aos="fade-up">
+			<Box mt={{ mobS: 'ml', tabS: 'wl' }} mx={{ mobS: 'mxl', tabS: 'wxl' }} data-aos="fade-up">
 				<RoadMap />
 			</Box>
-			<Box display="flex" mt="wxxl" width="100%" data-aos="zoom-in-up">
+			<Box row mt={{ mobS: 'mxxl', tabS: 'wxxl' }} width="100%" data-aos="fade-up" px="mxl">
 				<Diamond mt="mm" />
-				<StyledLine flex={1} direction="left" mt="ml" />
+				<StyledLine flex={1} direction="left" mt="ml" width="50%" />
 				<Text as="h1" fontFamily="Cinzel Decorative" fontWeight="bold" textAlign="center" px="ml">
 					FAQ
 				</Text>
 				<StyledLine flex={1} direction="right" mt="ml" />
 				<Diamond mt="mm" />
 			</Box>
-			<FAQ />
+			<Box data-aos="fade-up">
+				<FAQ />
+			</Box>
 		</Box>
 	);
 };
 
 export default MainSection;
+
+const Warriors = () => (
+	<Box
+		display="flex"
+		alignItems="flex-end"
+		position="relative"
+		justifyContent="space-between"
+		flex={1}
+		mt={{ mobS: '15rem', tabS: '0' }}
+	>
+		<Box
+			as="img"
+			src="./images/base.png"
+			top="35rem"
+			// width={{ mobS: '30rem', tabS: '55rem' }}
+			css={`
+				width: 55rem;
+
+				@media only screen and (max-width: ${theme.breakpoints.tabS}) {
+					width: 30rem;
+				}
+			`}
+		></Box>
+		<Box
+			as="img"
+			src="./images/warrior_1.png"
+			position="absolute"
+			left={{ mobS: '13rem', tabS: '26rem' }}
+			zIndex={1}
+			id="right"
+			data-aos="fade-right"
+			data-aos-offset="50"
+			css={`
+				height: 30rem;
+
+				@media only screen and (max-width: ${theme.breakpoints.tabS}) {
+					height: 16.5rem;
+				}
+			`}
+		></Box>
+		<Box
+			as="img"
+			src="./images/warrior_2.png"
+			position="absolute"
+			left={{ mobS: '5rem', tabS: '13rem' }}
+			id="down"
+			zIndex={2}
+			data-aos="fade"
+			data-aos-delay="2"
+			css={`
+				height: 30rem;
+
+				@media only screen and (max-width: ${theme.breakpoints.tabS}) {
+					height: 19rem;
+				}
+			`}
+		></Box>
+		<Box
+			as="img"
+			src="./images/warrior_3.png"
+			position="absolute"
+			id="left"
+			data-aos="fade-left"
+			css={`
+				height: 30rem;
+
+				@media only screen and (max-width: ${theme.breakpoints.tabS}) {
+					height: 16.5rem;
+				}
+			`}
+			zIndex={1}
+		></Box>
+	</Box>
+);
 
 const StyledLine = styled(Box)(
 	(props: { theme: any; direction: string }) => `
