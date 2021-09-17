@@ -72,7 +72,7 @@ const Step1 = (props: Props) => {
 	}, [warriorCore]);
 
 	return (
-		<Box alignSelf="flex-start" mx="wxxl">
+		<Box alignSelf="flex-start" column alignItems="center" minWidth="100%">
 			<HexaAlert>
 				<Text as="h3" fontFamily="Cinzel" fontWeight="bold" mt="mxxxl" mb="mxl">
 					Step. 1

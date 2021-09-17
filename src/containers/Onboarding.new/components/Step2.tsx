@@ -27,12 +27,12 @@ const Step2 = ({ setStep, handleWarriorGenerate, formText, setFormText }: Props)
 					Describe your victory over this pandemic and submit.
 				</Text>
 			</HexaAlert>
-			<Box bg="black-30" alignSelf="center" maxWidth="58rem" mt="15.4rem">
+			<Box bg="black-30" alignSelf="center" maxWidth="58rem" mt={{ mobS: '15rem', tabL: '15.4rem' }}>
 				<Box
 					border={`4px solid ${theme.colors['yellow-10']}`}
 					zIndex={1}
 					backgroundImage={`linear-gradient(180deg, ${theme.colors['blue-50']}CC -8.11%, ${theme.colors['blue-10']}00 31.22%)`}
-					px="wxl"
+					px={{ tabL: 'wxl', mobS: 'wxxs', mobL: 'wl' }}
 					position="relative"
 				>
 					<BorderDesign color={theme.colors['yellow-10']} />
@@ -70,7 +70,7 @@ const Step2 = ({ setStep, handleWarriorGenerate, formText, setFormText }: Props)
 						size="small"
 						disabled={formText.length ? false : true}
 						alignSelf="center"
-						mx={{ deskM: 'wl' }}
+						mx={{ tabL: 'wl', mobS: 'wxs' }}
 						onClick={handleWarriorGenerate}
 					>
 						<Text as="h5" fontFamily="El Messiri" textAlign="center">
