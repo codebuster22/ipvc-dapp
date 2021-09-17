@@ -12,6 +12,7 @@ import BorderDesign from './BorderDesign';
 import HexaButton from './HexaButton';
 import Confetti from 'react-confetti';
 import { useRouter } from 'next/router';
+import If from 'components/If';
 
 interface Props extends StepProps {
 	warriorId: string;
@@ -84,10 +85,10 @@ const Step5 = ({ setStep, warriorId, registry, address }: Props) => {
 		}
 	};
 
-	if (process.browser) {
-		width = screen.availWidth - 10;
-		height = screen.availHeight - 100;
-	}
+	// if (process.browser) {
+	// 	width = window.innerWidth;
+	// 	height = window.innerHeight;
+	// }
 
 	useEffect(() => {
 		if (process.browser) {
@@ -108,56 +109,69 @@ const Step5 = ({ setStep, warriorId, registry, address }: Props) => {
 	});
 
 	return (
-		<Box alignSelf="flex-start" pl="wl" pt="wxs">
-			<Confetti run recycle={false} width={width} height={height} numberOfPieces={1000} />
+		<Box
+			alignSelf={{ tabS: 'flex-start', mobS: 'center' }}
+			pl={{ tabS: 'wl', mobS: 'mxxl' }}
+			pr={{ mobS: 'mxxl', tabS: '0' }}
+			pt="wxs"
+		>
+			{/* <Confetti run recycle={false} width={width} height={height} numberOfPieces={1000} /> */}
 			<Box color="yellow-text" row alignItems="center" mb="wl" cursor="pointer" onClick={() => router.push('/')}>
 				<ArrowLeft height="38" width="46" />
 				<Text as="h2" fontFamily="El Messiri" fontWeight="medium" ml="mm">
 					Back to Home
 				</Text>
 			</Box>
-			<Box row>
-				<Box bg="blue-10">
-					<Box
-						display="flex"
-						justifyContent="center"
-						width="65rem"
-						position="relative"
-						height={{ mobS: '20rem', mobL: '27rem', tabS: '50rem', tabL: '65rem' }}
-						border={`4px solid ${theme.colors['yellow-text-50']}`}
-						backgroundImage={`linear-gradient(180deg, ${theme.colors['black-20']} -8.92%, rgba(35, 0, 0, 0) 48.15%)`}
-					>
-						<BorderDesign color={theme.colors['yellow-text-50']} />
-						<Box height="80%" position="relative" alignSelf="center">
-							<Warrior warriorId={warriorId} registry={registry} />
-						</Box>
+			<Box display={{ deskM: 'flex' }}>
+				<Box width={{ mobS: '25rem', mobL: '27rem', tabS: '50rem', tabL: '65rem' }}>
+					<Box bg="blue-10">
 						<Box
-							width="100%"
-							transform="rotate(180deg)"
-							css={`
-								transform-origin: 50% 50%;
-							`}
-							position="absolute"
-							left={0}
-							bottom={0}
+							display="flex"
+							justifyContent="center"
+							position="relative"
+							height={{ mobS: '25rem', mobL: '27rem', tabS: '50rem', tabL: '65rem' }}
+							border={`4px solid ${theme.colors['yellow-text-50']}`}
+							backgroundImage={`linear-gradient(180deg, ${theme.colors['black-20']} -8.92%, rgba(35, 0, 0, 0) 48.15%)`}
 						>
-							<BorderDesign rotated color={theme.colors['yellow-text-50']} />
-						</Box>
-						<Box
-							position="absolute"
-							center
-							height="100%"
-							width="100%"
-							bg="blue-10"
-							display={!loading ? 'none' : 'flex'}
-						>
-							<Text as="h2" color="white-text">
-								Loading...
-							</Text>
+							<BorderDesign color={theme.colors['yellow-text-50']} />
+							<Box height="80%" position="relative" alignSelf="center">
+								<Warrior warriorId={warriorId} registry={registry} />
+							</Box>
+							<Box
+								width="100%"
+								transform="rotate(180deg)"
+								css={`
+									transform-origin: 50% 50%;
+								`}
+								position="absolute"
+								left={0}
+								bottom={0}
+							>
+								<BorderDesign rotated color={theme.colors['yellow-text-50']} />
+							</Box>
+							<Box
+								position="absolute"
+								center
+								height="100%"
+								width="100%"
+								bg="blue-10"
+								display={!loading ? 'none' : 'flex'}
+							>
+								<Text as="h2" color="white-text">
+									Loading...
+								</Text>
+							</Box>
 						</Box>
 					</Box>
 				</Box>
-				<Box ml="wl" fontFamily="El Messiri" column justifyContent="center" alignItems="flex-start">
+				<Box
+					alignSelf="center"
+					ml={{ deskM: 'wxxl', tabL: '0' }}
+					fontFamily="El Messiri"
+					column
+					alignItems="flex-start"
+					py="ml"
+				>
 					<WarriorInfoItem label="Creator Address:" value={address} />
 					<WarriorInfoItem label="Warrior ID:" value={`#${warriorId}`} />
 					<WarriorInfoItem label="Current Gen Population:" value={currentGenInfo.currentPopulation} />
@@ -165,7 +179,7 @@ const Step5 = ({ setStep, warriorId, registry, address }: Props) => {
 						label="Current Gen Max Population:"
 						value={currentGenInfo.currentGenMaxPopulation}
 					/>
-					<Box alignSelf="center" mt="mxxxl">
+					<Box mt={{ tabS: 'mxxxl' }}>
 						<HexaButton size="small" onClick={download} id="download-btn">
 							<Text as="h3" fontWeight="thin">
 								Download
@@ -176,7 +190,7 @@ const Step5 = ({ setStep, warriorId, registry, address }: Props) => {
 			</Box>
 			<Box
 				height="100vh"
-				width="100vw"
+				width="100\vw"
 				bg={`${theme.colors['black-10']}a0`}
 				display={showDownloadModal ? 'flex' : 'none'}
 				position="absolute"
@@ -195,12 +209,13 @@ const Step5 = ({ setStep, warriorId, registry, address }: Props) => {
 					px="wl"
 					position="relative"
 					backgroundImage="linear-gradient(180deg, rgba(1, 84, 145, 1) -8.11%, rgba(0, 8, 35) 41.22%)"
+					mx="ml"
 				>
 					<BorderDesign color={theme.colors['yellow-text']} />
 					<Text maxWidth="40rem" textAlign="center" mb="mxxxl" mt="wxl">
 						Are you sure you want to download this warrior?
 					</Text>
-					<Box row center mb="wxl">
+					<Box row center mb="wxl" mx="ml">
 						<a id="download" style={{ textDecoration: 'none' }} onClick={() => setShowDownloadModal(false)}>
 							<HexaButton size="small">
 								<Text as="h3" color="white">
@@ -234,13 +249,28 @@ export default Step5;
 
 const WarriorInfoItem = ({ label, value }: { label: string; value: string }) => {
 	return (
-		<Box row mb="mxxxl">
+		<Box row mb={{ tabL: 'mxxl', mobS: 'mxs' }}>
 			<Text as="h3" fontWeight="bold" pr="mm" color="white">
 				{label}
 			</Text>
-			<Text as="h3" fontWeight="bold">
-				{value}
-			</Text>
+			<If
+				condition={label == 'Creator Address:'}
+				then={
+					<Box>
+						<Text as="h3" fontWeight="bold">
+							{value.substring(0, 22)}
+						</Text>
+						<Text as="h3" fontWeight="bold">
+							{value.substring(22, 42)}
+						</Text>
+					</Box>
+				}
+				else={
+					<Text as="h3" fontWeight="bold">
+						{value}
+					</Text>
+				}
+			/>
 		</Box>
 	);
 };

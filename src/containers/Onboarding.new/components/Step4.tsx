@@ -21,7 +21,7 @@ const Step4 = ({ setStep }: StepProps) => {
 				</Box>
 			</Box>
 			<Text as="h1" fontWeight="regular" fontFamily="El Messiri" color="white-text" mt="mm">
-				Please wait white we generate your warrior.
+				Please wait while we generate your warrior.
 			</Text>
 		</Box>
 	);

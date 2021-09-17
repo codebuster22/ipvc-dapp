@@ -5,7 +5,7 @@ import { StepProps } from './Step0';
 
 const Step3 = ({ setStep }: StepProps) => {
 	return (
-		<Box>
+		<Box alignSelf="flex-start" column alignItems="center" minWidth="100%">
 			<HexaAlert>
 				<Text as="h3" fontFamily="Cinzel" fontWeight="bold" mt="mxxxl" mb="mxl">
 					Step. 3
