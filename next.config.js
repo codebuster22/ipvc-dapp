@@ -1,4 +1,6 @@
-module.exports = {
+const withTM = require('next-transpile-modules')(['gsap']);
+
+module.exports = withTM({
 	async rewrites() {
 		return [
 			{
@@ -14,4 +16,4 @@ module.exports = {
 		});
 		return config;
 	},
-};
+});
